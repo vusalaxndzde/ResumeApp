@@ -21,7 +21,6 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             Statement stmt = c.createStatement();
             stmt.execute("select * from user");
             ResultSet rs = stmt.getResultSet();
-
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
