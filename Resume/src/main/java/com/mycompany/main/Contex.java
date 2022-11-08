@@ -4,10 +4,16 @@
  */
 package com.mycompany.main;
 
+import com.mycompany.dao.impl.UserDaoImpl;
+
 /**
  *
  * @author Asus
  */
 public class Contex {
+    
+    public static UserDaoImpl instanceUserDao() {
+        return new UserDaoImpl();
+    }
     
 }
