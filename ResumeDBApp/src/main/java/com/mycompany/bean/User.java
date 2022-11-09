@@ -4,6 +4,8 @@
  */
 package com.mycompany.bean;
 
+import java.sql.Date;
+
 /**
  *
  * @author Asus
@@ -15,18 +17,25 @@ public class User {
     private String surname;
     private String phone;
     private String email;
+    private Date brithdate;
+    private Country birthplace;
+    private Country nationality;
     
 
     public User() {
     }
 
-    public User(int id, String name, String surname, String phone, String email) {
+    public User(int id, String name, String surname, String phone, String email, Date brithdate, Country birthplace, Country nationality) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
+        this.brithdate = brithdate;
+        this.birthplace = birthplace;
+        this.nationality = nationality;
     }
+
 
     public int getId() {
         return id;
@@ -68,9 +77,33 @@ public class User {
         this.email = email;
     }
 
+    public Date getBrithdate() {
+        return brithdate;
+    }
+
+    public void setBrithdate(Date brithdate) {
+        this.brithdate = brithdate;
+    }
+
+    public Country getBirthplace() {
+        return birthplace;
+    }
+
+    public void setBirthplace(Country birthplace) {
+        this.birthplace = birthplace;
+    }
+
+    public Country getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(Country nationality) {
+        this.nationality = nationality;
+    }
+
     @Override
     public String toString() {
-        return "id=" + id + ", name=" + name + ", surname=" + surname + ", phone=" + phone + ", email=" + email;
+        return "id=" + id + ", name=" + name + ", surname=" + surname + ", phone=" + phone + ", email=" + email + ", brithdate=" + brithdate + ", birthplace=" + birthplace + ", nationality=" + nationality;
     }
     
 }

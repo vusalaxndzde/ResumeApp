@@ -1,9 +1,11 @@
 package com.mycompany.dao.impl;
 
+import com.mycompany.bean.Country;
 import com.mycompany.bean.User;
 import com.mycompany.dao.inter.AbstractDAO;
 import com.mycompany.dao.inter.UserDaoInter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,23 +13,40 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
+
+    private User getUser(ResultSet rs) throws SQLException{
+        int id = rs.getInt("id");
+        String name = rs.getString("name");
+        String surname = rs.getString("surname");
+        String phone = rs.getString("phone");
+        String email = rs.getString("email");
+        Date birthdate = rs.getDate("birthdate");
+        int birthplaceId = rs.getInt("birthplace_id");
+        int nationalityId = rs.getInt("nationality_id");
+        String birthplaceStr = rs.getString("birthplace");
+        String nationalityStr = rs.getString("nationality");
+
+        Country birthplace = new Country(birthplaceId, birthplaceStr, null);
+        Country nationality = new Country(nationalityId, null, nationalityStr);
+        
+        return new User(id, name, surname, phone, email, birthdate, birthplace, nationality);
+    }
 
     @Override
     public List<User> getAll() {
         List<User> userList = new ArrayList<>();
         try ( Connection c = connect()) {
             Statement stmt = c.createStatement();
-            stmt.execute("select * from user");
+            stmt.execute("select u.*, c.name birthplace, n.nationality from user u "
+                    + "left join country c "
+                    + "on u.birthplace_id = c.id "
+                    + "left join country n "
+                    + "on u.nationality_id = n.id");
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String surname = rs.getString("surname");
-                String phone = rs.getString("phone");
-                String email = rs.getString("email");
-                userList.add(new User(id, name, surname, phone, email));
+                User user = getUser(rs);
+                userList.add(user);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -67,15 +86,15 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         User result = null;
         try ( Connection c = connect()) {
             Statement stmt = c.createStatement();
-            stmt.execute("select * from user where id = " + id);
+            stmt.execute("select u.*, c.name birthplace, n.nationality from user u "
+                    + "left join country c "
+                    + "on u.birthplace_id = c.id "
+                    + "left join country n "
+                    + "on u.nationality_id = n.id where u.id = " + id);
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
-                int userid = rs.getInt("id");
-                String name = rs.getString("name");
-                String surname = rs.getString("surname");
-                String phone = rs.getString("phone");
-                String email = rs.getString("email");
-                result = new User(userid, name, surname, phone, email);
+                User user = getUser(rs);
+                result = user;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,9 +104,9 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
 
     @Override
     public boolean addUser(User u) {
-        try (Connection c = connect()) {
+        try ( Connection c = connect()) {
             PreparedStatement stmt = c.prepareStatement("insert into user(name, surname, phone, email) "
-                                                            + "values(?, ?, ?, ?)");
+                    + "values(?, ?, ?, ?)");
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getSurname());
             stmt.setString(3, u.getPhone());

@@ -10,7 +10,7 @@ import com.mycompany.dao.impl.UserDaoImpl;
  *
  * @author Asus
  */
-public class Contex {
+public class Context {
     
     public static UserDaoImpl instanceUserDao() {
         return new UserDaoImpl();
