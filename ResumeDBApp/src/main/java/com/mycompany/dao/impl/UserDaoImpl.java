@@ -66,6 +66,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             pstmt.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
         return true;
     }
@@ -77,6 +78,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             stmt.execute("delete from user where id = " + id);
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
         return true;
     }
@@ -112,10 +114,10 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             stmt.setString(3, u.getPhone());
             stmt.setString(4, u.getEmail());
             stmt.execute();
-            return true;
         } catch (SQLException ex) {
             return false;
         }
+        return true;
     }
 
 }
