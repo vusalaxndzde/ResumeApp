@@ -10,8 +10,8 @@ import com.mycompany.entity.Skill;
 import com.mycompany.entity.User;
 import com.mycompany.entity.UserSkill;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +20,13 @@ import java.util.List;
  * @author Asus
  */
 public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
-    
-    public UserSkill getUserSkill(ResultSet rs) throws Exception{
+
+    public UserSkill getUserSkill(ResultSet rs) throws Exception {
         int userId = rs.getInt("id");
         int skillId = rs.getInt("skill_id");
         String skillName = rs.getString("skill_name");
         int power = rs.getInt("power");
-        
+
         return new UserSkill(null, new User(userId), new Skill(skillId, skillName), power);
     }
 
@@ -34,11 +34,12 @@ public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
     public List<UserSkill> getAllUserSkillByUserId(int userId) {
         List<UserSkill> result = new ArrayList<>();
         try ( Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            stmt.execute("select u.*, s.id as skill_id, s.name as skill_name, us.power from user_skill us "
+            PreparedStatement stmt = c.prepareStatement("select u.*, s.id as skill_id, s.name as skill_name, us.power from user_skill us "
                     + "left join user u on us.user_id = u.id "
                     + "left join skill s on us.skill_id = s.id "
-                    + "where u.id = " + userId);
+                    + "where u.id = ?");
+            stmt.setInt(1, userId);
+            stmt.execute();
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 UserSkill userSkill = getUserSkill(rs);

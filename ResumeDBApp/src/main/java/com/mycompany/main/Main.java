@@ -1,13 +1,13 @@
 package com.mycompany.main;
 
-import com.mycompany.dao.inter.UserSkillDaoInter;
+import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
 
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        UserSkillDaoInter udi = Context.instanceUserSkillDao();
-        System.out.println(udi.getAllUserSkillByUserId(2));
+        EmploymentHistoryDaoInter udi = Context.instanceEmploymentHistoryDao();
+        System.out.println(udi.getEmploymentHistoryByUserId(1));
     }
 
 }
