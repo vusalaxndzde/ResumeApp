@@ -5,6 +5,7 @@
 package com.mycompany.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -20,9 +21,14 @@ public class User {
     private Date brithdate;
     private Country birthplace;
     private Country nationality;
+    private List<UserSkill> userSkill;
     
 
     public User() {
+    }
+
+    public User(int id) {
+        this.id = id;
     }
 
     public User(int id, String name, String surname, String phone, String email, Date brithdate, Country birthplace, Country nationality) {
@@ -99,6 +105,14 @@ public class User {
 
     public void setNationality(Country nationality) {
         this.nationality = nationality;
+    }
+
+    public List<UserSkill> getUserSkill() {
+        return userSkill;
+    }
+
+    public void setUserSkill(List<UserSkill> userSkill) {
+        this.userSkill = userSkill;
     }
 
     @Override

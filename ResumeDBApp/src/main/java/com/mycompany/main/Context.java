@@ -5,6 +5,9 @@
 package com.mycompany.main;
 
 import com.mycompany.dao.impl.UserDaoImpl;
+import com.mycompany.dao.impl.UserSkillDaoImpl;
+import com.mycompany.dao.inter.UserDaoInter;
+import com.mycompany.dao.inter.UserSkillDaoInter;
 
 /**
  *
@@ -12,8 +15,12 @@ import com.mycompany.dao.impl.UserDaoImpl;
  */
 public class Context {
     
-    public static UserDaoImpl instanceUserDao() {
+    public static UserDaoInter instanceUserDao() {
         return new UserDaoImpl();
+    }
+    
+    public static UserSkillDaoInter instanceUserSkillDao() {
+        return new UserSkillDaoImpl();
     }
     
 }
