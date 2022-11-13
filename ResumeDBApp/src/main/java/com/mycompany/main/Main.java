@@ -1,6 +1,6 @@
 package com.mycompany.main;
 
-import com.mycompany.bean.User;
+import com.mycompany.entity.User;
 import com.mycompany.dao.inter.UserDaoInter;
 import java.util.List;
 

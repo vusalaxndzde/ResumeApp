@@ -1,6 +1,6 @@
 package com.mycompany.dao.inter;
 
-import com.mycompany.bean.User;
+import com.mycompany.entity.User;
 import java.util.List;
 
 public interface UserDaoInter {
