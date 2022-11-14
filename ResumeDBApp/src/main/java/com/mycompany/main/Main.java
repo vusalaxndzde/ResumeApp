@@ -1,13 +1,13 @@
 package com.mycompany.main;
 
-import com.mycompany.dao.inter.SkillDaoInter;
+import com.mycompany.dao.inter.CountryDaoInter;
 
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        SkillDaoInter udi = Context.instanceSkillDao();
-        System.out.println(udi.getAllSkill());
+        CountryDaoInter udi = Context.instanceCountryDao();
+        System.out.println(udi.getAllCountry());
     }
 
 }
