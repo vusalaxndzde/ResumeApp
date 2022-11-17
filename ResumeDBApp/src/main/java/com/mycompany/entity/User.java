@@ -18,6 +18,8 @@ public class User {
     private String surname;
     private String phone;
     private String email;
+    private String profileDescription;
+    private String address;
     private Date brithdate;
     private Country birthplace;
     private Country nationality;
@@ -31,12 +33,14 @@ public class User {
         this.id = id;
     }
 
-    public User(int id, String name, String surname, String phone, String email, Date brithdate, Country birthplace, Country nationality) {
+    public User(int id, String name, String surname, String phone, String email, String profileDescription, String address, Date brithdate, Country birthplace, Country nationality) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
+        this.profileDescription = profileDescription;
+        this.address = address;
         this.brithdate = brithdate;
         this.birthplace = birthplace;
         this.nationality = nationality;
@@ -115,9 +119,25 @@ public class User {
         this.userSkill = userSkill;
     }
 
+    public String getProfileDescription() {
+        return profileDescription;
+    }
+
+    public void setProfileDescription(String profileDescription) {
+        this.profileDescription = profileDescription;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
-        return "id=" + id + ", name=" + name + ", surname=" + surname + ", phone=" + phone + ", email=" + email + ", brithdate=" + brithdate + ", birthplace=" + birthplace + ", nationality=" + nationality;
+        return "User{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", phone=" + phone + ", email=" + email + ", profileDescription=" + profileDescription + ", address=" + address + ", brithdate=" + brithdate + ", birthplace=" + birthplace + ", nationality=" + nationality + ", userSkill=" + userSkill + '}';
     }
     
 }
