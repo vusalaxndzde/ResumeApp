@@ -60,7 +60,8 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
     public boolean updateUser(User u) {
         try ( Connection c = connect()) {
             PreparedStatement pstmt = c.prepareStatement("update user set name = ?, surname = ?, phone = ?, "
-                    + "email = ?, profile_description = ?, address = ?, birthdate = ? where id = ?");
+                    + "email = ?, profile_description = ?, address = ?, birthdate = ?, "
+                    + "birthplace_id = ?, nationality_id = ? where id = ?");
             pstmt.setString(1, u.getName());
             pstmt.setString(2, u.getSurname());
             pstmt.setString(3, u.getPhone());
@@ -68,7 +69,9 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             pstmt.setString(5, u.getProfileDescription());
             pstmt.setString(6, u.getAddress());
             pstmt.setDate(7, u.getBrithdate());
-            pstmt.setInt(8, u.getId());
+            pstmt.setInt(8, u.getBirthplace().getId());
+            pstmt.setInt(9, u.getNationality().getId());
+            pstmt.setInt(10, u.getId());
             pstmt.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -113,16 +116,19 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
     @Override
     public boolean addUser(User u) {
         try ( Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("insert into user(name, surname, phone, email, profile_description, address, birthdate) "
-                    + "values(?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, u.getName());
-            stmt.setString(2, u.getSurname());
-            stmt.setString(3, u.getPhone());
-            stmt.setString(4, u.getEmail());
-            stmt.setString(5, u.getProfileDescription());
-            stmt.setString(6, u.getAddress());
-            stmt.setDate(7, u.getBrithdate());
-            stmt.execute();
+            PreparedStatement pstmt = c.prepareStatement("insert into user(name, surname, phone, email, "
+                    + "profile_description, address, birthdate, birthplace_id, nationality_id) "
+                    + "values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            pstmt.setString(1, u.getName());
+            pstmt.setString(2, u.getSurname());
+            pstmt.setString(3, u.getPhone());
+            pstmt.setString(4, u.getEmail());
+            pstmt.setString(5, u.getProfileDescription());
+            pstmt.setString(6, u.getAddress());
+            pstmt.setDate(7, u.getBrithdate());
+            pstmt.setInt(8, u.getBirthplace().getId());
+            pstmt.setInt(9, u.getNationality().getId());
+            pstmt.execute();
         } catch (SQLException ex) {
             return false;
         }

@@ -4,12 +4,15 @@
  */
 package main;
 
+import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.dao.inter.UserDaoInter;
+import com.mycompany.entity.Country;
 import com.mycompany.entity.User;
 import com.mycompany.main.Context;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.List;
 
 /**
  *
@@ -18,12 +21,14 @@ import java.text.ParseException;
 public class MainUser extends javax.swing.JFrame {
     
     private User loggedInUser;
-    private UserDaoInter udi = Context.instanceUserDao();
+    private UserDaoInter userDao = Context.instanceUserDao();
+    private CountryDaoInter countryDao = Context.instanceCountryDao();
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public MainUser() {
         initComponents();
-        loggedInUser = udi.getById(1);
+        fillWindow();
+        loggedInUser = userDao.getById(1);
         fillUserComponents();
     }
 
@@ -59,9 +64,9 @@ public class MainUser extends javax.swing.JFrame {
         lblBirthdate = new javax.swing.JLabel();
         txtBirthDate = new javax.swing.JTextField();
         lblCountry = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbCountry = new javax.swing.JComboBox<>();
         lblNationality = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbNationality = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,7 +125,7 @@ public class MainUser extends javax.swing.JFrame {
             pnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProfileLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlProfileLayout.setVerticalGroup(
@@ -137,7 +142,7 @@ public class MainUser extends javax.swing.JFrame {
         pnlSkills.setLayout(pnlSkillsLayout);
         pnlSkillsLayout.setHorizontalGroup(
             pnlSkillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 763, Short.MAX_VALUE)
+            .addGap(0, 757, Short.MAX_VALUE)
         );
         pnlSkillsLayout.setVerticalGroup(
             pnlSkillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +155,7 @@ public class MainUser extends javax.swing.JFrame {
         pnlHistory.setLayout(pnlHistoryLayout);
         pnlHistoryLayout.setHorizontalGroup(
             pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 763, Short.MAX_VALUE)
+            .addGap(0, 757, Short.MAX_VALUE)
         );
         pnlHistoryLayout.setVerticalGroup(
             pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,11 +174,7 @@ public class MainUser extends javax.swing.JFrame {
 
         lblCountry.setText("Country");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azerbaijan", "America" }));
-
         lblNationality.setText("Nationality");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azerbaijani", "American" }));
 
         javax.swing.GroupLayout pnlDetailsLayout = new javax.swing.GroupLayout(pnlDetails);
         pnlDetails.setLayout(pnlDetailsLayout);
@@ -190,13 +191,13 @@ public class MainUser extends javax.swing.JFrame {
                     .addComponent(lblNationality))
                 .addGap(23, 23, 23)
                 .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPhone, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBirthDate, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, 0, 162, Short.MAX_VALUE))
-                .addContainerGap(514, Short.MAX_VALUE))
+                    .addComponent(cbNationality, 0, 162, Short.MAX_VALUE))
+                .addContainerGap(508, Short.MAX_VALUE))
         );
         pnlDetailsLayout.setVerticalGroup(
             pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +211,7 @@ public class MainUser extends javax.swing.JFrame {
                     .addComponent(lblPhone)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -219,11 +220,11 @@ public class MainUser extends javax.swing.JFrame {
                     .addComponent(lblBirthdate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCountry))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbNationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNationality))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
@@ -239,9 +240,7 @@ public class MainUser extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tpUserInfo)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(pnlUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(pnlUserInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -259,6 +258,14 @@ public class MainUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void fillWindow() {
+        List<Country> countries = countryDao.getAllCountry();
+        for (Country country : countries) {
+            cbCountry.addItem(country);
+            cbNationality.addItem(country);
+        }
+    }
+    
     private void fillUserComponents() {
         String name = loggedInUser.getName();
         String surname = loggedInUser.getSurname();
@@ -267,6 +274,8 @@ public class MainUser extends javax.swing.JFrame {
         String phone = loggedInUser.getPhone();
         String email = loggedInUser.getEmail();
         Date birthdate = loggedInUser.getBrithdate();
+        Country country = loggedInUser.getBirthplace();
+        Country nationality = loggedInUser.getNationality();
         
         
         txtName.setText(name);
@@ -276,6 +285,8 @@ public class MainUser extends javax.swing.JFrame {
         txtPhone.setText(phone);
         txtEmail.setText(email);
         txtBirthDate.setText(sdf.format(birthdate));
+        cbCountry.setSelectedItem(country);
+        cbNationality.setSelectedItem(nationality);
     }
     
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -288,6 +299,8 @@ public class MainUser extends javax.swing.JFrame {
             String email = txtEmail.getText();
             String birthdateStr = txtBirthDate.getText();
             Date birthdate = new Date(sdf.parse(birthdateStr).getTime());
+            Country birthplace = (Country) cbCountry.getSelectedItem();
+            Country nationality = (Country) cbNationality.getSelectedItem();
             
             
             loggedInUser.setName(name);
@@ -297,7 +310,9 @@ public class MainUser extends javax.swing.JFrame {
             loggedInUser.setAddress(address);
             loggedInUser.setEmail(email);
             loggedInUser.setBrithdate(birthdate);
-            udi.updateUser(loggedInUser);
+            loggedInUser.setBirthplace(birthplace);
+            loggedInUser.setNationality(nationality);
+            userDao.updateUser(loggedInUser);
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
@@ -340,8 +355,8 @@ public class MainUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<Country> cbCountry;
+    private javax.swing.JComboBox<Country> cbNationality;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAddress;
