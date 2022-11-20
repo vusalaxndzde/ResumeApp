@@ -52,8 +52,6 @@ public class MainUser extends javax.swing.JFrame {
         pnlProfile = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaProfile = new javax.swing.JTextArea();
-        pnlSkills = new javax.swing.JPanel();
-        pnlHistory = new javax.swing.JPanel();
         pnlDetails = new javax.swing.JPanel();
         lblPhone = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
@@ -67,6 +65,8 @@ public class MainUser extends javax.swing.JFrame {
         cbCountry = new javax.swing.JComboBox<>();
         lblNationality = new javax.swing.JLabel();
         cbNationality = new javax.swing.JComboBox<>();
+        pnlSkills = new javax.swing.JPanel();
+        pnlHistory = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,32 +138,6 @@ public class MainUser extends javax.swing.JFrame {
 
         tpUserInfo.addTab("Profile", pnlProfile);
 
-        javax.swing.GroupLayout pnlSkillsLayout = new javax.swing.GroupLayout(pnlSkills);
-        pnlSkills.setLayout(pnlSkillsLayout);
-        pnlSkillsLayout.setHorizontalGroup(
-            pnlSkillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
-        );
-        pnlSkillsLayout.setVerticalGroup(
-            pnlSkillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
-        );
-
-        tpUserInfo.addTab("Skills", pnlSkills);
-
-        javax.swing.GroupLayout pnlHistoryLayout = new javax.swing.GroupLayout(pnlHistory);
-        pnlHistory.setLayout(pnlHistoryLayout);
-        pnlHistoryLayout.setHorizontalGroup(
-            pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
-        );
-        pnlHistoryLayout.setVerticalGroup(
-            pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
-        );
-
-        tpUserInfo.addTab("Employement History", pnlHistory);
-
         lblPhone.setText("Phone");
 
         lblAddress.setText("Address");
@@ -230,6 +204,32 @@ public class MainUser extends javax.swing.JFrame {
         );
 
         tpUserInfo.addTab("Details", pnlDetails);
+
+        javax.swing.GroupLayout pnlSkillsLayout = new javax.swing.GroupLayout(pnlSkills);
+        pnlSkills.setLayout(pnlSkillsLayout);
+        pnlSkillsLayout.setHorizontalGroup(
+            pnlSkillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 757, Short.MAX_VALUE)
+        );
+        pnlSkillsLayout.setVerticalGroup(
+            pnlSkillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 359, Short.MAX_VALUE)
+        );
+
+        tpUserInfo.addTab("Skills", pnlSkills);
+
+        javax.swing.GroupLayout pnlHistoryLayout = new javax.swing.GroupLayout(pnlHistory);
+        pnlHistory.setLayout(pnlHistoryLayout);
+        pnlHistoryLayout.setHorizontalGroup(
+            pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 757, Short.MAX_VALUE)
+        );
+        pnlHistoryLayout.setVerticalGroup(
+            pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 359, Short.MAX_VALUE)
+        );
+
+        tpUserInfo.addTab("Employement History", pnlHistory);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
