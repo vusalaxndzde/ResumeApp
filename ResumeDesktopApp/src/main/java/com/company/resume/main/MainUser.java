@@ -4,10 +4,10 @@
  */
 package com.company.resume.main;
 
+import static com.company.resume.config.Config.loggedInUser;
 import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.dao.inter.UserDaoInter;
 import com.mycompany.entity.Country;
-import com.mycompany.entity.User;
 import com.mycompany.main.Context;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class MainUser extends javax.swing.JFrame {
     
-    private User loggedInUser;
     private UserDaoInter userDao = Context.instanceUserDao();
     private CountryDaoInter countryDao = Context.instanceCountryDao();
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
