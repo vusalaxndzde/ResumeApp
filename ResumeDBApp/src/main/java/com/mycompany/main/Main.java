@@ -1,18 +1,20 @@
 package com.mycompany.main;
 
-import com.mycompany.dao.inter.SkillDaoInter;
+import com.mycompany.dao.inter.UserSkillDaoInter;
 import com.mycompany.entity.Skill;
+import com.mycompany.entity.User;
+import com.mycompany.entity.UserSkill;
 
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        SkillDaoInter udi = Context.instanceSkillDao();
-        System.out.println(udi.getSkillById(1));
-        Skill s = new Skill(5, "Kotlin");
-        //System.out.println(udi.addSkill(s));
-        //System.out.println(udi.updateSkill(s));
-        System.out.println(udi.removeSkill(5));
+        UserSkillDaoInter udi = Context.instanceUserSkillDao();
+        User user = new User(1);
+        Skill skill = new Skill(4, "Javascript");
+        UserSkill us = new UserSkill(1, user, skill, 5);
+        System.out.println(udi.addUserSkill(us));
+        
     }
 
 }

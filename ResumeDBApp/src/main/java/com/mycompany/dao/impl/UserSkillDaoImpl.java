@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.dao.impl;
 
 import com.mycompany.dao.inter.AbstractDAO;
@@ -12,13 +8,11 @@ import com.mycompany.entity.UserSkill;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Asus
- */
 public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
 
     public UserSkill getUserSkill(ResultSet rs) throws Exception {
@@ -49,6 +43,50 @@ public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public boolean addUserSkill(UserSkill us) {
+        try (Connection c = connect()) {
+            PreparedStatement pstmt = c.prepareStatement("insert into user_skill(user_id, skill_id, power) "
+                    + "values(?, ?, ?)");
+            pstmt.setInt(1, us.getUser().getId());
+            pstmt.setInt(2, us.getSkill().getId());
+            pstmt.setInt(3, us.getPower());
+            pstmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeUserSkill(int id) {
+        try (Connection c = connect()) {
+            Statement stmt = c.createStatement();
+            stmt.execute("delete from user_skill where id = " + id);
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateUserSkill(UserSkill us) {
+        try (Connection c = connect()) {
+            PreparedStatement pstmt = c.prepareStatement("update user_skill set user_id = ?, "
+                    + "skill_id = ?, power = ?");
+            pstmt.setInt(1, us.getUser().getId());
+            pstmt.setInt(2, us.getSkill().getId());
+            pstmt.setInt(3, us.getPower());
+            pstmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
 }
