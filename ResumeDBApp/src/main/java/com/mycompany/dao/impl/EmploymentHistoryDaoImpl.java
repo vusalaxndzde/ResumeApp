@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +29,10 @@ public class EmploymentHistoryDaoImpl extends AbstractDAO implements EmploymentH
     public List<EmploymentHistory> getEmploymentHistoryByUserId(int userId) {
         List<EmploymentHistory> result = new ArrayList<>();
         try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("select * from employment_history where user_id = ?");
-            stmt.setInt(1, userId);
-            stmt.execute();
-            ResultSet rs = stmt.getResultSet();
+            PreparedStatement pstmt = c.prepareStatement("select * from employment_history where user_id = ?");
+            pstmt.setInt(1, userId);
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
             while (rs.next()) {
                 EmploymentHistory employmentHistory = getEmploymentHistory(rs);
                 result.add(employmentHistory);
@@ -39,6 +41,54 @@ public class EmploymentHistoryDaoImpl extends AbstractDAO implements EmploymentH
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public boolean updateEmploymentHistory(EmploymentHistory eh) {
+        try (Connection c = connect()) {
+            PreparedStatement pstmt = c.prepareStatement("update employment_history set header = ?, "
+                    + "begin_date = ?, end_date = ?, job_description = ?, user_id = ?");
+            pstmt.setString(1, eh.getHeader());
+            pstmt.setDate(2, eh.getBeginDate());
+            pstmt.setDate(3, eh.getEndDate());
+            pstmt.setString(4, eh.getJobDescription());
+            pstmt.setInt(5, eh.getUser().getId());
+            pstmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addEmploymentHistory(EmploymentHistory eh) {
+        try (Connection c = connect()) {
+            PreparedStatement pstmt = c.prepareStatement("insert into employment_history(header, "
+                    + "begin_date, end_date, job_description, user_id) values(?, ?, ?, ?, ?)");
+            pstmt.setString(1, eh.getHeader());
+            pstmt.setDate(2, eh.getBeginDate());
+            pstmt.setDate(3, eh.getEndDate());
+            pstmt.setString(4, eh.getJobDescription());
+            pstmt.setInt(5, eh.getUser().getId());
+            pstmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeEmploymentHistory(int id) {
+        try (Connection c = connect()) {
+            Statement stmt = c.createStatement();
+            stmt.execute("delete from employment_history where id = " + id);
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
     
 }
