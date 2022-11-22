@@ -7,4 +7,10 @@ public interface EmploymentHistoryDaoInter {
     
     public List<EmploymentHistory> getEmploymentHistoryByUserId(int userId);
     
+    public boolean updateEmploymentHistory(EmploymentHistory eh);
+    
+    public boolean addEmploymentHistory(EmploymentHistory eh);
+    
+    public boolean removeEmploymentHistory(EmploymentHistory eh);
+    
 }
