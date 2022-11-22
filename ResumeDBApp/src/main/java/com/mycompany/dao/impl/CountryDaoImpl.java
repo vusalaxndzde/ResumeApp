@@ -4,7 +4,9 @@ import com.mycompany.dao.inter.AbstractDAO;
 import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.entity.Country;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,62 @@ public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public Country getCountryById(int id) {
+        Country country = null;
+        try ( Connection c = connect()) {
+            Statement stmt = c.createStatement();
+            stmt.execute("select * from country where id = " + id);
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                country = getCountry(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return country;
+    }
+
+    @Override
+    public boolean updateCountry(Country c) {
+        try (Connection con = connect()) {
+            PreparedStatement pstmt = con.prepareStatement("update country set name = ?, nationality = ?");
+            pstmt.setString(1, c.getName());
+            pstmt.setString(2, c.getNationality());
+            pstmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addCountry(Country c) {
+        try (Connection con = connect()) {
+            PreparedStatement pstmt = con.prepareStatement("insert into country(name, nationality) values(?, ?)");
+            pstmt.setString(1, c.getName());
+            pstmt.setString(2, c.getNationality());
+            pstmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeCountry(int id) {
+        try ( Connection c = connect()) {
+            Statement stmt = c.createStatement();
+            stmt.execute("delete from country where id = " + id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }
