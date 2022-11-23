@@ -83,10 +83,11 @@ public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
     public boolean updateUserSkill(UserSkill us) {
         try (Connection c = connect()) {
             PreparedStatement pstmt = c.prepareStatement("update user_skill set user_id = ?, "
-                    + "skill_id = ?, power = ?");
+                    + "skill_id = ?, power = ? where id = ?");
             pstmt.setInt(1, us.getUser().getId());
             pstmt.setInt(2, us.getSkill().getId());
             pstmt.setInt(3, us.getPower());
+            pstmt.setInt(4, us.getId());
             pstmt.execute();
             return true;
         } catch (SQLException ex) {
