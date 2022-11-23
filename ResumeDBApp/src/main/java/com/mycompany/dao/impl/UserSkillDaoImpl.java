@@ -16,19 +16,21 @@ import java.util.List;
 public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
 
     public UserSkill getUserSkill(ResultSet rs) throws Exception {
+        int userSkillId = rs.getInt("userskill_id");
         int userId = rs.getInt("id");
         int skillId = rs.getInt("skill_id");
         String skillName = rs.getString("skill_name");
         int power = rs.getInt("power");
 
-        return new UserSkill(null, new User(userId), new Skill(skillId, skillName), power);
+        return new UserSkill(userSkillId, new User(userId), new Skill(skillId, skillName), power);
     }
 
     @Override
     public List<UserSkill> getAllUserSkillByUserId(int userId) {
         List<UserSkill> result = new ArrayList<>();
         try ( Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("select u.*, s.id as skill_id, s.name as skill_name, us.power from user_skill us "
+            PreparedStatement stmt = c.prepareStatement("select us.id as userskill_id, u.*, s.id as skill_id, "
+                    + "s.name as skill_name, us.power from user_skill us "
                     + "left join user u on us.user_id = u.id "
                     + "left join skill s on us.skill_id = s.id "
                     + "where u.id = ?");

@@ -6,13 +6,16 @@ import com.mycompany.dao.inter.UserSkillDaoInter;
 import com.mycompany.entity.Skill;
 import com.mycompany.entity.UserSkill;
 import com.mycompany.main.Context;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 public class SkillsPanel extends javax.swing.JPanel {
-    
+
     private SkillDaoInter skillDao = Context.instanceSkillDao();
     private UserSkillDaoInter userSkillDao = Context.instanceUserSkillDao();
+    private List<UserSkill> userSkills;
 
     public SkillsPanel() {
         initComponents();
@@ -45,6 +48,11 @@ public class SkillsPanel extends javax.swing.JPanel {
         btnAdd.setText("+");
 
         btnDelete.setText("-");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -52,22 +60,23 @@ public class SkillsPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(lblSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbSkills, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(txtSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(57, 57, 57)
-                .addComponent(lblPower)
-                .addGap(37, 37, 37)
-                .addComponent(sliderPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbSkills, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(txtSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addComponent(lblPower)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sliderPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +133,7 @@ public class SkillsPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 761, Short.MAX_VALUE)
+            .addGap(0, 767, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -142,25 +151,39 @@ public class SkillsPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        UserSkill userSkill = userSkills.get(tblSkills.getSelectedRow());
+        userSkillDao.removeUserSkill(userSkill.getId());
+        fillWindow();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     private void fillWindow() {
         List<Skill> skills = skillDao.getAllSkill();
         for (Skill skill : skills) {
             cbSkills.addItem(skill);
         }
-    }
-    
-    private void fillTable() {
-        List<UserSkill> uSkills = userSkillDao.getAllUserSkillByUserId(Config.loggedInUser.getId());
-        
-        DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new String[]{"Skills", "Power"});
-        tblSkills.setModel(model);
-    }
-    
-    public void fillUserComponents() {
-        fillWindow();
         fillTable();
     }
+
+    private void fillTable() {
+        userSkills = userSkillDao.getAllUserSkillByUserId(Config.loggedInUser.getId());
+
+        Vector<Vector> rows = new Vector<>();
+        for (UserSkill userSkill : userSkills) {
+            Vector<Object> row = new Vector<>();
+            row.add(userSkill.getSkill());
+            row.add(userSkill.getPower());
+            rows.add(row);
+        }
+
+        DefaultTableModel model = new DefaultTableModel(rows, new Vector(Arrays.asList("Skills", "Power")));
+        tblSkills.setModel(model);
+    }
+
+    public void fillUserComponents() {
+        fillWindow();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
