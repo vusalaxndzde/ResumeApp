@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.company.resume.main;
 
+import com.company.resume.config.Config;
 import static com.company.resume.config.Config.loggedInUser;
 import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.dao.inter.UserDaoInter;
@@ -14,10 +11,6 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 
-/**
- *
- * @author Asus
- */
 public class MainUser extends javax.swing.JFrame {
     
     private UserDaoInter userDao = Context.instanceUserDao();
@@ -27,7 +20,7 @@ public class MainUser extends javax.swing.JFrame {
     public MainUser() {
         initComponents();
         fillWindow();
-        loggedInUser = userDao.getById(1);
+        Config.loggedInUser = userDao.getById(1);
         fillUserComponents();
     }
 
