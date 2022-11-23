@@ -3,10 +3,7 @@ package com.company.resume.main;
 import com.company.resume.config.Config;
 import static com.company.resume.config.Config.loggedInUser;
 import com.mycompany.dao.inter.UserDaoInter;
-import com.mycompany.entity.Country;
 import com.mycompany.main.Context;
-import java.sql.Date;
-import java.text.ParseException;
 
 public class MainUser extends javax.swing.JFrame {
     
@@ -17,6 +14,8 @@ public class MainUser extends javax.swing.JFrame {
         initComponents();
         Config.loggedInUser = userDao.getById(1);
         fillUserComponents();
+        pnlProfil.fillUserComponents();
+        pnlDetails.fillUserComponents();
     }
 
     /**
@@ -36,24 +35,10 @@ public class MainUser extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         tpUserInfo = new javax.swing.JTabbedPane();
-        pnlProfile = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAreaProfile = new javax.swing.JTextArea();
-        pnlDetails = new javax.swing.JPanel();
-        lblPhone = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
-        lblAddress = new javax.swing.JLabel();
-        txtPhone = new javax.swing.JTextField();
-        lblEmail = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        lblBirthdate = new javax.swing.JLabel();
-        txtBirthDate = new javax.swing.JTextField();
-        lblCountry = new javax.swing.JLabel();
-        cbCountry = new javax.swing.JComboBox<>();
-        lblNationality = new javax.swing.JLabel();
-        cbNationality = new javax.swing.JComboBox<>();
-        pnlSkills = new javax.swing.JPanel();
-        pnlHistory = new javax.swing.JPanel();
+        pnlProfil = new com.company.resume.panel.ProfilPanel();
+        pnlDetails = new com.company.resume.panel.DetailsPanel();
+        pnlSkills = new com.company.resume.panel.SkillsPanel();
+        pnlHistory = new com.company.resume.panel.EmploymentHistoryPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,121 +87,10 @@ public class MainUser extends javax.swing.JFrame {
                 .addComponent(btnSave))
         );
 
-        txtAreaProfile.setColumns(20);
-        txtAreaProfile.setRows(5);
-        jScrollPane1.setViewportView(txtAreaProfile);
-
-        javax.swing.GroupLayout pnlProfileLayout = new javax.swing.GroupLayout(pnlProfile);
-        pnlProfile.setLayout(pnlProfileLayout);
-        pnlProfileLayout.setHorizontalGroup(
-            pnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProfileLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlProfileLayout.setVerticalGroup(
-            pnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProfileLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        tpUserInfo.addTab("Profile", pnlProfile);
-
-        lblPhone.setText("Phone");
-
-        lblAddress.setText("Address");
-
-        lblEmail.setText("Email");
-
-        lblBirthdate.setText("Birthdate");
-
-        lblCountry.setText("Country");
-
-        lblNationality.setText("Nationality");
-
-        javax.swing.GroupLayout pnlDetailsLayout = new javax.swing.GroupLayout(pnlDetails);
-        pnlDetails.setLayout(pnlDetailsLayout);
-        pnlDetailsLayout.setHorizontalGroup(
-            pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDetailsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress)
-                    .addComponent(lblPhone)
-                    .addComponent(lblEmail)
-                    .addComponent(lblBirthdate)
-                    .addComponent(lblCountry)
-                    .addComponent(lblNationality))
-                .addGap(23, 23, 23)
-                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(cbCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBirthDate, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbNationality, 0, 162, Short.MAX_VALUE))
-                .addContainerGap(508, Short.MAX_VALUE))
-        );
-        pnlDetailsLayout.setVerticalGroup(
-            pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDetailsLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAddress))
-                .addGap(13, 13, 13)
-                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPhone)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEmail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblBirthdate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCountry))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbNationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNationality))
-                .addContainerGap(124, Short.MAX_VALUE))
-        );
-
+        tpUserInfo.addTab("Profil", pnlProfil);
         tpUserInfo.addTab("Details", pnlDetails);
-
-        javax.swing.GroupLayout pnlSkillsLayout = new javax.swing.GroupLayout(pnlSkills);
-        pnlSkills.setLayout(pnlSkillsLayout);
-        pnlSkillsLayout.setHorizontalGroup(
-            pnlSkillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
-        );
-        pnlSkillsLayout.setVerticalGroup(
-            pnlSkillsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
-        );
-
         tpUserInfo.addTab("Skills", pnlSkills);
-
-        javax.swing.GroupLayout pnlHistoryLayout = new javax.swing.GroupLayout(pnlHistory);
-        pnlHistory.setLayout(pnlHistoryLayout);
-        pnlHistoryLayout.setHorizontalGroup(
-            pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
-        );
-        pnlHistoryLayout.setVerticalGroup(
-            pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
-        );
-
-        tpUserInfo.addTab("Employement History", pnlHistory);
+        tpUserInfo.addTab("Employment History", pnlHistory);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,9 +133,10 @@ public class MainUser extends javax.swing.JFrame {
             String name = txtName.getText();
             String surname = txtSurname.getText();            
             
-            
             loggedInUser.setName(name);
             loggedInUser.setSurname(surname);
+            pnlProfil.fillUser(loggedInUser);
+            pnlDetails.fillUser(loggedInUser);
             
             userDao.updateUser(loggedInUser);
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -303,30 +178,16 @@ public class MainUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<Country> cbCountry;
-    private javax.swing.JComboBox<Country> cbNationality;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblAddress;
-    private javax.swing.JLabel lblBirthdate;
-    private javax.swing.JLabel lblCountry;
-    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblNationality;
-    private javax.swing.JLabel lblPhone;
     private javax.swing.JLabel lblSurname;
-    private javax.swing.JPanel pnlDetails;
-    private javax.swing.JPanel pnlHistory;
-    private javax.swing.JPanel pnlProfile;
-    private javax.swing.JPanel pnlSkills;
+    private com.company.resume.panel.DetailsPanel pnlDetails;
+    private com.company.resume.panel.EmploymentHistoryPanel pnlHistory;
+    private com.company.resume.panel.ProfilPanel pnlProfil;
+    private com.company.resume.panel.SkillsPanel pnlSkills;
     private javax.swing.JPanel pnlUserInfo;
     private javax.swing.JTabbedPane tpUserInfo;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextArea txtAreaProfile;
-    private javax.swing.JTextField txtBirthDate;
-    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtSurname;
     // End of variables declaration//GEN-END:variables
 }
