@@ -46,6 +46,11 @@ public class SkillsPanel extends javax.swing.JPanel {
         sliderPower.setValue(1);
 
         btnAdd.setText("+");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("-");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -151,13 +156,8 @@ public class SkillsPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        UserSkill userSkill = userSkills.get(tblSkills.getSelectedRow());
-        userSkillDao.removeUserSkill(userSkill.getId());
-        fillWindow();
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
     private void fillWindow() {
+        cbSkills.removeAllItems();
         List<Skill> skills = skillDao.getAllSkill();
         for (Skill skill : skills) {
             cbSkills.addItem(skill);
@@ -184,6 +184,25 @@ public class SkillsPanel extends javax.swing.JPanel {
         fillWindow();
     }
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        UserSkill userSkill = userSkills.get(tblSkills.getSelectedRow());
+        userSkillDao.removeUserSkill(userSkill.getId());
+        fillWindow();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String newSkillStr = txtSkill.getText();
+        Skill skill;
+        if (newSkillStr != null && !newSkillStr.trim().isEmpty()) {
+            skill = new Skill(0, newSkillStr);
+            skillDao.addSkill(skill);
+        } else {
+            skill = (Skill) cbSkills.getSelectedItem();
+        }
+        int power = sliderPower.getValue();
+        userSkillDao.addUserSkill(new UserSkill(0, Config.loggedInUser, skill, power));
+        fillWindow();
+    }//GEN-LAST:event_btnAddActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
