@@ -48,19 +48,23 @@ public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
     }
 
     @Override
-    public boolean addUserSkill(UserSkill us) {
+    public int addUserSkill(UserSkill us) {
+        int id = 0;
         try (Connection c = connect()) {
             PreparedStatement pstmt = c.prepareStatement("insert into user_skill(user_id, skill_id, power) "
-                    + "values(?, ?, ?)");
+                    + "values(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, us.getUser().getId());
             pstmt.setInt(2, us.getSkill().getId());
             pstmt.setInt(3, us.getPower());
             pstmt.execute();
-            return true;
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                id = generatedKeys.getInt(1);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return false;
+        return id;
     }
 
     @Override
