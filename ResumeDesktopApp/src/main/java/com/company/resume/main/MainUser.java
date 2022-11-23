@@ -2,24 +2,19 @@ package com.company.resume.main;
 
 import com.company.resume.config.Config;
 import static com.company.resume.config.Config.loggedInUser;
-import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.dao.inter.UserDaoInter;
 import com.mycompany.entity.Country;
 import com.mycompany.main.Context;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.text.ParseException;
-import java.util.List;
 
 public class MainUser extends javax.swing.JFrame {
     
     private UserDaoInter userDao = Context.instanceUserDao();
-    private CountryDaoInter countryDao = Context.instanceCountryDao();
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    
 
     public MainUser() {
         initComponents();
-        fillWindow();
         Config.loggedInUser = userDao.getById(1);
         fillUserComponents();
     }
@@ -250,64 +245,25 @@ public class MainUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fillWindow() {
-        List<Country> countries = countryDao.getAllCountry();
-        for (Country country : countries) {
-            cbCountry.addItem(country);
-            cbNationality.addItem(country);
-        }
-    }
+    
     
     private void fillUserComponents() {
         String name = loggedInUser.getName();
         String surname = loggedInUser.getSurname();
-        String profileDesc = loggedInUser.getProfileDescription();
-        String address = loggedInUser.getAddress();
-        String phone = loggedInUser.getPhone();
-        String email = loggedInUser.getEmail();
-        Date birthdate = loggedInUser.getBrithdate();
-        Country country = loggedInUser.getBirthplace();
-        Country nationality = loggedInUser.getNationality();
-        
         
         txtName.setText(name);
         txtSurname.setText(surname);
-        txtAreaProfile.setText(profileDesc);
-        txtAddress.setText(address);
-        txtPhone.setText(phone);
-        txtEmail.setText(email);
-        txtBirthDate.setText(sdf.format(birthdate));
-        cbCountry.setSelectedItem(country);
-        cbNationality.setSelectedItem(nationality);
     }
     
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        try {
             String name = txtName.getText();
-            String surname = txtSurname.getText();
-            String profileDescription = txtAreaProfile.getText();
-            String address = txtAddress.getText();
-            String phone = txtPhone.getText();
-            String email = txtEmail.getText();
-            String birthdateStr = txtBirthDate.getText();
-            Date birthdate = new Date(sdf.parse(birthdateStr).getTime());
-            Country birthplace = (Country) cbCountry.getSelectedItem();
-            Country nationality = (Country) cbNationality.getSelectedItem();
+            String surname = txtSurname.getText();            
             
             
             loggedInUser.setName(name);
             loggedInUser.setSurname(surname);
-            loggedInUser.setProfileDescription(profileDescription);
-            loggedInUser.setPhone(phone);
-            loggedInUser.setAddress(address);
-            loggedInUser.setEmail(email);
-            loggedInUser.setBrithdate(birthdate);
-            loggedInUser.setBirthplace(birthplace);
-            loggedInUser.setNationality(nationality);
+            
             userDao.updateUser(loggedInUser);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
