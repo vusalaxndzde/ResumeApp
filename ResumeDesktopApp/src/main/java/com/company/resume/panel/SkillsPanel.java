@@ -195,7 +195,8 @@ public class SkillsPanel extends javax.swing.JPanel {
         Skill skill;
         if (newSkillStr != null && !newSkillStr.trim().isEmpty()) {
             skill = new Skill(0, newSkillStr);
-            skillDao.addSkill(skill);
+            int id = skillDao.addSkill(skill);
+            skill.setId(id);
         } else {
             skill = (Skill) cbSkills.getSelectedItem();
         }
