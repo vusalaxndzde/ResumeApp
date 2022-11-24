@@ -1,5 +1,8 @@
 package com.company.resume.panel;
 
+import com.company.resume.frame.AddEmpHistoryFrame;
+import javax.swing.JFrame;
+
 public class EmploymentHistoryPanel extends javax.swing.JPanel {
 
     public EmploymentHistoryPanel() {
@@ -11,16 +14,30 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         pnlHistory = new javax.swing.JPanel();
+        btnAdd = new javax.swing.JButton();
+
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlHistoryLayout = new javax.swing.GroupLayout(pnlHistory);
         pnlHistory.setLayout(pnlHistoryLayout);
         pnlHistoryLayout.setHorizontalGroup(
             pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHistoryLayout.createSequentialGroup()
+                .addContainerGap(653, Short.MAX_VALUE)
+                .addComponent(btnAdd)
+                .addGap(29, 29, 29))
         );
         pnlHistoryLayout.setVerticalGroup(
             pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHistoryLayout.createSequentialGroup()
+                .addContainerGap(314, Short.MAX_VALUE)
+                .addComponent(btnAdd)
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -45,8 +62,15 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        AddEmpHistoryFrame addEmpHistory = new AddEmpHistoryFrame("Add New Employment History");
+        addEmpHistory.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        addEmpHistory.setVisible(true);
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JPanel pnlHistory;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,7 +13,8 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
     private EmploymentHistoryDaoInter empHistoryDao = Context.instanceEmploymentHistoryDao();
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    public AddEmpHistoryFrame() {
+    public AddEmpHistoryFrame(String s) {
+        super(s);
         initComponents();
     }
 
@@ -174,7 +175,7 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddEmpHistoryFrame().setVisible(true);
+                new AddEmpHistoryFrame("Add New Employment History").setVisible(true);
             }
         });
     }
