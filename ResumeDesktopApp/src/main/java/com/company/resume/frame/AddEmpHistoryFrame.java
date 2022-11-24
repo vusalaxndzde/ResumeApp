@@ -34,6 +34,7 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
         txtAreaJobDesc = new javax.swing.JTextArea();
         lblInf = new javax.swing.JLabel();
         btnOkay = new javax.swing.JButton();
+        lblMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,7 +50,7 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
         txtAreaJobDesc.setRows(5);
         jScrollPane1.setViewportView(txtAreaJobDesc);
 
-        lblInf.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblInf.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lblInf.setText("Fill in the blanks to add employment history:");
 
         btnOkay.setText("Okay");
@@ -59,14 +60,21 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
             }
         });
 
+        lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        lblMessage.setForeground(new java.awt.Color(0, 153, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnOkay)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnOkay))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblInf)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -82,7 +90,7 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(txtCompanyName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtEndDate, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEndDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                     .addComponent(txtBeginDate, javax.swing.GroupLayout.Alignment.LEADING))))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(lblJobDescription)
@@ -93,9 +101,9 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(24, 24, 24)
                 .addComponent(lblInf)
-                .addGap(23, 23, 23)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCompanyName))
@@ -111,8 +119,10 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblJobDescription)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(btnOkay)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnOkay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
 
@@ -124,7 +134,7 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -143,6 +153,7 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
                     Config.loggedInUser);
             int id = empHistoryDao.addEmploymentHistory(newEmpHistory);
             newEmpHistory.setId(id);
+            lblMessage.setText("Employment history added.");
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
@@ -189,6 +200,7 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblEndDate;
     private javax.swing.JLabel lblInf;
     private javax.swing.JLabel lblJobDescription;
+    private javax.swing.JLabel lblMessage;
     private javax.swing.JTextArea txtAreaJobDesc;
     private javax.swing.JTextField txtBeginDate;
     private javax.swing.JTextField txtCompanyName;
