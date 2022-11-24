@@ -57,9 +57,11 @@ public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {
     @Override
     public boolean updateCountry(Country c) {
         try (Connection con = connect()) {
-            PreparedStatement pstmt = con.prepareStatement("update country set name = ?, nationality = ?");
+            PreparedStatement pstmt = con.prepareStatement("update country set name = ?, nationality = ? "
+                    + "where id = ?");
             pstmt.setString(1, c.getName());
             pstmt.setString(2, c.getNationality());
+            pstmt.setInt(3, c.getId());
             pstmt.execute();
             return true;
         } catch (SQLException ex) {
