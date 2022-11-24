@@ -1,6 +1,11 @@
 package com.company.resume.frame;
 
+import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
+import com.mycompany.main.Context;
+
 public class AddEmpHistoryFrame extends javax.swing.JFrame {
+    
+    private EmploymentHistoryDaoInter empHistoryDao = Context.instanceEmploymentHistoryDao();
 
     public AddEmpHistoryFrame() {
         initComponents();
@@ -41,6 +46,11 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
         lblInf.setText("Fill in the blanks to add employment history:");
 
         btnOkay.setText("Okay");
+        btnOkay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkayActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,6 +122,10 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOkayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkayActionPerformed
+        
+    }//GEN-LAST:event_btnOkayActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

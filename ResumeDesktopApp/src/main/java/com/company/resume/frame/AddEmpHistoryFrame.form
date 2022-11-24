@@ -163,6 +163,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Okay"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOkayActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
