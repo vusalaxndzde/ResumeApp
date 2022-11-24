@@ -9,7 +9,7 @@ public interface EmploymentHistoryDaoInter {
     
     public boolean updateEmploymentHistory(EmploymentHistory eh);
     
-    public boolean addEmploymentHistory(EmploymentHistory eh);
+    public int addEmploymentHistory(EmploymentHistory eh);
     
     public boolean removeEmploymentHistory(int id);
     

@@ -62,21 +62,25 @@ public class EmploymentHistoryDaoImpl extends AbstractDAO implements EmploymentH
     }
 
     @Override
-    public boolean addEmploymentHistory(EmploymentHistory eh) {
+    public int addEmploymentHistory(EmploymentHistory eh) {
+        int id = 0;
         try (Connection c = connect()) {
             PreparedStatement pstmt = c.prepareStatement("insert into employment_history(header, "
-                    + "begin_date, end_date, job_description, user_id) values(?, ?, ?, ?, ?)");
+                    + "begin_date, end_date, job_description, user_id) values(?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, eh.getHeader());
             pstmt.setDate(2, eh.getBeginDate());
             pstmt.setDate(3, eh.getEndDate());
             pstmt.setString(4, eh.getJobDescription());
             pstmt.setInt(5, eh.getUser().getId());
             pstmt.execute();
-            return true;
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                id = generatedKeys.getInt(1);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return false;
+        return id;
     }
 
     @Override
