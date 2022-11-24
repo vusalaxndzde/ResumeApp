@@ -114,11 +114,12 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
     }
 
     @Override
-    public boolean addUser(User u) {
+    public int addUser(User u) {
+        int id = 0;
         try ( Connection c = connect()) {
             PreparedStatement pstmt = c.prepareStatement("insert into user(name, surname, phone, email, "
                     + "profile_description, address, birthdate, birthplace_id, nationality_id) "
-                    + "values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "values(?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, u.getName());
             pstmt.setString(2, u.getSurname());
             pstmt.setString(3, u.getPhone());
@@ -129,10 +130,14 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             pstmt.setInt(8, u.getBirthplace().getId());
             pstmt.setInt(9, u.getNationality().getId());
             pstmt.execute();
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                id = generatedKeys.getInt(1);
+            }
         } catch (SQLException ex) {
-            return false;
+            ex.printStackTrace();
         }
-        return true;
+        return id;
     }
 
 }
