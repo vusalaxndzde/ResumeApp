@@ -1,11 +1,17 @@
 package com.company.resume.frame;
 
+import com.company.resume.config.Config;
 import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
+import com.mycompany.entity.EmploymentHistory;
 import com.mycompany.main.Context;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class AddEmpHistoryFrame extends javax.swing.JFrame {
     
     private EmploymentHistoryDaoInter empHistoryDao = Context.instanceEmploymentHistoryDao();
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public AddEmpHistoryFrame() {
         initComponents();
@@ -124,7 +130,21 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkayActionPerformed
-        
+        try {
+            String header = txtCompanyName.getText();
+            String beginDateStr = txtBeginDate.getText();
+            Date beginDate = new Date(sdf.parse(beginDateStr).getTime());
+            String endDateStr = txtEndDate.getText();
+            Date endDate = new Date(sdf.parse(endDateStr).getTime());
+            String jobDesc = txtAreaJobDesc.getText();
+            
+            EmploymentHistory newEmpHistory = new EmploymentHistory(0, header, beginDate, endDate, jobDesc, 
+                    Config.loggedInUser);
+            int id = empHistoryDao.addEmploymentHistory(newEmpHistory);
+            newEmpHistory.setId(id);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_btnOkayActionPerformed
 
     public static void main(String args[]) {
