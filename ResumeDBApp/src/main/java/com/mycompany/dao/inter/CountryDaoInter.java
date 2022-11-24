@@ -11,7 +11,7 @@ public interface CountryDaoInter {
     
     public boolean updateCountry(Country c);
     
-    public boolean addCountry(Country c);
+    public int addCountry(Country c);
     
     public boolean removeCountry(int id);
 

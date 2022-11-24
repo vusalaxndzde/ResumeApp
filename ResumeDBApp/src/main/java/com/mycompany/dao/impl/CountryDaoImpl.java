@@ -71,17 +71,22 @@ public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {
     }
 
     @Override
-    public boolean addCountry(Country c) {
+    public int addCountry(Country c) {
+        int id = 0;
         try (Connection con = connect()) {
-            PreparedStatement pstmt = con.prepareStatement("insert into country(name, nationality) values(?, ?)");
+            PreparedStatement pstmt = con.prepareStatement("insert into country(name, nationality) values(?, ?)", 
+                    Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, c.getName());
             pstmt.setString(2, c.getNationality());
             pstmt.execute();
-            return true;
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            while (generatedKeys.next()) {
+                id = generatedKeys.getInt(1);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return false;
+        return id;
     }
 
     @Override
