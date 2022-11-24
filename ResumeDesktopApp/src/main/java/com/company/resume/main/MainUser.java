@@ -131,6 +131,7 @@ public class MainUser extends javax.swing.JFrame {
         loggedInUser.setSurname(surname);
         pnlProfil.fillUser(loggedInUser);
         pnlDetails.fillUser(loggedInUser);
+        pnlHistory.updateEmpHistory();
 
         userDao.updateUser(loggedInUser);
     }//GEN-LAST:event_btnSaveActionPerformed

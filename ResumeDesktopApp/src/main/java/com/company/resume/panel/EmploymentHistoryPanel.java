@@ -6,7 +6,8 @@ import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
 import com.mycompany.entity.EmploymentHistory;
 import com.mycompany.main.Context;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 import javax.swing.JFrame;
 
@@ -14,6 +15,7 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
     
     private EmploymentHistoryDaoInter empHistoryDao = Context.instanceEmploymentHistoryDao();
     private List<EmploymentHistory> empHistories;
+    private EmploymentHistory empHistory;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private int index = 0;
 
@@ -58,26 +60,27 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
         pnlHistory.setLayout(pnlHistoryLayout);
         pnlHistoryLayout.setHorizontalGroup(
             pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHistoryLayout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(btnPrevious)
-                .addGap(33, 33, 33)
-                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdd)
-                .addGap(29, 29, 29))
             .addGroup(pnlHistoryLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlHistoryLayout.createSequentialGroup()
-                        .addComponent(txtBeginDate, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(189, Short.MAX_VALUE))
+                        .addComponent(btnPrevious)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
+                    .addGroup(pnlHistoryLayout.createSequentialGroup()
+                        .addGroup(pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlHistoryLayout.createSequentialGroup()
+                                .addComponent(txtBeginDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(189, Short.MAX_VALUE))))
         );
         pnlHistoryLayout.setVerticalGroup(
             pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +126,7 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
 
     public void fillUserComponents() {
         empHistories = empHistoryDao.getEmploymentHistoryByUserId(Config.loggedInUser.getId());
-        EmploymentHistory empHistory = empHistories.get(index);
+        empHistory = empHistories.get(index);
         String header = empHistory.getHeader();
         Date beginDate = empHistory.getBeginDate();
         Date endDate = empHistory.getEndDate();
@@ -131,8 +134,38 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
         
         txtHeader.setText(header);
         txtBeginDate.setText(sdf.format(beginDate));
-        txtEndDate.setText(sdf.format(endDate));
+        if (endDate == null) {
+            txtEndDate.setText("-");
+        } else {
+            txtEndDate.setText(sdf.format(endDate));
+        }
         txtAreaJobDesc.setText(jobDesc);
+    }
+    
+    public void updateEmpHistory() {
+        try {
+            String header = txtHeader.getText();
+            String beginDateStr = txtBeginDate.getText();
+            String endDateStr = txtEndDate.getText();
+            String jobDesc = txtAreaJobDesc.getText();
+            Date beginDate = new Date(sdf.parse(beginDateStr).getTime());
+            Date endDate;
+            if (endDateStr.equals("-")) {
+                endDate = null;
+            } else {
+                endDate = new Date(sdf.parse(endDateStr).getTime());
+            }
+            
+            empHistory.setHeader(header);
+            empHistory.setBeginDate(beginDate);
+            empHistory.setEndDate(endDate);
+            empHistory.setJobDescription(jobDesc);
+            
+            empHistoryDao.updateEmploymentHistory(empHistory);
+            
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
     }
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
