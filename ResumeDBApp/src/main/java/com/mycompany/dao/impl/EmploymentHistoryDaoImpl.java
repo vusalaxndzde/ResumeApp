@@ -16,13 +16,14 @@ import java.util.List;
 public class EmploymentHistoryDaoImpl extends AbstractDAO implements EmploymentHistoryDaoInter {
     
     public EmploymentHistory getEmploymentHistory(ResultSet rs) throws Exception {
+        int id = rs.getInt("id");
         String header = rs.getString("header");
         Date beginDate = rs.getDate("begin_date");
         Date endDate = rs.getDate("end_date");
         String jobDescription = rs.getString("job_description");
         int userId = rs.getInt("user_id");
         
-        return new EmploymentHistory(null, header, beginDate, endDate, jobDescription, new User(userId));
+        return new EmploymentHistory(id, header, beginDate, endDate, jobDescription, new User(userId));
     }
 
     @Override
