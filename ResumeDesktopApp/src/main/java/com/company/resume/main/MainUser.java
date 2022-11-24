@@ -16,6 +16,7 @@ public class MainUser extends javax.swing.JFrame {
         pnlProfil.fillUserComponents();
         pnlDetails.fillUserComponents();
         pnlSkills.fillUserComponents();
+        pnlHistory.fillUserComponents();
     }
 
     @SuppressWarnings("unchecked")
