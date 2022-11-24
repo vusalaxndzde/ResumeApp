@@ -146,7 +146,12 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
             String beginDateStr = txtBeginDate.getText();
             Date beginDate = new Date(sdf.parse(beginDateStr).getTime());
             String endDateStr = txtEndDate.getText();
-            Date endDate = new Date(sdf.parse(endDateStr).getTime());
+            Date endDate;
+            if (endDateStr.equals("-") || endDateStr.trim().equals("")) {
+                endDate = null;
+            } else {
+                endDate = new Date(sdf.parse(endDateStr).getTime());
+            }
             String jobDesc = txtAreaJobDesc.getText();
             
             EmploymentHistory newEmpHistory = new EmploymentHistory(0, header, beginDate, endDate, jobDesc, 

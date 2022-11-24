@@ -12,9 +12,9 @@ import java.util.List;
 import javax.swing.JFrame;
 
 public class EmploymentHistoryPanel extends javax.swing.JPanel {
-    
+
     private EmploymentHistoryDaoInter empHistoryDao = Context.instanceEmploymentHistoryDao();
-    private List<EmploymentHistory> empHistories;
+    public List<EmploymentHistory> empHistories = empHistoryDao.getEmploymentHistoryByUserId(Config.loggedInUser.getId());
     private EmploymentHistory empHistory;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private int index = 0;
@@ -53,8 +53,18 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(txtAreaJobDesc);
 
         btnPrevious.setText("Previous");
+        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
+            }
+        });
 
         btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlHistoryLayout = new javax.swing.GroupLayout(pnlHistory);
         pnlHistory.setLayout(pnlHistoryLayout);
@@ -72,15 +82,15 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
                         .addGap(29, 29, 29))
                     .addGroup(pnlHistoryLayout.createSequentialGroup()
                         .addGroup(pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlHistoryLayout.createSequentialGroup()
                                 .addComponent(txtBeginDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(189, Short.MAX_VALUE))))
+                                .addComponent(txtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(127, Short.MAX_VALUE))))
         );
         pnlHistoryLayout.setVerticalGroup(
             pnlHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,14 +134,13 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void fillUserComponents() {
-        empHistories = empHistoryDao.getEmploymentHistoryByUserId(Config.loggedInUser.getId());
+    private void fillUserComponents() {
         empHistory = empHistories.get(index);
         String header = empHistory.getHeader();
         Date beginDate = empHistory.getBeginDate();
         Date endDate = empHistory.getEndDate();
         String jobDesc = empHistory.getJobDescription();
-        
+
         txtHeader.setText(header);
         txtBeginDate.setText(sdf.format(beginDate));
         if (endDate == null) {
@@ -141,7 +150,22 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
         }
         txtAreaJobDesc.setText(jobDesc);
     }
-    
+
+    public void fillAndSwitchEmpHistory() {
+        empHistories = empHistoryDao.getEmploymentHistoryByUserId(Config.loggedInUser.getId());
+        if (index < empHistories.size() && index >= 0) {
+            btnNext.setEnabled(true);
+            btnPrevious.setEnabled(true);
+            fillUserComponents();
+        }
+        if ((index - 1) < 0) {
+            btnPrevious.setEnabled(false);
+        }
+        if ((index + 1) >= empHistories.size()) {
+            btnNext.setEnabled(false);
+        }
+    }
+
     public void updateEmpHistory() {
         try {
             String header = txtHeader.getText();
@@ -150,31 +174,38 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
             String jobDesc = txtAreaJobDesc.getText();
             Date beginDate = new Date(sdf.parse(beginDateStr).getTime());
             Date endDate;
-            if (endDateStr.equals("-")) {
+            if (endDateStr.equals("-") || endDateStr.trim().equals("")) {
                 endDate = null;
             } else {
                 endDate = new Date(sdf.parse(endDateStr).getTime());
             }
-            
+
             empHistory.setHeader(header);
             empHistory.setBeginDate(beginDate);
             empHistory.setEndDate(endDate);
             empHistory.setJobDescription(jobDesc);
-            
+
             empHistoryDao.updateEmploymentHistory(empHistory);
-            
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
     }
-    
+
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         AddEmpHistoryFrame f = new AddEmpHistoryFrame("Add Employment History");
         f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         f.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
-    
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        index++;
+        fillAndSwitchEmpHistory();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
+        index--;
+        fillAndSwitchEmpHistory();
+    }//GEN-LAST:event_btnPreviousActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

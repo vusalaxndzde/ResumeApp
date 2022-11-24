@@ -10,13 +10,13 @@ public class MainUser extends javax.swing.JFrame {
     private UserDaoInter userDao = Context.instanceUserDao();
 
     public MainUser() {
-        initComponents();
         Config.loggedInUser = userDao.getById(1);
+        initComponents();
         fillUserComponents();
         pnlProfil.fillUserComponents();
         pnlDetails.fillUserComponents();
         pnlSkills.fillUserComponents();
-        pnlHistory.fillUserComponents();
+        pnlHistory.fillAndSwitchEmpHistory();
     }
 
     @SuppressWarnings("unchecked")
