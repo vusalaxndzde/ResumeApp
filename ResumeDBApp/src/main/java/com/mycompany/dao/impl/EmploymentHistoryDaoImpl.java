@@ -47,12 +47,13 @@ public class EmploymentHistoryDaoImpl extends AbstractDAO implements EmploymentH
     public boolean updateEmploymentHistory(EmploymentHistory eh) {
         try (Connection c = connect()) {
             PreparedStatement pstmt = c.prepareStatement("update employment_history set header = ?, "
-                    + "begin_date = ?, end_date = ?, job_description = ?, user_id = ?");
+                    + "begin_date = ?, end_date = ?, job_description = ?, user_id = ? where id = ?");
             pstmt.setString(1, eh.getHeader());
             pstmt.setDate(2, eh.getBeginDate());
             pstmt.setDate(3, eh.getEndDate());
             pstmt.setString(4, eh.getJobDescription());
             pstmt.setInt(5, eh.getUser().getId());
+            pstmt.setInt(6, eh.getId());
             pstmt.execute();
             return true;
         } catch (SQLException ex) {
