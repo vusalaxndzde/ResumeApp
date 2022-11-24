@@ -80,7 +80,7 @@ public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {
             pstmt.setString(2, c.getNationality());
             pstmt.execute();
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
-            while (generatedKeys.next()) {
+            if (generatedKeys.next()) {
                 id = generatedKeys.getInt(1);
             }
         } catch (SQLException ex) {
