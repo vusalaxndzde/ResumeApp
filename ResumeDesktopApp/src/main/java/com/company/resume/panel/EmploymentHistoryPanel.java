@@ -221,6 +221,7 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         empHistoryDao.removeEmploymentHistory(empHistory.getId());
+        index--;
         fillAndSwitchEmpHistory();
     }//GEN-LAST:event_btnDeleteActionPerformed
 

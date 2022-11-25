@@ -4,12 +4,13 @@ import com.company.resume.config.Config;
 import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
 import com.mycompany.entity.EmploymentHistory;
 import com.mycompany.main.Context;
+import java.awt.Color;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class AddEmpHistoryFrame extends javax.swing.JFrame {
-    
+
     private EmploymentHistoryDaoInter empHistoryDao = Context.instanceEmploymentHistoryDao();
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -72,7 +73,7 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnOkay))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,12 +154,17 @@ public class AddEmpHistoryFrame extends javax.swing.JFrame {
                 endDate = new Date(sdf.parse(endDateStr).getTime());
             }
             String jobDesc = txtAreaJobDesc.getText();
-            
-            EmploymentHistory newEmpHistory = new EmploymentHistory(0, header, beginDate, endDate, jobDesc, 
+
+            EmploymentHistory newEmpHistory = new EmploymentHistory(0, header, beginDate, endDate, jobDesc,
                     Config.loggedInUser);
             int id = empHistoryDao.addEmploymentHistory(newEmpHistory);
             newEmpHistory.setId(id);
-            lblMessage.setText("Employment history added.");
+            if (id != 0) {
+                lblMessage.setText("Employment history added.");
+            } else {
+                lblMessage.setForeground(Color.red);
+                lblMessage.setText("An error occurred while adding employment history!");
+            }
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
