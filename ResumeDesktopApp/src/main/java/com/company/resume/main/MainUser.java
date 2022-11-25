@@ -4,6 +4,7 @@ import com.company.resume.config.Config;
 import static com.company.resume.config.Config.loggedInUser;
 import com.mycompany.dao.inter.UserDaoInter;
 import com.mycompany.main.Context;
+import java.awt.Color;
 
 public class MainUser extends javax.swing.JFrame {
 
@@ -35,6 +36,7 @@ public class MainUser extends javax.swing.JFrame {
         pnlDetails = new com.company.resume.panel.DetailsPanel();
         pnlSkills = new com.company.resume.panel.SkillsPanel();
         pnlHistory = new com.company.resume.panel.EmploymentHistoryPanel();
+        lblMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +90,9 @@ public class MainUser extends javax.swing.JFrame {
         tpUserInfo.addTab("Skills", pnlSkills);
         tpUserInfo.addTab("Employment History", pnlHistory);
 
+        lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblMessage.setForeground(new java.awt.Color(0, 153, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,10 +100,14 @@ public class MainUser extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tpUserInfo)
+                    .addComponent(tpUserInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlUserInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,8 +117,10 @@ public class MainUser extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tpUserInfo)
-                .addContainerGap())
+                .addComponent(tpUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,7 +144,13 @@ public class MainUser extends javax.swing.JFrame {
         pnlDetails.fillUser(loggedInUser);
         pnlHistory.updateEmpHistory();
 
-        userDao.updateUser(loggedInUser);
+        boolean isAdded = userDao.updateUser(loggedInUser);
+        if (isAdded) {
+            lblMessage.setText("All changes saved.");
+        } else {
+            lblMessage.setForeground(Color.red);
+            lblMessage.setText("An error occurred while saving changes!");
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     public static void main(String args[]) {
@@ -171,6 +188,7 @@ public class MainUser extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblMessage;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSurname;
     private com.company.resume.panel.DetailsPanel pnlDetails;

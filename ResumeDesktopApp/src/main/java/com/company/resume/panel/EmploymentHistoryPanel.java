@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 public class EmploymentHistoryPanel extends javax.swing.JPanel {
 
     private EmploymentHistoryDaoInter empHistoryDao = Context.instanceEmploymentHistoryDao();
-    public List<EmploymentHistory> empHistories = empHistoryDao.getEmploymentHistoryByUserId(Config.loggedInUser.getId());
+    private List<EmploymentHistory> empHistories;
     private EmploymentHistory empHistory;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private int index = 0;
@@ -146,6 +146,7 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fillUserComponents() {
+        empHistories = empHistoryDao.getEmploymentHistoryByUserId(Config.loggedInUser.getId());
         empHistory = empHistories.get(index);
         String header = empHistory.getHeader();
         Date beginDate = empHistory.getBeginDate();
