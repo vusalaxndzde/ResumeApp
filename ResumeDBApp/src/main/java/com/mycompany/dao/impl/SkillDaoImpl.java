@@ -60,7 +60,7 @@ public class SkillDaoImpl extends AbstractDAO implements SkillDaoInter {
             pstmt.setInt(2, s.getId());
             pstmt.execute();
             return true;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;
@@ -77,7 +77,7 @@ public class SkillDaoImpl extends AbstractDAO implements SkillDaoInter {
             if (generatedKeys.next()) {
                 id = generatedKeys.getInt(1);
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return id;
@@ -89,7 +89,7 @@ public class SkillDaoImpl extends AbstractDAO implements SkillDaoInter {
             Statement stmt = c.createStatement();
             stmt.execute("delete from skill where id = " + id);
             return true;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;

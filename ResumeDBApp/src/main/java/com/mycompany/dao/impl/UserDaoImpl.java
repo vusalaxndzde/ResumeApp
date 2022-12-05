@@ -50,7 +50,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
                 User user = getUser(rs);
                 userList.add(user);
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return userList;
@@ -73,7 +73,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             pstmt.setInt(9, u.getNationality().getId());
             pstmt.setInt(10, u.getId());
             pstmt.execute();
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
@@ -85,7 +85,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         try ( Connection c = connect()) {
             Statement stmt = c.createStatement();
             stmt.execute("delete from user where id = " + id);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
@@ -134,7 +134,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             if (generatedKeys.next()) {
                 id = generatedKeys.getInt(1);
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return id;

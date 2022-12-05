@@ -61,7 +61,7 @@ public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
             if (generatedKeys.next()) {
                 id = generatedKeys.getInt(1);
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return id;
@@ -73,7 +73,7 @@ public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
             Statement stmt = c.createStatement();
             stmt.execute("delete from user_skill where id = " + id);
             return true;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;
@@ -90,7 +90,7 @@ public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
             pstmt.setInt(4, us.getId());
             pstmt.execute();
             return true;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;

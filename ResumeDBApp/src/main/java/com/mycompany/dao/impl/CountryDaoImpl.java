@@ -64,7 +64,7 @@ public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {
             pstmt.setInt(3, c.getId());
             pstmt.execute();
             return true;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;
@@ -83,7 +83,7 @@ public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {
             if (generatedKeys.next()) {
                 id = generatedKeys.getInt(1);
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return id;

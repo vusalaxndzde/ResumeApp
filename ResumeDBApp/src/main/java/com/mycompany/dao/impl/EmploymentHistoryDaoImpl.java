@@ -57,7 +57,7 @@ public class EmploymentHistoryDaoImpl extends AbstractDAO implements EmploymentH
             pstmt.setInt(6, eh.getId());
             pstmt.execute();
             return true;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;
@@ -79,7 +79,7 @@ public class EmploymentHistoryDaoImpl extends AbstractDAO implements EmploymentH
             if (generatedKeys.next()) {
                 id = generatedKeys.getInt(1);
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return id;
@@ -91,7 +91,7 @@ public class EmploymentHistoryDaoImpl extends AbstractDAO implements EmploymentH
             Statement stmt = c.createStatement();
             stmt.execute("delete from employment_history where id = " + id);
             return true;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;
