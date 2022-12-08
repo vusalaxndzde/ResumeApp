@@ -41,7 +41,7 @@ ResumeWebApp/*.iml
 ResumeDesktopApp/nbactions*.xml
 ResumeDesktopApp/nb-configuration*.xml
 ResumeDBApp/nbactions*.xml
-ResumeApp/ResumeDBApp/nb-configuration*.xml
+ResumeDBApp/nb-configuration*.xml
 
 
 # Folder config file
