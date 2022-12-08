@@ -1,4 +1,7 @@
-<%--
+<%@ page import="com.mycompany.main.Context" %>
+<%@ page import="com.mycompany.dao.inter.UserDaoInter" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.mycompany.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: Asus
   Date: 08.12.2022
@@ -11,6 +14,38 @@
     <title>users jsp</title>
 </head>
 <body>
+    <%
+        UserDaoInter userDao = Context.instanceUserDao();
+        List<User> users = userDao.getAll();
+    %>
+    <div>
+        <form action="users.jsp" method="post">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="surname">Surname:</label><br>
+            <input type="text" id="surname" name="surname"><br><br>
+            <input type="search" name="search" value="Search">
+        </form>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (User user : users) {%>
+            <tr>
+                <td><%=user.getName()%></td>
+                <td><%=user.getSurname()%></td>
+                <td><%=user.getNationality().getName()%></td>
+            </tr>
+            <%}%>
+        </tbody>
+    </table>
 
 </body>
 </html>
