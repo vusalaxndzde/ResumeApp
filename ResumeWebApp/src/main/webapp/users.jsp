@@ -24,7 +24,7 @@
             <input type="text" id="name" name="name"><br><br>
             <label for="surname">Surname:</label><br>
             <input type="text" id="surname" name="surname"><br><br>
-            <input type="search" name="search" value="Search">
+            <input type="submit" name="search" value="Search">
         </form>
     </div>
 
@@ -38,11 +38,11 @@
         </thead>
         <tbody>
             <%for (User user : users) {%>
-            <tr>
-                <td><%=user.getName()%></td>
-                <td><%=user.getSurname()%></td>
-                <td><%=user.getNationality().getName()%></td>
-            </tr>
+                <tr>
+                    <td><%=user.getName()%></td>
+                    <td><%=user.getSurname()%></td>
+                    <td><%=user.getNationality().getName() == null ? "N/A" : user.getNationality().getName()%></td>
+                </tr>
             <%}%>
         </tbody>
     </table>
