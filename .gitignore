@@ -5,32 +5,32 @@
 # Project Ignores Files 
 
 # Maven
-.mvn
-*.classpath
-*.project
-*.settings
-/bin/*
-/target/*
+ResumeWebApp/.mvn
+ResumeWebApp/*.classpath
+ResumeWebApp/*.project
+ResumeWebApp/*.settings
+ResumeWebApp/bin/*
+ResumeWebApp/target/*
 
 #gradle
 .gradle
 /build
 
 # Compiled class file
-*.class
+ResumeWebApp/*.class
 
 # Package Files
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
+ResumeWebApp/*.jar
+ResumeWebApp/*.war
+ResumeWebApp/*.ear
+ResumeWebApp/*.zip
+ResumeWebApp/*.tar.gz
+ResumeWebApp/*.rar
 
 
 # JetBrains IDEs
-.idea/
-*.iml
+ResumeWebApp/.idea/
+ResumeWebApp/*.iml
 
 # Eclipse
 .project
@@ -38,8 +38,10 @@
 .settings
 
 # Netbeans
-nbactions*.xml
-nb-configuration*.xml
+ResumeDesktopApp/nbactions*.xml
+ResumeDesktopApp/nb-configuration*.xml
+ResumeDBApp/nbactions*.xml
+ResumeDBApp/nb-configuration*.xml
 
 
 # Folder config file
@@ -53,4 +55,4 @@ $RECYCLE.BIN/
 **/.DS_Store
 
 #spring
-.springBeans
+ResumeWebApp/.springBeans
