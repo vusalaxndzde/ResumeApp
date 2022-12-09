@@ -16,6 +16,9 @@
 <body>
     <%
         UserDaoInter userDao = Context.instanceUserDao();
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        Integer nationalityId = Integer.parseInt(request.getParameter("nationality"));
         List<User> users = userDao.getAll();
     %>
     <div>
@@ -24,10 +27,11 @@
             <input type="text" id="name" name="name"><br><br>
             <label for="surname">Surname:</label><br>
             <input type="text" id="surname" name="surname"><br><br>
+            <label for="nid">Nationality</label>
+            <input type="text" id="nid" name="nationality">
             <input type="submit" name="search" value="Search">
         </form>
     </div>
-
     <table>
         <thead>
             <tr>
@@ -41,11 +45,10 @@
                 <tr>
                     <td><%=user.getName()%></td>
                     <td><%=user.getSurname()%></td>
-                    <td><%=user.getNationality().getName() == null ? "N/A" : user.getNationality().getName()%></td>
+                    <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getName()%></td>
                 </tr>
             <%}%>
         </tbody>
     </table>
-
 </body>
 </html>
