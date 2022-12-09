@@ -30,7 +30,9 @@ ResumeWebApp/*.rar
 
 # JetBrains IDEs
 ResumeWebApp/.idea/
+ResumeDBApp/.idea/
 ResumeWebApp/*.iml
+ResumeDBApp/.iml/
 
 # Eclipse
 .project
