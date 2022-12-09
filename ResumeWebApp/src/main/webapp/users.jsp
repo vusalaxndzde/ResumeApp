@@ -18,11 +18,18 @@
         UserDaoInter userDao = Context.instanceUserDao();
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
-        Integer nationalityId = Integer.parseInt(request.getParameter("nationality"));
-        List<User> users = userDao.getAll();
+        String nationalityIdStr = request.getParameter("nationality");
+        Integer nationalityId = null;
+        if (nationalityIdStr != null && !nationalityIdStr.trim().equals("")) {
+            nationalityId = Integer.valueOf(request.getParameter("nationality"));
+        }
+        System.out.println(name);
+        System.out.println(surname);
+        System.out.println(nationalityIdStr);
+        List<User> users = userDao.filter(name, surname, nationalityId);
     %>
     <div>
-        <form action="users.jsp" method="post">
+        <form action="users.jsp" method="get">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name"><br><br>
             <label for="surname">Surname:</label><br>
@@ -45,7 +52,7 @@
                 <tr>
                     <td><%=user.getName()%></td>
                     <td><%=user.getSurname()%></td>
-                    <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getName()%></td>
+                    <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getNationality()%></td>
                 </tr>
             <%}%>
         </tbody>

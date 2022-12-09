@@ -57,6 +57,51 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
     }
 
     @Override
+    public List<User> filter(String name, String surname, Integer nationalityId) {
+        List<User> userList = new ArrayList<>();
+        try ( Connection c = connect()) {
+            String query = "select u.*, c.name birthplace, n.nationality from user u "
+                    + "left join country c "
+                    + "on u.birthplace_id = c.id "
+                    + "left join country n "
+                    + "on u.nationality_id = n.id where 1=1 ";
+            if (name != null && !name.trim().equals("")) {
+                query += "and u.name = ? ";
+            }
+            if (surname != null && !surname.trim().equals("")) {
+                query += "and u.surname = ? ";
+            }
+            if (nationalityId != null) {
+                query += "and u.nationality_id = ? ";
+            }
+
+            PreparedStatement pstmt = c.prepareStatement(query);
+            int i = 1;
+            if (name != null && !name.trim().equals("")) {
+                pstmt.setString(i, name);
+                i++;
+            }
+            if (surname != null && !surname.trim().equals("")) {
+                pstmt.setString(i, surname);
+                i++;
+            }
+            if (nationalityId != null) {
+                pstmt.setInt(i, nationalityId);
+            }
+
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+            while (rs.next()) {
+                User user = getUser(rs);
+                userList.add(user);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return userList;
+    }
+
+    @Override
     public boolean updateUser(User u) {
         try ( Connection c = connect()) {
             PreparedStatement pstmt = c.prepareStatement("update user set name = ?, surname = ?, phone = ?, "

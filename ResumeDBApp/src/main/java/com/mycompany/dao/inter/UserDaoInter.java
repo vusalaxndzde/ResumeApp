@@ -5,14 +5,16 @@ import java.util.List;
 
 public interface UserDaoInter {
     
-    public List<User> getAll();
+    List<User> getAll();
+
+    List<User> filter(String name, String surname, Integer nationalityId);
     
-    public User getById(int id);
+    User getById(int id);
     
-    public int addUser(User u);
+    int addUser(User u);
     
-    public boolean updateUser(User u);
+    boolean updateUser(User u);
     
-    public boolean removeUser(int id);
+    boolean removeUser(int id);
     
 }
