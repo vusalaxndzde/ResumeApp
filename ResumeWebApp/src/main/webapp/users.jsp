@@ -34,8 +34,8 @@
             <input type="text" id="name" name="name"><br><br>
             <label for="surname">Surname:</label><br>
             <input type="text" id="surname" name="surname"><br><br>
-            <label for="nid">Nationality</label>
-            <input type="text" id="nid" name="nationality">
+            <label for="nid">Nationality:</label><br>
+            <input type="text" id="nid" name="nationality"><br><br>
             <input type="submit" name="search" value="Search">
         </form>
     </div>
