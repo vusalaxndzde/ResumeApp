@@ -13,6 +13,8 @@
 <head>
     <title>users jsp</title>
     <link rel="stylesheet" href="assets/css/users.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
     <%
@@ -28,24 +30,32 @@
     %>
     <div class="container">
         <div>
-            <form action="users.jsp" method="get">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"><br><br>
-                <label for="surname">Surname:</label><br>
-                <input type="text" id="surname" name="surname"><br><br>
-                <label for="nid">Nationality:</label><br>
-                <input type="text" id="nid" name="nationality"><br><br>
-                <input type="submit" name="search" value="Search">
-            </form>
+            <div class="control_panel">
+                <form action="users.jsp" method="get">
+                    <div class="control_panel_group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name"><br>
+                    </div>
+                    <div class="control_panel_group">
+                        <label for="surname">Surname:</label>
+                        <input type="text" id="surname" name="surname"><br>
+                    </div>
+                    <div class="control_panel_group">
+                        <label for="nid">Nationality:</label>
+                        <input type="text" id="nid" name="nationality"><br>
+                    </div>
+                    <input type="submit" name="search" value="Search">
+                </form>
+            </div>
         </div>
         <div>
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Surname</th>
                         <th>Country</th>
-                        <th>Operators</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,8 +65,12 @@
                         <td><%=user.getSurname()%></td>
                         <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getNationality()%></td>
                         <td>
-                            <input type="submit" name="action" value="delete">
-                            <input type="submit" name="action" value="update">
+                            <button class="btn_table" type="submit" name="action" value="delete">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <button class="btn_table" type="submit" name="action" value="update">
+                                <i class="fa-sharp fa-solid fa-pen"></i>
+                            </button>
                         </td>
                     </tr>
                     <%}%>
