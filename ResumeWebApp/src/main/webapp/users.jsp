@@ -12,6 +12,7 @@
 <html>
 <head>
     <title>users jsp</title>
+    <link rel="stylesheet" href="assets/css/users.css">
 </head>
 <body>
     <%
@@ -25,7 +26,7 @@
         }
         List<User> users = userDao.filter(name, surname, nationalityId);
     %>
-    <div>
+    <div class="container">
         <div>
             <form action="users.jsp" method="get">
                 <label for="name">Name:</label><br>
