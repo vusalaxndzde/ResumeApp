@@ -28,55 +28,53 @@
         }
         List<User> users = userDao.filter(name, surname, nationalityId);
     %>
-    <div class="container">
-        <div>
-            <div class="control_panel">
+    <div class="container mycontainer">
+            <div>
                 <form action="users.jsp" method="get">
-                    <div class="control_panel_group">
+                    <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" id="name" name="name"><br>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
                     </div>
-                    <div class="control_panel_group">
+                    <div class="form-group">
                         <label for="surname">Surname:</label>
-                        <input type="text" id="surname" name="surname"><br>
+                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Enter surname">
                     </div>
-                    <div class="control_panel_group">
+                    <div class="form-group">
                         <label for="nid">Nationality:</label>
-                        <input type="text" id="nid" name="nationality"><br>
+                        <input type="text" class="form-control" id="nid" name="nationality" placeholder="Enter nationality">
                     </div>
-                    <input type="submit" name="search" value="Search">
+                    <input type="submit" class="btn btn-primary" name="search" value="Search">
                 </form>
             </div>
-        </div>
-        <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Country</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%for (User user : users) {%>
-                    <tr>
-                        <td><%=user.getName()%></td>
-                        <td><%=user.getSurname()%></td>
-                        <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getNationality()%></td>
-                        <td>
-                            <button class="btn_table" type="submit" name="action" value="delete">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                            <button class="btn_table" type="submit" name="action" value="update">
-                                <i class="fa-sharp fa-solid fa-pen"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <%}%>
-                </tbody>
-            </table>
-        </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Country</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for (User user : users) {%>
+                        <tr>
+                            <td><%=user.getName()%></td>
+                            <td><%=user.getSurname()%></td>
+                            <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getNationality()%></td>
+                            <td>
+                                <button class="btn btn-danger" type="submit" name="action" value="delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                <button class="btn btn-secondary" type="submit" name="action" value="update">
+                                    <i class="fa-sharp fa-solid fa-pen"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
     </div>
 </body>
 </html>
