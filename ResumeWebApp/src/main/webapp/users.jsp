@@ -29,7 +29,8 @@
         List<User> users = userDao.filter(name, surname, nationalityId);
     %>
     <div class="container mycontainer">
-            <div>
+        <div class="row">
+            <div class="col-4">
                 <form action="users.jsp" method="get">
                     <div class="form-group">
                         <label for="name">Name:</label>
@@ -46,35 +47,36 @@
                     <input type="submit" class="btn btn-primary" name="search" value="Search">
                 </form>
             </div>
-            <div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Surname</th>
-                            <th>Country</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%for (User user : users) {%>
-                        <tr>
-                            <td><%=user.getName()%></td>
-                            <td><%=user.getSurname()%></td>
-                            <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getNationality()%></td>
-                            <td>
-                                <button class="btn btn-danger" type="submit" name="action" value="delete">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                                <button class="btn btn-secondary" type="submit" name="action" value="update">
-                                    <i class="fa-sharp fa-solid fa-pen"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <%}%>
-                    </tbody>
-                </table>
-            </div>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Country</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <%for (User user : users) {%>
+                <tr>
+                    <td><%=user.getName()%></td>
+                    <td><%=user.getSurname()%></td>
+                    <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getNationality()%></td>
+                    <td>
+                        <button class="btn btn-danger" type="submit" name="action" value="delete">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                        <button class="btn btn-secondary" type="submit" name="action" value="update">
+                            <i class="fa-sharp fa-solid fa-pen"></i>
+                        </button>
+                    </td>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
