@@ -11,8 +11,8 @@
     <title>Login</title>
 </head>
 <body>
-    <div>
-        <form>
+    <div style="margin: 250px 0px 0px 850px; border: 10px solid red; width: 10%">
+        <form action="LoginController" method="post">
             <div>
                 <label for="username">Username:</label><br>
                 <input type="text" id="username" name="username" placeholder="Enter username">
@@ -20,6 +20,9 @@
             <div>
                 <label for="password">Password:</label><br>
                 <input type="password" id="password" name="password" placeholder="Enter password">
+            </div>
+            <div>
+                <button type="submit" name="btn_login">Login</button>
             </div>
         </form>
     </div>
