@@ -20,7 +20,7 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         List<User> users = userDao.filter(username, password, null);
-        if (!(users.size() == 0)) {
+        if (users.size() == 1) {
             response.sendRedirect("users.jsp");
         } else {
             response.sendError(404);
