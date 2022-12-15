@@ -9,16 +9,17 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
-    <div style="margin: 250px 0 0 850px; border: 10px solid red; width: 10%">
+    <div style="margin: 250px 0 0 850px">
         <form action="LoginController" method="post">
             <div>
-                <label for="username">Username:</label><br>
+                <i class="fa-solid fa-user"></i>
                 <input type="text" id="username" name="username" placeholder="Enter username">
             </div>
             <div>
-                <label for="password">Password:</label><br>
+                <i class="fa-solid fa-lock"></i>
                 <input type="password" id="password" name="password" placeholder="Enter password">
             </div>
             <div>
