@@ -51,12 +51,12 @@
         <div>
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Country</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Country</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
                 <%for (User user : users) {%>
