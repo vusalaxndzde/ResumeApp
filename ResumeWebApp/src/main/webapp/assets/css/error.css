@@ -1,0 +1,9 @@
+.error-background {
+    background-color: #e8ebed;
+    width: 35%;
+    height: 45%;
+}
+
+.error-text {
+    margin-top: 70px;
+}
