@@ -15,12 +15,11 @@
 </head>
 <body>
     <%
-        UserDaoInter userDao = Context.instanceUserDao();
-        User u = userDao.getById(1);
+        User u = (User) request.getAttribute("u");
     %>
     <h1>User</h1>
     <div>
-        <form action="UserController" method="post">
+        <form action="userdetail" method="post">
             <input type="hidden" name="id" value="<%=u.getId()%>">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name" value="<%=u.getName()%>"><br><br>
