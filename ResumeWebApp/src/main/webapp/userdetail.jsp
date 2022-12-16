@@ -1,6 +1,5 @@
-<%@ page import="com.mycompany.main.Context" %>
-<%@ page import="com.mycompany.dao.inter.UserDaoInter" %>
-<%@ page import="com.mycompany.entity.User" %><%--
+<%@ page import="com.mycompany.entity.User" %>
+<%--
   Created by IntelliJ IDEA.
   User: Asus
   Date: 08.12.2022
@@ -11,10 +10,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User jsp</title>
+    <title>User Detail</title>
 </head>
 <body>
     <%
+        if (request.getAttribute("owner") == null) {
+            response.sendRedirect("error.jsp?msg=page not found");
+            return;
+        }
         User u = (User) request.getAttribute("u");
     %>
     <h1>User</h1>
