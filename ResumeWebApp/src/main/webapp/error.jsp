@@ -21,11 +21,11 @@
         <div class="error-background">
             <div class="text-center error-text">
                 <h1 class="display-1 fw-bold">404</h1>
-                <p class="fs-3"> <span class="text-danger">Opps!</span> Something went wrong.</p>
+                <p class="fs-3"><span class="text-danger">Opps!</span> Something went wrong.</p>
                 <p class="lead">
                     <%=request.getParameter("msg")%>
                 </p>
-                <a href="index.jsp" class="btn btn-primary">Go Home</a>
+                <a href="users.jsp" class="btn btn-primary">Go Back</a>
             </div>
         </div>
     </div>
