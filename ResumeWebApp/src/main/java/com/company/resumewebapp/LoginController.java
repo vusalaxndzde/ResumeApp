@@ -21,7 +21,7 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         List<User> users = userDao.filter(username, password, null);
         if (users.size() == 1) {
-            response.sendRedirect("users.jsp");
+            response.sendRedirect("users");
         } else {
             response.sendError(404);
         }
