@@ -1,5 +1,3 @@
-<%@ page import="com.mycompany.main.Context" %>
-<%@ page import="com.mycompany.dao.inter.UserDaoInter" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.mycompany.entity.User" %><%--
   Created by IntelliJ IDEA.
@@ -54,21 +52,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                <%for (User user : users) {%>
-                <tr>
-                    <td><%=user.getName()%></td>
-                    <td><%=user.getSurname()%></td>
-                    <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getNationality()%></td>
-                    <td>
-                        <button class="btn btn-danger" type="submit" name="action" value="delete">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                        <button class="btn btn-secondary" type="submit" name="action" value="update">
-                            <i class="fa-sharp fa-solid fa-pen"></i>
-                        </button>
-                    </td>
-                </tr>
-                <%}%>
+                    <%for (User user : users) {%>
+                    <tr>
+                        <td><%=user.getName()%></td>
+                        <td><%=user.getSurname()%></td>
+                        <td><%=user.getNationality() == null ? "N/A" : user.getNationality().getNationality()%></td>
+                        <td>
+                            <button class="btn btn-danger" type="submit" name="action" value="delete">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                            <button class="btn btn-secondary" type="submit" name="action" value="update">
+                                <i class="fa-sharp fa-solid fa-pen"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <%}%>
                 </tbody>
             </table>
         </div>
