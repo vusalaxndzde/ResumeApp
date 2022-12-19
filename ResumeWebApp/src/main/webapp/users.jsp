@@ -18,20 +18,15 @@
 </head>
 <body>
     <%
-        UserDaoInter userDao = Context.instanceUserDao();
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        String nationalityIdStr = request.getParameter("nationality");
-        Integer nationalityId = null;
-        if (nationalityIdStr != null && !nationalityIdStr.trim().equals("")) {
-            nationalityId = Integer.valueOf(request.getParameter("nationality"));
+        if (request.getAttribute("owner") == null) {
+            return;
         }
-        List<User> users = userDao.filter(name, surname, nationalityId);
+        List<User> users = (List<User>) request.getAttribute("users");
     %>
     <div class="container mycontainer">
         <div class="row">
             <div class="col-4">
-                <form action="users.jsp" method="get">
+                <form action="users" method="get">
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
