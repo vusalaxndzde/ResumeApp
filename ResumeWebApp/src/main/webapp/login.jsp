@@ -17,7 +17,7 @@
     <div class="container">
         <section class="w-100 p-4 d-flex justify-content-center pb-4" style="margin-top: 200px">
             <div style="width: 45%">
-                <form action="LoginController" method="post">
+                <form action="login" method="post">
                     <div class="form-outline mb-4">
                         <i class="fa-solid fa-user"></i>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username">

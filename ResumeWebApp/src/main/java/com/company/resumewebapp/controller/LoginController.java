@@ -10,10 +10,15 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "LoginController", value = "/LoginController")
+@WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
 
     UserDaoInter userDao = Context.instanceUserDao();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
