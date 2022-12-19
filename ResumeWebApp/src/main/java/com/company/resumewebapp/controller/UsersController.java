@@ -1,4 +1,4 @@
-package com.company.resumewebapp;
+package com.company.resumewebapp.controller;
 
 import com.mycompany.dao.inter.UserDaoInter;
 import com.mycompany.entity.User;
