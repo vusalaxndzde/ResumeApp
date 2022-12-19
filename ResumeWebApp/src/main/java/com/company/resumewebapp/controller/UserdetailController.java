@@ -9,8 +9,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "UserController", value = "/userdetail")
-public class UserController extends HttpServlet {
+@WebServlet(name = "UserdetailController", value = "/userdetail")
+public class UserdetailController extends HttpServlet {
 
     UserDaoInter userDao = Context.instanceUserDao();
 
@@ -31,7 +31,7 @@ public class UserController extends HttpServlet {
             request.getRequestDispatcher("userdetail.jsp").forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
-            response.sendRedirect("error.jsp?msg=" + ex.getMessage());
+            response.sendRedirect("error?msg=" + ex.getMessage());
         }
     }
 
