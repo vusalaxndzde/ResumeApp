@@ -14,10 +14,6 @@
 </head>
 <body>
     <%
-        if (request.getAttribute("owner") == null) {
-            response.sendRedirect("error.jsp?msg=page not found");
-            return;
-        }
         User u = (User) request.getAttribute("u");
     %>
     <h1>User</h1>

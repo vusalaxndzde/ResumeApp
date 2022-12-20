@@ -16,9 +16,6 @@
 </head>
 <body>
     <%
-        if (request.getAttribute("owner") == null) {
-            return;
-        }
         List<User> users = (List<User>) request.getAttribute("users");
     %>
     <div class="container mycontainer">

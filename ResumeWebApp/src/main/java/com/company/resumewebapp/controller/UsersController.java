@@ -25,7 +25,6 @@ public class UsersController extends HttpServlet {
             nationalityId = Integer.valueOf(request.getParameter("nationality"));
         }
         List<User> users = userDao.filter(name, surname, nationalityId);
-        request.setAttribute("owner", true);
         request.setAttribute("users", users);
         request.getRequestDispatcher("users.jsp").forward(request, response);
     }
