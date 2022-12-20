@@ -45,8 +45,11 @@ public class UserdetailController extends HttpServlet {
         u.setName(name);
         u.setSurname(surname);
 
-        userDao.updateUser(u);
-
-        response.sendRedirect("userdetail?id=" + id);
+        if (request.getParameter("action").equals("update")) {
+            userDao.updateUser(u);
+        } else if (request.getParameter("action").equals("delete")) {
+            userDao.removeUser(id);
+        }
+        response.sendRedirect("users");
     }
 }
