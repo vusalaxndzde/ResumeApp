@@ -26,7 +26,6 @@ public class UserdetailController extends HttpServlet {
             if (u == null) {
                 throw  new IllegalArgumentException("user not found");
             }
-            request.setAttribute("owner", true);
             request.setAttribute("u", u);
             request.getRequestDispatcher("userdetail.jsp").forward(request, response);
         } catch (Exception ex) {
