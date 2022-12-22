@@ -49,6 +49,12 @@
                     <input type="text" class="form-control" id="inputPhone" value="<%=u.getPhone()%>" placeholder="Phone">
                 </div>
             </div>
+            <div class="form-row mymargin">
+                <div class="form-group col-2">
+                    <label for="inputBirthdate">Birthdate</label>
+                    <input type="date" class="form-control" id="inputBirthdate" value="<%=u.getBrithdate()%>">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="inputAddress">Address</label>
                 <input type="text" class="form-control" id="inputAddress" value="<%=u.getAddress()%>" placeholder="1234 Main St">
@@ -74,10 +80,6 @@
                         <option ><%=country.getName()%></option >
                         <%}%>
                     </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
                 </div>
             </div>
             <!-- Update button -->
