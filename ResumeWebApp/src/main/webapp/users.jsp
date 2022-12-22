@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/users.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script type="text/javascript" src="assets/js/users.js"></script>
 </head>
 <body>
     <%
@@ -34,7 +35,7 @@
                         <label for="nid">Nationality:</label>
                         <input type="text" class="form-control" id="nid" name="nationality" placeholder="Enter nationality">
                     </div>
-                    <input type="submit" class="btn btn-primary" name="search" value="Search">
+                    <input type="submit" class="btn btn-primary" id="search" name="search" value="Search">
                 </form>
             </div>
         </div>
