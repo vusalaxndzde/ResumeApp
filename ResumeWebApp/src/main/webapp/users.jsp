@@ -59,10 +59,8 @@
                         <td><%=user.getSurname()%></td>
                         <td><%=user.getBirthplace().getName() == null ? "N/A" : user.getBirthplace().getName()%></td>
                         <td style="width: 10px">
-                            <input type="hidden" name="id" value="<%=user.getId()%>">
-                            <input type="hidden" name="action" value="delete">
                             <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter"
-                                    type="submit" value="delete">
+                                    type="submit" value="delete" onclick="setIdForDelete('<%=user.getId()%>')">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </td>
@@ -96,8 +94,11 @@
                     Are you sure?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Yes</button>
+                    <form action="userdetail" method="post">
+                        <input type="hidden" id="idForDelete" name="id">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger" name="action" value="delete">Yes</button>
+                    </form>
                 </div>
             </div>
         </div>
