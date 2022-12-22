@@ -38,7 +38,7 @@
                     <input type="text" class="form-control" id="inputSurname" name="surname" value="<%=u.getSurname()%>" placeholder="Last name">
                 </div>
             </div>
-            <!-- Email phone city-->
+            <!-- Email phone birth-->
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputEmail">Email</label>
@@ -55,6 +55,7 @@
                     <input type="date" class="form-control" id="inputBirthdate" value="<%=u.getBrithdate()%>">
                 </div>
             </div>
+            <!-- Address country -->
             <div class="form-group">
                 <label for="inputAddress">Address</label>
                 <input type="text" class="form-control" id="inputAddress" value="<%=u.getAddress()%>" placeholder="1234 Main St">
@@ -63,7 +64,7 @@
                 <label for="inputAddress2">Address 2</label>
                 <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
             </div>
-            <div class="form-row">
+            <div class="form-row mymargin">
                 <div class="form-group col-md-6">
                     <label for="inputCity">Nationality</label>
                     <input type="text" class="form-control" id="inputCity" value="<%=u.getNationality().getNationality()%>">
@@ -81,6 +82,11 @@
                         <%}%>
                     </select>
                 </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="profileDescTextarea">Profile description</label>
+                <textarea class="form-control" id="profileDescTextarea" name="profileDesc" rows="5"><%=u.getProfileDescription()%></textarea>
             </div>
             <!-- Update button -->
             <button type="submit" class="btn btn-success" name="submit" value="Submit">Update</button>
