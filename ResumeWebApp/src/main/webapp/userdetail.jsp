@@ -5,6 +5,8 @@
 <%@ page import="com.mycompany.main.Context" %>
 <%@ page import="com.mycompany.entity.EmploymentHistory" %>
 <%@ page import="com.mycompany.dao.inter.EmploymentHistoryDaoInter" %>
+<%@ page import="com.mycompany.dao.inter.UserSkillDaoInter" %>
+<%@ page import="com.mycompany.entity.UserSkill" %>
 <%--
   Created by IntelliJ IDEA.
   User: Asus
@@ -27,6 +29,8 @@
         List<Country> countries = countryDao.getAllCountry();
         EmploymentHistoryDaoInter empHistoryDao = Context.instanceEmploymentHistoryDao();
         List<EmploymentHistory> userEmpHistories = empHistoryDao.getEmploymentHistoryByUserId(u.getId());
+        UserSkillDaoInter userSkillDao = Context.instanceUserSkillDao();
+        List<UserSkill> userSkills = userSkillDao.getAllUserSkillByUserId(u.getId());
     %>
     <div class="container my-container">
         <form action="userdetail" method="post">
@@ -120,8 +124,23 @@
                 <hr>
                 <%}%>
             </div>
+            <div class="form-group my-margin-bottom">
+                <h4>Skills</h4>
+                <%for (UserSkill userSkill : userSkills) {%>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" value="<%=userSkill.getSkill()%>">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="range" class="form-range" min="0" max="10" id="skillRange" value="<%=userSkill.getPower()%>" >
+                    </div>
+                </div>
+                <%}%>
+            </div>
+
             <!-- Update button -->
-            <button type="submit" class="btn btn-success my-margin-bottom" name="submit" value="Submit">Update</button>
+            <button type="submit" class="btn btn-success my-margin-bottom" name="submit" value="Update">Update</button>
+            <button type="submit" class="btn btn-secondary my-margin-bottom" name="submit" value="Back">Back</button>
         </form>
     </div>
 </body>
