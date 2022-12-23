@@ -1,7 +1,11 @@
-.mycontainer {
+.my-container {
     margin-top: 90px;
 }
 
-.mymargin {
+.my-margin-bottom {
     margin-bottom: 35px;
+}
+
+.my-margin-top {
+    margin-top: 50px;
 }
