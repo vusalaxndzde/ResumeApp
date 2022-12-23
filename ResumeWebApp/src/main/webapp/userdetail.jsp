@@ -149,7 +149,7 @@
                     <%}%>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-success" id="addSkill" onclick="addSkillTd()"></button>
+                <button type="button" class="btn btn-success" id="addSkill" onclick="addSkillTd()">Add skill</button>
             </div>
             <!-- Update button -->
             <button type="submit" class="btn btn-success my-margin-bottom" name="submit" value="Update">Update</button>
