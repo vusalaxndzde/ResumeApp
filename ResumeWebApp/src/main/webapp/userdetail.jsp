@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="assets/css/userdetail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script type="text/javascript" src="assets/js/userdetail.js"></script>
 </head>
 <body style="background-color: #e0e1e1">
     <%
@@ -130,11 +131,12 @@
             </div>
             <div class="form-group my-margin-bottom my-margin-top">
                 <h4>Skills</h4>
-                <table class="table">
+                <table class="table" id="skillTable">
                     <%for (UserSkill userSkill : userSkills) {%>
                     <tr>
                         <td style="width: 400px">
-                            <input type="text" class="form-control" value="<%=userSkill.getSkill()%>"></td>
+                            <input type="text" class="form-control" value="<%=userSkill.getSkill()%>">
+                        </td>
                         <td style="width: 400px">
                             <input type="range" class="form-range" min="0" max="10" id="skillRange" value="<%=userSkill.getPower()%>" >
                         </td>
@@ -147,8 +149,8 @@
                     <%}%>
                     </tbody>
                 </table>
+                <button type="button" class="btn btn-success" id="addSkill" onclick="addSkillTd()"></button>
             </div>
-
             <!-- Update button -->
             <button type="submit" class="btn btn-success my-margin-bottom" name="submit" value="Update">Update</button>
             <button type="submit" class="btn btn-secondary my-margin-bottom" name="submit" value="Back">Back</button>
