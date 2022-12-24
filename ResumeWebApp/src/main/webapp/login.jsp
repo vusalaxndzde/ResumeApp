@@ -18,12 +18,11 @@
         <section class="w-100 p-4 d-flex justify-content-center pb-4" style="margin-top: 200px">
             <div style="width: 45%">
                 <form action="login" method="post">
+                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: dodgerblue">Log in</h3>
                     <div class="form-outline mb-4">
-                        <i class="fa-solid fa-user"></i>
                         <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
                     </div>
                     <div class="form-outline mb-4">
-                        <i class="fa-solid fa-lock"></i>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mb-4" name="btn_login">Login</button>

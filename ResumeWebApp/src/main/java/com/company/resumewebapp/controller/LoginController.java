@@ -1,5 +1,6 @@
 package com.company.resumewebapp.controller;
 
+import com.company.resumewebapp.util.ControllerUtil;
 import com.mycompany.dao.inter.UserDaoInter;
 import com.mycompany.entity.User;
 import com.mycompany.main.Context;
@@ -22,13 +23,16 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
-        List<User> users = userDao.filter(username, password, null);
-        if (users.size() == 1) {
-            response.sendRedirect("users");
+        User user = userDao.getUserByEmail(email);
+        if (user == null) {
+            ControllerUtil.errorPage(response, "There is no user such email");
         } else {
-            response.sendError(404);
+            if (password.equals(user.getPassword())) {
+                request.getSession().setAttribute("loggedInUser", user);
+                response.sendRedirect("users");
+            }
         }
     }
 }

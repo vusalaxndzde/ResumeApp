@@ -8,6 +8,8 @@ public interface UserDaoInter {
     List<User> getAll();
 
     List<User> filter(String name, String surname, Integer nationalityId);
+
+    User getUserByEmail(String email);
     
     User getById(int id);
     
