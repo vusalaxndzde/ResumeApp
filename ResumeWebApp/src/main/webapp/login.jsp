@@ -20,7 +20,7 @@
                 <form action="login" method="post">
                     <div class="form-outline mb-4">
                         <i class="fa-solid fa-user"></i>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
                     </div>
                     <div class="form-outline mb-4">
                         <i class="fa-solid fa-lock"></i>
