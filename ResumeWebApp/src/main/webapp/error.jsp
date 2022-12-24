@@ -25,7 +25,7 @@
                 <p class="lead">
                     <%=request.getParameter("msg")%>
                 </p>
-                <a href="users.jsp" class="btn btn-primary">Go Back</a>
+                <a href="login" class="btn btn-primary">Go Back</a>
             </div>
         </div>
     </div>

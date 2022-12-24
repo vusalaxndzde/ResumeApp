@@ -26,13 +26,17 @@ public class LoginController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = userDao.getUserByEmail(email);
-        if (user == null) {
-            ControllerUtil.errorPage(response, "There is no user such email");
-        } else {
-            if (password.equals(user.getPassword())) {
-                request.getSession().setAttribute("loggedInUser", user);
-                response.sendRedirect("users");
+        try {
+            if (user == null) {
+                throw new Exception("There is no user such email");
             }
+            if (!password.equals(user.getPassword())) {
+                throw new Exception("Email or password invalid");
+            }
+            request.getSession().setAttribute("loggedInUser", user);
+            response.sendRedirect("users");
+        } catch (Exception ex) {
+            ControllerUtil.errorPage(response, ex);
         }
     }
 }
