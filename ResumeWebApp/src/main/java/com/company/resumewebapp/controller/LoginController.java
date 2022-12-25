@@ -34,7 +34,7 @@ public class LoginController extends HttpServlet {
                 throw new Exception("Email or password invalid");
             }
             request.getSession().setAttribute("loggedInUser", user);
-            response.sendRedirect("users");
+            response.sendRedirect("index");
         } catch (Exception ex) {
             ControllerUtil.errorPage(response, ex);
         }
