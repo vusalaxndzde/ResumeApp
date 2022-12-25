@@ -1,3 +1,4 @@
+<%@ page import="com.mycompany.entity.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
+    <%
+        User u = (User) request.getSession().getAttribute("loggedInUser");
+    %>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index">Resume</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,5 +61,9 @@
             </ul>
         </div>
     </nav>
+    <form action="userdetail" method="get">
+        <input type="hidden" name="id" value="<%=u.getId()%>">
+        <button type="submit" class="btn btn-success">Update resume</button>
+    </form>
 </body>
 </html>

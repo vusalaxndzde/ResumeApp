@@ -152,8 +152,8 @@
                 <button type="button" class="btn btn-success" id="addSkill" onclick="addSkillTd()">Add skill</button>
             </div>
             <!-- Update button -->
-            <button type="submit" class="btn btn-success my-margin-bottom" name="submit" value="Update">Update</button>
-            <button type="submit" class="btn btn-secondary my-margin-bottom" name="submit" value="Back">Back</button>
+            <button type="submit" class="btn btn-success my-margin-bottom" name="action" value="update">Update</button>
+            <button type="submit" class="btn btn-secondary my-margin-bottom" name="action" value="back">Back</button>
         </form>
     </div>
 </body>
