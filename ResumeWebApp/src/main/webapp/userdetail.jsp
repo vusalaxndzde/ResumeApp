@@ -36,6 +36,7 @@
     %>
     <div class="container my-container" style="background-color: #efefef; border-radius: 15px">
         <form action="userdetail" method="post">
+            <form action="userdetail" method="post">
             <div style="height: 15px">
                 <input type="hidden" name="id" value="<%=u.getId()%>">
             </div>
@@ -55,23 +56,23 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" value="<%=u.getEmail()%>" placeholder="Email">
+                    <input type="email" class="form-control" id="inputEmail" name="email" value="<%=u.getEmail()%>" placeholder="Email">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputPhone">Phone</label>
-                    <input type="text" class="form-control" id="inputPhone" value="<%=u.getPhone()%>" placeholder="Phone">
+                    <input type="text" class="form-control" id="inputPhone" name="phone" value="<%=u.getPhone()%>" placeholder="Phone">
                 </div>
             </div>
             <div class="form-row my-margin-bottom">
                 <div class="form-group col-2">
                     <label for="inputBirthdate">Birthdate</label>
-                    <input type="date" class="form-control" id="inputBirthdate" value="<%=u.getBrithdate()%>">
+                    <input type="date" class="form-control" id="inputBirthdate" name="birthdate" value="<%=u.getBrithdate()%>">
                 </div>
             </div>
             <!-- Address country -->
             <div class="form-group">
                 <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="inputAddress" value="<%=u.getAddress()%>" placeholder="1234 Main St">
+                <input type="text" class="form-control" id="inputAddress" name="address" value="<%=u.getAddress()%>" placeholder="1234 Main St">
             </div>
             <div class="form-group">
                 <label for="inputAddress2">Address 2</label>
@@ -79,12 +80,12 @@
             </div>
             <div class="form-row my-margin">
                 <div class="form-group col-md-6">
-                    <label for="inputCity">Nationality</label>
-                    <input type="text" class="form-control" id="inputCity" value="<%=u.getNationality().getNationality()%>">
+                    <label for="inputNationality">Nationality</label>
+                    <input type="text" class="form-control" id="inputNationality" name="nationality" value="<%=u.getNationality().getNationality()%>">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputCountry">Country</label>
-                    <select id="inputCountry" class="form-control">
+                    <select id="inputCountry" class="form-control" name="country">
                         <option selected><%=u.getBirthplace().getName()%></option>
                         <%for (Country country : countries) {
                             if (country.getName().equals(u.getBirthplace().getName())) {
@@ -102,6 +103,9 @@
                 <label for="profileDescTextarea">Profile description</label>
                 <textarea class="form-control" id="profileDescTextarea" name="profileDesc" rows="5"><%=u.getProfileDescription()%></textarea>
             </div>
+                <button type="submit" class="btn btn-outline-success" name="action" value="updateProfile">Update profile</button>
+            </form>
+            <!-- Employment history -->
             <div class="form-group my-margin-top">
                 <h4>Employment history</h4><br>
                 <%for (EmploymentHistory empHistory : userEmpHistories) {%>
