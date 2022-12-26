@@ -9,11 +9,14 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet(name = "UserdetailController", value = "/userdetail")
 public class UserdetailController extends HttpServlet {
 
     UserDaoInter userDao = Context.instanceUserDao();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-dd-MM");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,18 +41,29 @@ public class UserdetailController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         System.out.println(id);
-        String name = request.getParameter("name");
-        System.out.println(name);
-        String surname= request.getParameter("surname");
-        System.out.println(surname);
-
         User u = userDao.getById(id);
-        u.setName(name);
-        u.setSurname(surname);
 
         if (request.getParameter("action").equals("updateProfile")) {
-            System.out.println(request.getParameter("country"));
-            //userDao.updateUser(u);
+            try {
+                String name = request.getParameter("name");
+                String surname = request.getParameter("surname");
+                String email = request.getParameter("email");
+                String phone = request.getParameter("phone");
+                String birthdateStr = request.getParameter("birthdate");
+                System.out.println(birthdateStr);
+                Date birthdate = new Date(sdf.parse(birthdateStr).getTime());
+                System.out.println(sdf.parse(birthdateStr));
+                String address = request.getParameter("address");
+                String nationality = request.getParameter("nationality");
+                String country = request.getParameter("country");
+                String profileDesc = request.getParameter("profileDesc");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+
+
+            userDao.updateUser(u);
         } else if (request.getParameter("action").equals("delete")) {
             userDao.removeUser(id);
         }
