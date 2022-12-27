@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script type="text/javascript" src="assets/js/userdetail.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body style="background-color: #e0e1e1">
     <%
@@ -36,7 +39,6 @@
     %>
     <div class="container my-container" style="background-color: #efefef; border-radius: 15px">
         <form action="userdetail" method="post">
-            <form action="userdetail" method="post">
             <div style="height: 15px">
                 <input type="hidden" name="id" value="<%=u.getId()%>">
             </div>
@@ -113,36 +115,45 @@
                 <textarea class="form-control" id="profileDescTextarea" name="profileDesc" rows="5"><%=u.getProfileDescription()%></textarea>
             </div>
                 <button type="submit" class="btn btn-outline-success" name="action" value="updateProfile">Update profile</button>
-            </form>
+        </form>
             <!-- Employment history -->
-            <div class="form-group my-margin-top">
-                <h4>Employment history</h4><br>
-                <%for (EmploymentHistory empHistory : userEmpHistories) {%>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="headerEmpHistory">Company</label>
-                        <input type="text" class="form-control" id="headerEmpHistory" name="company" value="<%=empHistory.getHeader()%>">
+        <div>
+            <form action="userdetail" method="post">
+                <div class="form-group my-margin-top">
+                    <h4>Employment history</h4><br>
+                    <%for (EmploymentHistory empHistory : userEmpHistories) {%>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="headerEmpHistory">Company</label>
+                            <input type="text" class="form-control" id="headerEmpHistory" name="company" value="<%=empHistory.getHeader()%>">
+                        </div>
                     </div>
+                    <div class="form-group form-row">
+                        <div class="col-md-12">
+                            <label>Begin date / End date</label>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input type="date" class="form-control" id="beginDate" name="beginDate" value="<%=empHistory.getBeginDate()%>">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input type="date" class="form-control" id="endDate" name="beginDate" value="<%=empHistory.getEndDate()%>">
+                        </div>
+                    </div>
+                    <div class="form-group my-margin-bottom">
+                        <label for="jobDescTextarea">Job description</label>
+                        <textarea class="form-control" id="jobDescTextarea" name="jobDesc" rows="5"><%=empHistory.getJobDescription()%></textarea>
+                    </div>
+                    <hr>
+                    <%}%>
                 </div>
-                <div class="form-group form-row">
-                    <div class="col-md-12">
-                        <label>Begin date / End date</label>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <input type="date" class="form-control" id="beginDate" name="beginDate" value="<%=empHistory.getBeginDate()%>">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <input type="date" class="form-control" id="endDate" name="beginDate" value="<%=empHistory.getEndDate()%>">
-                    </div>
-                </div>
-                <div class="form-group my-margin-bottom">
-                    <label for="jobDescTextarea">Job description</label>
-                    <textarea class="form-control" id="jobDescTextarea" name="jobDesc" rows="5"><%=empHistory.getJobDescription()%></textarea>
-                </div>
-                <hr>
-                <%}%>
-            </div>
-            <div class="form-group my-margin-bottom my-margin-top">
+                <button class="btn btn-outline-success">Update history</button>
+            </form>
+            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Add history
+            </button>
+        </div>
+
+        <div class="form-group my-margin-bottom my-margin-top">
                 <h4>Skills</h4>
                 <table class="table" id="skillTable">
                     <%for (UserSkill userSkill : userSkills) {%>
@@ -164,10 +175,30 @@
                 </table>
                 <button type="button" class="btn btn-success" id="addSkill" onclick="addSkillTd()">Add skill</button>
             </div>
-            <!-- Update button -->
-            <button type="submit" class="btn btn-success my-margin-bottom" name="action" value="update">Update</button>
-            <button type="submit" class="btn btn-secondary my-margin-bottom" name="action" value="back">Back</button>
-        </form>
+        <!-- Update button -->
+        <button type="submit" class="btn btn-success my-margin-bottom" name="action" value="update">Update</button>
+        <button type="submit" class="btn btn-secondary my-margin-bottom" name="action" value="back">Back</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
