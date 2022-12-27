@@ -146,11 +146,11 @@
                     <hr>
                     <%}%>
                 </div>
-                <button class="btn btn-outline-success">Update history</button>
+                <button type="submit" class="btn btn-outline-success">Update history</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Add history
+                </button>
             </form>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Add history
-            </button>
         </div>
 
         <div class="form-group my-margin-bottom my-margin-top">
@@ -193,11 +193,11 @@
                 <form action="userdetail" method="post">
                     <div class="modal-body">
                         <div class="form-group">
-                            <h4>Employment history</h4><br>
+                            <input type="hidden" name="id" value="<%=u.getId()%>">
                             <div class="form-row">
                                 <div class="form-group col-md-8">
-                                    <label for="headerEmpHistory">Company</label>
-                                    <input type="text" class="form-control" id="headerEmpHistory" name="company">
+                                    <label for="addHeaderEmpHistory">Company</label>
+                                    <input type="text" class="form-control" id="addHeaderEmpHistory" name="company">
                                 </div>
                             </div>
                             <div class="form-group form-row">
@@ -205,21 +205,21 @@
                                     <label>Begin date / End date</label>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <input type="date" class="form-control" id="beginDate" name="beginDate">
+                                    <input type="date" class="form-control" id="addBeginDate" name="beginDate">
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <input type="date" class="form-control" id="endDate" name="beginDate">
+                                    <input type="date" class="form-control" id="addEndDate" name="endDate">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="jobDescTextarea">Job description</label>
-                                <textarea class="form-control" id="jobDescTextarea" name="jobDesc" rows="5"></textarea>
+                                <label for="addJobDescTextarea">Job description</label>
+                                <textarea class="form-control" id="addJobDescTextarea" name="jobDesc" rows="5"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" name="action" value="addHistory">Add</button>
+                        <button type="submit" class="btn btn-primary" name="action" value="addHistory">Add</button>
                     </div>
                 </form>
             </div>

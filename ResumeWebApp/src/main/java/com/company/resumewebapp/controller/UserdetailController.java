@@ -2,7 +2,9 @@ package com.company.resumewebapp.controller;
 
 import com.company.resumewebapp.util.ControllerUtil;
 import com.mycompany.dao.inter.CountryDaoInter;
+import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
 import com.mycompany.dao.inter.UserDaoInter;
+import com.mycompany.entity.EmploymentHistory;
 import com.mycompany.entity.User;
 import com.mycompany.main.Context;
 import jakarta.servlet.*;
@@ -18,6 +20,7 @@ public class UserdetailController extends HttpServlet {
 
     UserDaoInter userDao = Context.instanceUserDao();
     CountryDaoInter countryDao = Context.instanceCountryDao();
+    EmploymentHistoryDaoInter employmentHistoryDao = Context.instanceEmploymentHistoryDao();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
@@ -42,11 +45,10 @@ public class UserdetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
         User u = userDao.getById(id);
 
-        if (request.getParameter("action").equals("updateProfile")) {
-            try {
+        try {
+            if (request.getParameter("action").equals("updateProfile")) {
                 String name = request.getParameter("name");
                 String surname = request.getParameter("surname");
                 String email = request.getParameter("email");
@@ -68,12 +70,17 @@ public class UserdetailController extends HttpServlet {
                 u.getNationality().setId(nationalityId);
                 u.getBirthplace().setId(countryId);
                 userDao.updateUser(u);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } else if (request.getParameter("action").equals("addHistory")) {
+                String company = request.getParameter("company");
+                Date beginDate = new Date(sdf.parse(request.getParameter("beginDate")).getTime());
+                Date endDate = new Date(sdf.parse(request.getParameter("endDate")).getTime());
+                String jobDesc = request.getParameter("jobDesc");
+                EmploymentHistory employmentHistory = new EmploymentHistory(null, company, beginDate, endDate, jobDesc, u);
+                employmentHistoryDao.addEmploymentHistory(employmentHistory);
             }
-        } else if (request.getParameter("action").equals("delete")) {
-            userDao.removeUser(id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        response.sendRedirect("users");
+        //response.sendRedirect("users");
     }
 }
