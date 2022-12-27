@@ -148,7 +148,7 @@
                 </div>
                 <button class="btn btn-outline-success">Update history</button>
             </form>
-            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                 Add history
             </button>
         </div>
@@ -185,18 +185,43 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add history</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                <form action="userdetail" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <h4>Employment history</h4><br>
+                            <div class="form-row">
+                                <div class="form-group col-md-8">
+                                    <label for="headerEmpHistory">Company</label>
+                                    <input type="text" class="form-control" id="headerEmpHistory" name="company">
+                                </div>
+                            </div>
+                            <div class="form-group form-row">
+                                <div class="col-md-12">
+                                    <label>Begin date / End date</label>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="date" class="form-control" id="beginDate" name="beginDate">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="date" class="form-control" id="endDate" name="beginDate">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobDescTextarea">Job description</label>
+                                <textarea class="form-control" id="jobDescTextarea" name="jobDesc" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" name="action" value="addHistory">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
