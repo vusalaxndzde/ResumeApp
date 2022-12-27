@@ -16,7 +16,7 @@ import java.util.Date;
 public class UserdetailController extends HttpServlet {
 
     UserDaoInter userDao = Context.instanceUserDao();
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-dd-MM");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,13 +50,12 @@ public class UserdetailController extends HttpServlet {
                 String email = request.getParameter("email");
                 String phone = request.getParameter("phone");
                 String birthdateStr = request.getParameter("birthdate");
-                System.out.println(birthdateStr);
                 Date birthdate = new Date(sdf.parse(birthdateStr).getTime());
-                System.out.println(sdf.parse(birthdateStr));
                 String address = request.getParameter("address");
                 String nationality = request.getParameter("nationality");
                 String country = request.getParameter("country");
                 String profileDesc = request.getParameter("profileDesc");
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
