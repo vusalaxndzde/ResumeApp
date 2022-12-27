@@ -51,7 +51,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="settings">Settings</a>
                         <div class="dropdown-divider"></div>
                         <form action="logout" method="post" class="form-inline my-2 my-lg-0">
                             <button class="dropdown-item dropdown-signout" type="submit" name="submit" value="logout">Sign out</button>
