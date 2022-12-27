@@ -55,6 +55,38 @@ public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {
     }
 
     @Override
+    public Country getCountryByName(String name) {
+        Country country = null;
+        try ( Connection c = connect()) {
+            Statement stmt = c.createStatement();
+            stmt.execute("select * from country where name = " + name);
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                country = getCountry(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return country;
+    }
+
+    @Override
+    public Country getCountryByNationality(String nationality) {
+        Country country = null;
+        try ( Connection c = connect()) {
+            Statement stmt = c.createStatement();
+            stmt.execute("select * from country where nationality = " + nationality);
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                country = getCountry(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return country;
+    }
+
+    @Override
     public boolean updateCountry(Country c) {
         try (Connection con = connect()) {
             PreparedStatement pstmt = con.prepareStatement("update country set name = ?, nationality = ? "

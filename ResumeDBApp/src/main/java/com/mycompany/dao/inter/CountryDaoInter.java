@@ -8,6 +8,10 @@ public interface CountryDaoInter {
     public List<Country> getAllCountry();
     
     public Country getCountryById(int id);
+
+    Country getCountryByName(String name);
+
+    Country getCountryByNationality(String nationality);
     
     public boolean updateCountry(Country c);
     

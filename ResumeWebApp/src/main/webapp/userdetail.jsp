@@ -81,18 +81,27 @@
             <div class="form-row my-margin">
                 <div class="form-group col-md-6">
                     <label for="inputNationality">Nationality</label>
-                    <input type="text" class="form-control" id="inputNationality" name="nationality" value="<%=u.getNationality().getNationality()%>">
+                    <select id="inputNationality" class="form-control" name="nationality">
+                        <option value="<%=u.getNationality().getId()%>" selected><%=u.getNationality().getNationality()%></option>
+                        <%for (Country nationality : countries) {
+                            if (nationality.getNationality().equals(u.getNationality().getNationality())) {
+                                continue;
+                            }
+                        %>
+                        <option value="<%=nationality.getId()%>" ><%=nationality.getNationality()%></option >
+                        <%}%>
+                    </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputCountry">Country</label>
                     <select id="inputCountry" class="form-control" name="country">
-                        <option selected><%=u.getBirthplace().getName()%></option>
+                        <option value="<%=u.getBirthplace().getId()%>" selected><%=u.getBirthplace().getName()%></option>
                         <%for (Country country : countries) {
                             if (country.getName().equals(u.getBirthplace().getName())) {
                                 continue;
                             }
                         %>
-                        <option ><%=country.getName()%></option >
+                        <option value="<%=country.getId()%>" ><%=country.getName()%></option >
                         <%}%>
                     </select>
                 </div>

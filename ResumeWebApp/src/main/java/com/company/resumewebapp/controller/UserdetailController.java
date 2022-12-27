@@ -1,7 +1,9 @@
 package com.company.resumewebapp.controller;
 
 import com.company.resumewebapp.util.ControllerUtil;
+import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.dao.inter.UserDaoInter;
+import com.mycompany.entity.Country;
 import com.mycompany.entity.User;
 import com.mycompany.main.Context;
 import jakarta.servlet.*;
@@ -10,12 +12,13 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 @WebServlet(name = "UserdetailController", value = "/userdetail")
 public class UserdetailController extends HttpServlet {
 
     UserDaoInter userDao = Context.instanceUserDao();
+    CountryDaoInter countryDao = Context.instanceCountryDao();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
@@ -52,17 +55,23 @@ public class UserdetailController extends HttpServlet {
                 String birthdateStr = request.getParameter("birthdate");
                 Date birthdate = new Date(sdf.parse(birthdateStr).getTime());
                 String address = request.getParameter("address");
-                String nationality = request.getParameter("nationality");
-                String country = request.getParameter("country");
                 String profileDesc = request.getParameter("profileDesc");
+                int nationalityId = Integer.parseInt(request.getParameter("nationality"));
+                int countryId = Integer.parseInt(request.getParameter("country"));
 
+                u.setName(name);
+                u.setSurname(surname);
+                u.setEmail(email);
+                u.setPhone(phone);
+                u.setBrithdate(birthdate);
+                u.setAddress(address);
+                u.setProfileDescription(profileDesc);
+                u.getNationality().setId(nationalityId);
+                u.getBirthplace().setId(countryId);
+                userDao.updateUser(u);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
-
-
-            userDao.updateUser(u);
         } else if (request.getParameter("action").equals("delete")) {
             userDao.removeUser(id);
         }
