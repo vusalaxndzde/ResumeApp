@@ -3,7 +3,6 @@ package com.company.resumewebapp.controller;
 import com.company.resumewebapp.util.ControllerUtil;
 import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.dao.inter.UserDaoInter;
-import com.mycompany.entity.Country;
 import com.mycompany.entity.User;
 import com.mycompany.main.Context;
 import jakarta.servlet.*;

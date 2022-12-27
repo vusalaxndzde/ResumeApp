@@ -79,7 +79,7 @@
                 <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
             </div>
             <div class="form-row my-margin">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="inputNationality">Nationality</label>
                     <select id="inputNationality" class="form-control" name="nationality">
                         <option value="<%=u.getNationality().getId()%>" selected><%=u.getNationality().getNationality()%></option>
