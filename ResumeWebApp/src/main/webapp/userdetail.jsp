@@ -139,9 +139,20 @@
                             <input type="date" class="form-control" id="endDate" name="beginDate" value="<%=empHistory.getEndDate()%>">
                         </div>
                     </div>
-                    <div class="form-group my-margin-bottom">
-                        <label for="jobDescTextarea">Job description</label>
-                        <textarea class="form-control" id="jobDescTextarea" name="jobDesc" rows="5"><%=empHistory.getJobDescription()%></textarea>
+                    <div class="form-group form-row my-margin-bottom">
+                        <div class="form-group col-md-10">
+                            <label for="jobDescTextarea">Job description</label>
+                            <textarea class="form-control" id="jobDescTextarea" name="jobDesc" rows="5"><%=empHistory.getJobDescription()%></textarea>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <form action="userdetail" method="get">
+                                <input type="hidden" name="historyId" value="<%=empHistory.getId()%>">
+                                <input type="hidden" name="id" value="<%=u.getId()%>">
+                                <button class="btn btn-danger dltHistoryBtn" type="submit" name="action" value="deleteHistory">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     <hr>
                     <%}%>

@@ -35,6 +35,10 @@ public class UserdetailController extends HttpServlet {
             if (u == null) {
                 throw  new IllegalArgumentException("user not found");
             }
+            if (request.getParameter("action") != null && request.getParameter("action").equals("deleteHistory")) {
+                int historyId = Integer.parseInt(request.getParameter("historyId"));
+                employmentHistoryDao.removeEmploymentHistory(historyId);
+            }
             request.setAttribute("u", u);
             request.getRequestDispatcher("userdetail.jsp").forward(request, response);
         } catch (Exception ex) {
@@ -81,6 +85,6 @@ public class UserdetailController extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        //response.sendRedirect("users");
+        response.sendRedirect("users");
     }
 }
