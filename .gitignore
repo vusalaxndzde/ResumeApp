@@ -3,19 +3,19 @@
 # Project Ignores Files 
 
 # Maven
-ResumeWebApp/.mvn
-ResumeWebApp/*.classpath
-ResumeWebApp/*.project
-ResumeWebApp/*.settings
-ResumeWebApp/bin/*
-ResumeWebApp/target/*
+*/.mvn
+*/*.classpath
+*/*.project
+*/*.settings
+*/bin/*
+*/target/*
 
 #gradle
 .gradle
 /build
 
 # Compiled class file
-ResumeWebApp/*.class
+*/*.class
 
 # Package Files
 ResumeWebApp/*.jar
@@ -27,10 +27,9 @@ ResumeWebApp/*.rar
 
 
 # JetBrains IDEs
-ResumeWebApp/.idea/
-ResumeDBApp/.idea/
-ResumeWebApp/*.iml
-ResumeDBApp/.iml/
+*/.idea/
+*/*.iml/
+
 
 # Eclipse
 .project
@@ -38,10 +37,8 @@ ResumeDBApp/.iml/
 .settings
 
 # Netbeans
-ResumeDesktopApp/nbactions*.xml
-ResumeDesktopApp/nb-configuration*.xml
-ResumeDBApp/nbactions*.xml
-ResumeDBApp/nb-configuration*.xml
+*/nbactions*.xml
+*/nb-configuration*.xml
 
 
 # Folder config file
