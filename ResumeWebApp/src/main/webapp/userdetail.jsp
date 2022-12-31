@@ -37,7 +37,7 @@
         UserSkillDaoInter userSkillDao = Context.instanceUserSkillDao();
         List<UserSkill> userSkills = userSkillDao.getAllUserSkillByUserId(u.getId());
     %>
-    <div class="container my-container" style="background-color: #efefef; border-radius: 15px">
+    <div class="container my-container resume-wrapper-inner mx-auto text-start bg-white shadow-lg" style="background-color: #efefef; border-radius: 15px">
         <form action="userdetail" method="post">
             <div style="height: 15px">
                 <input type="hidden" name="id" value="<%=u.getId()%>">
