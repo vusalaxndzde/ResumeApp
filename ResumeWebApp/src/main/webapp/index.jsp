@@ -71,6 +71,12 @@
                 <p>Java Software Developer</p>
             </div>
         </div>
+        <div class="form-row">
+            <div class="form-group col-4">
+                <p>Employment History</p>
+            </div>
+        </div>
+
     </div>
     <form action="userdetail" method="get">
         <input type="hidden" name="id" value="<%=u.getId()%>">
