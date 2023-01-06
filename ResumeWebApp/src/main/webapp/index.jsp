@@ -76,7 +76,6 @@
                 <p>Employment History</p>
             </div>
         </div>
-
     </div>
     <form action="userdetail" method="get">
         <input type="hidden" name="id" value="<%=u.getId()%>">
