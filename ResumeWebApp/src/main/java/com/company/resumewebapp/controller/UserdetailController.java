@@ -68,7 +68,7 @@ public class UserdetailController extends HttpServlet {
                 u.setSurname(surname);
                 u.setEmail(email);
                 u.setPhone(phone);
-                u.setBrithdate(birthdate);
+                u.setBirthdate(birthdate);
                 u.setAddress(address);
                 u.setProfileDescription(profileDesc);
                 u.getNationality().setId(nationalityId);

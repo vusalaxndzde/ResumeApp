@@ -72,6 +72,15 @@ public class EmploymentHistory implements Serializable {
         this.beginDate = beginDate;
         this.jobDescription = jobDescription;
     }
+    
+    public EmploymentHistory(Integer id, String header, Date beginDate, Date endDate, String jobDescription, User user) {
+        this.id = id;
+        this.header = header;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.jobDescription = jobDescription;
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
