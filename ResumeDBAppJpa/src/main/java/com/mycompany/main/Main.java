@@ -8,8 +8,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         UserDaoInter udi = Context.instanceUserDao();
-        User u = udi.getById(1);
-        System.out.println(u.getName());
+        User u = udi.getUserByEmail("vusal.axndzde@gmail.com");
+        System.out.println(u);
     }
 
 }
