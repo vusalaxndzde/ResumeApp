@@ -1,5 +1,7 @@
 # ResumeApp
-Resume database app
+Resume jdbc database app
+
+Resume jpa database app
 
 Resume desktop app
 
