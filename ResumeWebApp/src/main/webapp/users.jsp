@@ -59,7 +59,7 @@
                     <tr>
                         <td><%=user.getName()%></td>
                         <td><%=user.getSurname()%></td>
-                        <td><%=user.getBirthplace().getName() == null ? "N/A" : user.getBirthplace().getName()%></td>
+                        <td><%=user.getNationality().getNationality() == null ? "N/A" : user.getNationality().getNationality()%></td>
                         <td style="width: 10px">
                             <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter"
                                     type="submit" value="delete" onclick="setIdForDelete('<%=user.getId()%>')">

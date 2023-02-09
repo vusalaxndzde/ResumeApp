@@ -29,7 +29,7 @@ public abstract class AbstractDAO {
     
     public static void closeEmf() {
         emf.close();
-        System.out.println(emf);
+        emf = null;
     }
     
 }

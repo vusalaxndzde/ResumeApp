@@ -14,6 +14,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         EntityManager em = createEntityManager();
         Query query = em.createQuery("select u from User u", User.class);
         List<User> users = query.getResultList();
+        closeEmf();
         return users;
     }
 
