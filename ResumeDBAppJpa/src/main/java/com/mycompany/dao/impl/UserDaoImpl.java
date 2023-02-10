@@ -6,9 +6,6 @@ import com.mycompany.dao.inter.UserDaoInter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
 

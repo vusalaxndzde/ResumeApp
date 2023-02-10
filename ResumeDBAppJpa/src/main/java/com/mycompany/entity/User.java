@@ -78,10 +78,10 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<EmploymentHistory> employmentHistoryList;
     @JoinColumn(name = "birthplace_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Country birthplace;
     @JoinColumn(name = "nationality_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Country nationality;
 
     public User() {
