@@ -72,7 +72,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<User> query = cb.createQuery(User.class);
         Root<User> root = query.from(User.class);
-        CriteriaQuery query1 = query.where(cb.equal(root.get("email"), email));
+        CriteriaQuery<User> query1 = query.where(cb.equal(root.get("email"), email));
         
         Query q = em.createQuery(query1);
         List<User> user = q.getResultList();
