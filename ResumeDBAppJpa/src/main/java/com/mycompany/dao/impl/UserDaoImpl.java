@@ -95,11 +95,12 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
 //        return null;
 //    }
     
+    // Native SQL
     @Override
     public User getUserByEmail(String email) {
         EntityManager em = createEntityManager();
-        Query query = em.createNamedQuery("User.findByEmail", User.class);
-        query.setParameter("email", email);
+        Query query = em.createNativeQuery("select * from user where email = ?", User.class);
+        query.setParameter(1, email);
         List<User> user = query.getResultList();
         if (user.size() == 1) {
             return user.get(0);
