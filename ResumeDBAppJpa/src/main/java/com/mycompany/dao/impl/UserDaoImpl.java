@@ -82,16 +82,25 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
 //        return null;
 //    }
     
+    // NamedQuery
+//    @Override
+//    public User getUserByEmail(String email) {
+//        EntityManager em = createEntityManager();
+//        Query query = em.createNamedQuery("User.findByEmail", User.class);
+//        query.setParameter("email", email);
+//        List<User> user = query.getResultList();
+//        if (user.size() == 1) {
+//            return user.get(0);
+//        }
+//        return null;
+//    }
+    
     @Override
     public User getUserByEmail(String email) {
         EntityManager em = createEntityManager();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<User> query = cb.createQuery(User.class);
-        Root<User> root = query.from(User.class);
-        CriteriaQuery<User> query1 = query.where(cb.equal(root.get("email"), email));
-        
-        Query q = em.createQuery(query1);
-        List<User> user = q.getResultList();
+        Query query = em.createNamedQuery("User.findByEmail", User.class);
+        query.setParameter("email", email);
+        List<User> user = query.getResultList();
         if (user.size() == 1) {
             return user.get(0);
         }
