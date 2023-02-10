@@ -7,6 +7,7 @@
     <class>com.mycompany.entity.UserSkill</class>
     <class>com.mycompany.entity.Skill</class>
     <class>com.mycompany.entity.User</class>
+    <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/resume?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
