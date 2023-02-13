@@ -18,18 +18,4 @@ public abstract class AbstractDAO {
         return c;
     }
     
-    private static EntityManagerFactory emf = null;
-    
-    public EntityManager createEntityManager() {
-        if (emf == null) {
-            emf = Persistence.createEntityManagerFactory("resumedbappPU");
-        }
-        return emf.createEntityManager();
-    }
-    
-    public static void closeEmf() {
-        emf.close();
-        emf = null;
-    }
-    
 }

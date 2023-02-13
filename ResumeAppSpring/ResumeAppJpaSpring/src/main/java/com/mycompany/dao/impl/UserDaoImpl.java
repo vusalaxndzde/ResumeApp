@@ -7,12 +7,15 @@ import com.mycompany.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
+@Repository(value = "userDao1")
+public class UserDaoImpl implements UserDaoInter {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Override
     public List<User> getAll() {
@@ -121,19 +124,13 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
 
     @Override
     public User getById(int id) {
-        EntityManager em = createEntityManager();
         User u = em.find(User.class, id);
-        closeEmf();
         return u;
     }
 
     @Override
     public int addUser(User u) {
-        EntityManager em = createEntityManager();
-        em.getTransaction().begin();
         em.persist(u);
-        em.getTransaction().commit();
-        closeEmf();
         return 1;
     }
 
