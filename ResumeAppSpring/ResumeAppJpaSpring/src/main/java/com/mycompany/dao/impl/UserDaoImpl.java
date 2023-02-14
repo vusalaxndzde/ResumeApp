@@ -1,6 +1,5 @@
 package com.mycompany.dao.impl;
 
-import com.mycompany.dao.inter.AbstractDAO;
 import com.mycompany.dao.inter.UserDaoInter;
 import com.mycompany.entity.User;
 
