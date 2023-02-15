@@ -31,6 +31,9 @@ public class ResumeAppJpaSpringApplication {
 				for (User user : users) {
 					System.out.println(user.getName() + " " + user.getSurname());
 				}
+				User u = users.get(0);
+				u.setName(u.getName().toLowerCase());
+				userDao.updateUser(u);
 			}
 		};
 	}
