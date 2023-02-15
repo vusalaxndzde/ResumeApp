@@ -4,16 +4,18 @@ import com.mycompany.dao.inter.UserDaoInter;
 import com.mycompany.entity.User;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
+@Service(value = "userService1")
 @Transactional
 public class UserServiceImpl implements UserServiceInter {
 
     @Autowired
+    @Qualifier(value = "userDao1")
     private UserDaoInter userDao;
 
     @Override
