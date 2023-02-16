@@ -1,5 +1,6 @@
 package com.mycompany;
 
+import com.mycompany.dao.inter.UserRepository;
 import com.mycompany.entity.User;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -18,6 +20,9 @@ public class ResumeAppJpaSpringApplication {
 	@Qualifier(value = "userService1")
 	private UserServiceInter userService;
 
+	@Autowired
+	private UserRepository userRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ResumeAppJpaSpringApplication.class, args);
 	}
@@ -27,13 +32,11 @@ public class ResumeAppJpaSpringApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				List<User> users = userService.getAll();
-				for (User user : users) {
-					System.out.println(user.getName() + " " + user.getSurname());
-				}
-				User u = users.get(0);
-				u.setName(u.getName().toLowerCase());
-				//userService.updateUser(u);
+				User users = userRepository.findByName("Sarkhan", "Resullu");
+//				for (User user : users) {
+//					System.out.println(user.getName() + " " + user.getSurname());
+//				}
+				System.out.println(users);
 			}
 		};
 	}
