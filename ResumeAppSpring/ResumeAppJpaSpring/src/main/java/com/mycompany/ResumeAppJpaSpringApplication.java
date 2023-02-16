@@ -32,7 +32,7 @@ public class ResumeAppJpaSpringApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				User users = userRepository.findByName("Sarkhan", "Resullu");
+				User users = userRepository.findUserByNameAndSurname("Sarkhan", "Resullu");
 //				for (User user : users) {
 //					System.out.println(user.getName() + " " + user.getSurname());
 //				}
