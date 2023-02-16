@@ -35,7 +35,7 @@ public class EmploymentHistory implements Serializable {
     @Column(name = "job_description")
     private String jobDescription;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User user;
 
     public EmploymentHistory() {

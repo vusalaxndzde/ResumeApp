@@ -33,7 +33,7 @@ public class ResumeAppJpaSpringApplication {
 				}
 				User u = users.get(0);
 				u.setName(u.getName().toLowerCase());
-				userService.updateUser(u);
+				//userService.updateUser(u);
 			}
 		};
 	}

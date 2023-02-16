@@ -21,10 +21,10 @@ public class UserSkill implements Serializable {
     @Column(name = "power")
     private int power;
     @JoinColumn(name = "skill_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Skill skill;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User user;
 
     public UserSkill() {
