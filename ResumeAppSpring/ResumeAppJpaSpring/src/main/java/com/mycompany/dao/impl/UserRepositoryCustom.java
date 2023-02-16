@@ -1,10 +1,10 @@
-package com.mycompany.dao.inter;
+package com.mycompany.dao.impl;
 
 import com.mycompany.entity.User;
 
 import java.util.List;
 
-public interface UserDaoInter {
+public interface UserRepositoryCustom {
     
     List<User> getAll();
 

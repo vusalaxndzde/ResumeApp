@@ -1,6 +1,6 @@
 package com.mycompany;
 
-import com.mycompany.dao.inter.UserRepository;
+import com.mycompany.dao.impl.UserRepository;
 import com.mycompany.entity.User;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -32,11 +31,11 @@ public class ResumeAppJpaSpringApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				User users = userRepository.findUserByNameAndSurname("Sarkhan", "Resullu");
-//				for (User user : users) {
-//					System.out.println(user.getName() + " " + user.getSurname());
-//				}
-				System.out.println(users);
+				List<User> users = userService.filter(null, null, null);
+				for (User user : users) {
+					System.out.println(user.getName() + " " + user.getSurname());
+				}
+				//System.out.println(users);
 			}
 		};
 	}

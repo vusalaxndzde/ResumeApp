@@ -1,6 +1,5 @@
 package com.mycompany.dao.impl;
 
-import com.mycompany.dao.inter.UserDaoInter;
 import com.mycompany.entity.User;
 
 import jakarta.persistence.EntityManager;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository(value = "userDao1")
-public class UserDaoImpl implements UserDaoInter {
+public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     @PersistenceContext
     private EntityManager em;
