@@ -31,7 +31,7 @@ public class ResumeAppJpaSpringApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				List<User> users = userService.filter(null, null, null);
+				List<User> users = userRepository.filter(null, null, null);
 				for (User user : users) {
 					System.out.println(user.getName() + " " + user.getSurname());
 				}
