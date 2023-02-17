@@ -5,6 +5,8 @@ import com.mycompany.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,6 +17,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     @PersistenceContext
     private EntityManager em;
 
+    @Cacheable(value = "users")
     @Override
     public List<User> getAll() {
         Query query = em.createQuery("select u from User u", User.class);
@@ -113,6 +116,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
         return true;
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public boolean removeUser(int id) {
         User u = em.find(User.class, id);
@@ -122,8 +126,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     @Override
     public User getById(int id) {
-        User u = em.find(User.class, id);
-        return u;
+        return em.find(User.class, id);
     }
 
     @Override
