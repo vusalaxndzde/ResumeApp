@@ -1,6 +1,8 @@
 package com.mycompany;
 
 import com.mycompany.dao.impl.UserRepository;
+import com.mycompany.dao.inter.SkillDaoInter;
+import com.mycompany.entity.Skill;
 import com.mycompany.entity.User;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class ResumeAppJpaSpringApplication {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private SkillDaoInter skillDao;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ResumeAppJpaSpringApplication.class, args);
 	}
@@ -33,14 +38,8 @@ public class ResumeAppJpaSpringApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-//				List<User> users = userService.getAll();
-//				for (User user : users) {
-//					System.out.println(user.getName() + " " + user.getSurname());
-//				}
-				//System.out.println(users);
-				for (int i = 0; i < 10; i++) {
-					userService.getAll();
-				}
+				Skill skill = new Skill(20, "Spring Data");
+				System.out.println(skillDao.removeSkill(20));
 			}
 		};
 	}
