@@ -1,6 +1,7 @@
 package com.mycompany;
 
 import com.mycompany.dao.impl.UserRepository;
+import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.dao.inter.SkillDaoInter;
 import com.mycompany.dao.inter.UserSkillDaoInter;
 import com.mycompany.entity.Skill;
@@ -28,7 +29,7 @@ public class ResumeAppJpaSpringApplication {
 	private UserRepository userRepository;
 
 	@Autowired
-	private UserSkillDaoInter usDao;
+	private CountryDaoInter usDao;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ResumeAppJpaSpringApplication.class, args);
@@ -39,7 +40,7 @@ public class ResumeAppJpaSpringApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				System.out.println(usDao.getAllUserSkillByUserId(1));
+				System.out.println(usDao.getCountryByName("Azerbaijan"));
 			}
 		};
 	}

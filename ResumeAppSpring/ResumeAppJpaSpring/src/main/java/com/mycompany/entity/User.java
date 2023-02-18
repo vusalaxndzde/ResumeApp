@@ -49,7 +49,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserSkill> userSkillList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<EmploymentHistory> employmentHistoryList;

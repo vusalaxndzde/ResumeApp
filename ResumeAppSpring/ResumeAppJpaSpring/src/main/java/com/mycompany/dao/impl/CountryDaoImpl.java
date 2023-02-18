@@ -3,134 +3,63 @@ package com.mycompany.dao.impl;
 import com.mycompany.dao.inter.AbstractDAO;
 import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.entity.Country;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
+@Repository
+@Transactional
 public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {
 
-    public Country getCountry(ResultSet rs) throws Exception {
-        int id = rs.getInt("id");
-        String name = rs.getString("name");
-        String nationality = rs.getString("nationality");
-
-        return new Country(id, name, nationality);
-    }
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public List<Country> getAllCountry() {
-        List<Country> result = new ArrayList<>();
-        try ( Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            stmt.execute("select * from country");
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                Country country = getCountry(rs);
-                result.add(country);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        Query query = em.createQuery("select c from Country c", Country.class);
+        return query.getResultList();
     }
 
     @Override
     public Country getCountryById(int id) {
-        Country country = null;
-        try ( Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            stmt.execute("select * from country where id = " + id);
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                country = getCountry(rs);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return country;
+        return em.find(Country.class, id);
     }
 
     @Override
     public Country getCountryByName(String name) {
-        Country country = null;
-        try ( Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            stmt.execute("select * from country where name = " + name);
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                country = getCountry(rs);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return country;
+        Query query = em.createQuery("select c from Country c where c.name = :name");
+        query.setParameter("name", name);
+        return (Country) query.getSingleResult();
     }
 
     @Override
     public Country getCountryByNationality(String nationality) {
-        Country country = null;
-        try ( Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            stmt.execute("select * from country where nationality = " + nationality);
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                country = getCountry(rs);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return country;
+        Query query = em.createQuery("select c from Country c where c.nationality = :nationality");
+        query.setParameter("nationality", nationality);
+        return (Country) query.getSingleResult();
     }
 
     @Override
     public boolean updateCountry(Country c) {
-        try (Connection con = connect()) {
-            PreparedStatement pstmt = con.prepareStatement("update country set name = ?, nationality = ? "
-                    + "where id = ?");
-            pstmt.setString(1, c.getName());
-            pstmt.setString(2, c.getNationality());
-            pstmt.setInt(3, c.getId());
-            pstmt.execute();
-            return true;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return false;
+        em.merge(c);
+        return true;
     }
 
     @Override
     public int addCountry(Country c) {
-        int id = 0;
-        try (Connection con = connect()) {
-            PreparedStatement pstmt = con.prepareStatement("insert into country(name, nationality) values(?, ?)", 
-                    Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, c.getName());
-            pstmt.setString(2, c.getNationality());
-            pstmt.execute();
-            ResultSet generatedKeys = pstmt.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                id = generatedKeys.getInt(1);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return id;
+        em.persist(c);
+        return c.getId();
     }
 
     @Override
     public boolean removeCountry(int id) {
-        try ( Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            stmt.execute("delete from country where id = " + id);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        Country c = em.find(Country.class, id);
+        em.remove(c);
+        return true;
     }
 
 }
