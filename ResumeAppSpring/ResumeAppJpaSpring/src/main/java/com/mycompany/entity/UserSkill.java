@@ -55,20 +55,20 @@ public class UserSkill implements Serializable {
         this.power = power;
     }
 
-    public Skill getSkillId() {
+    public Skill getSkill() {
         return skill;
     }
 
-    public void setSkillId(Skill skillId) {
-        this.skill = skillId;
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 
-    public User getUserId() {
+    public User getUser() {
         return user;
     }
 
-    public void setUserId(User userId) {
-        this.user = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

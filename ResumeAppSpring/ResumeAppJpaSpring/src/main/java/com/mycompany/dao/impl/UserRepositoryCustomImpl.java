@@ -21,8 +21,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     @Override
     public List<User> getAll() {
         Query query = em.createQuery("select u from User u", User.class);
-        List<User> users = query.getResultList();
-        return users;
+        return query.getResultList();
     }
 
     @Override

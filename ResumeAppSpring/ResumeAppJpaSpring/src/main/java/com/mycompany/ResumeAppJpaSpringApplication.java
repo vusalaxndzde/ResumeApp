@@ -2,6 +2,7 @@ package com.mycompany;
 
 import com.mycompany.dao.impl.UserRepository;
 import com.mycompany.dao.inter.SkillDaoInter;
+import com.mycompany.dao.inter.UserSkillDaoInter;
 import com.mycompany.entity.Skill;
 import com.mycompany.entity.User;
 import com.mycompany.service.inter.UserServiceInter;
@@ -27,7 +28,7 @@ public class ResumeAppJpaSpringApplication {
 	private UserRepository userRepository;
 
 	@Autowired
-	private SkillDaoInter skillDao;
+	private UserSkillDaoInter usDao;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ResumeAppJpaSpringApplication.class, args);
@@ -38,8 +39,7 @@ public class ResumeAppJpaSpringApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				Skill skill = new Skill(20, "Spring Data");
-				System.out.println(skillDao.removeSkill(20));
+				System.out.println(usDao.getAllUserSkillByUserId(1));
 			}
 		};
 	}
