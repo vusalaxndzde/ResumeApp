@@ -1,6 +1,5 @@
 package com.mycompany.dao.impl;
 
-import com.mycompany.dao.inter.AbstractDAO;
 import com.mycompany.dao.inter.UserSkillDaoInter;
 import com.mycompany.entity.User;
 import com.mycompany.entity.UserSkill;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserSkillDaoImpl extends AbstractDAO implements UserSkillDaoInter {
+public class UserSkillDaoImpl implements UserSkillDaoInter {
 
     @PersistenceContext
     private EntityManager em;

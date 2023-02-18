@@ -1,6 +1,5 @@
 package com.mycompany.dao.impl;
 
-import com.mycompany.dao.inter.AbstractDAO;
 import com.mycompany.dao.inter.CountryDaoInter;
 import com.mycompany.entity.Country;
 import jakarta.persistence.EntityManager;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {
+public class CountryDaoImpl implements CountryDaoInter {
 
     @PersistenceContext
     private EntityManager em;

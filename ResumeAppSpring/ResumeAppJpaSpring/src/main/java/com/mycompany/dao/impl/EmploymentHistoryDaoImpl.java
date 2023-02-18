@@ -1,6 +1,5 @@
 package com.mycompany.dao.impl;
 
-import com.mycompany.dao.inter.AbstractDAO;
 import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
 import com.mycompany.entity.EmploymentHistory;
 import com.mycompany.entity.User;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class EmploymentHistoryDaoImpl extends AbstractDAO implements EmploymentHistoryDaoInter {
+public class EmploymentHistoryDaoImpl implements EmploymentHistoryDaoInter {
 
     @PersistenceContext
     private EntityManager em;

@@ -2,10 +2,6 @@ package com.mycompany;
 
 import com.mycompany.dao.impl.UserRepository;
 import com.mycompany.dao.inter.CountryDaoInter;
-import com.mycompany.dao.inter.SkillDaoInter;
-import com.mycompany.dao.inter.UserSkillDaoInter;
-import com.mycompany.entity.Skill;
-import com.mycompany.entity.User;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
 
 @SpringBootApplication
 @EnableCaching

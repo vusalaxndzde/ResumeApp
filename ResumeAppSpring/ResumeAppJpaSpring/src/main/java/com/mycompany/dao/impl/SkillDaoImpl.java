@@ -1,6 +1,5 @@
 package com.mycompany.dao.impl;
 
-import com.mycompany.dao.inter.AbstractDAO;
 import com.mycompany.dao.inter.SkillDaoInter;
 import com.mycompany.entity.Skill;
 import jakarta.persistence.EntityManager;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class SkillDaoImpl extends AbstractDAO implements SkillDaoInter {
+public class SkillDaoImpl implements SkillDaoInter {
 
     @PersistenceContext
     private EntityManager em;
