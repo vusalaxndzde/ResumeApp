@@ -7,13 +7,7 @@
 <%@ page import="com.mycompany.dao.inter.EmploymentHistoryDaoInter" %>
 <%@ page import="com.mycompany.dao.inter.UserSkillDaoInter" %>
 <%@ page import="com.mycompany.entity.UserSkill" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Asus
-  Date: 08.12.2022
-  Time: 18:05
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
