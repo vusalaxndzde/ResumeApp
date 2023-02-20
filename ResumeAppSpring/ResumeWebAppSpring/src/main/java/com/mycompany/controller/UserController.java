@@ -29,7 +29,7 @@ public class UserController {
         }
         List<User> users = userService.filter(name, surname, nationalityId);
         request.setAttribute("users", users);
-        return "users";
+        return "usersJ";
     }
 
 
