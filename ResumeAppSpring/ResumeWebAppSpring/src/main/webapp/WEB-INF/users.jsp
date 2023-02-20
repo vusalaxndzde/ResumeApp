@@ -15,10 +15,10 @@
 </head>
 <body>
     <%
-        User u = (User) request.getSession().getAttribute("loggedInUser");
+        //User u = (User) request.getSession().getAttribute("loggedInUser");
         List<User> users = (List<User>) request.getAttribute("users");
     %>
-    <h1>Welcome, <%=u.getName()%></h1>
+    <h1>Welcome</h1>
     <div class="container mycontainer">
         <div class="row">
             <div class="col-4">

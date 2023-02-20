@@ -16,28 +16,18 @@ import org.springframework.context.annotation.Bean;
 @EnableCaching
 public class ResumeAppJpaSpringApplication {
 
-	@Autowired
-	@Qualifier(value = "userService1")
-	private UserServiceInter userService;
-
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private CountryDaoInter usDao;
-
 	public static void main(String[] args) {
 		SpringApplication.run(ResumeAppJpaSpringApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner run() {
-		return new CommandLineRunner() {
-			@Override
-			public void run(String... args) throws Exception {
-				System.out.println(usDao.getCountryByName("Azerbaijan"));
-			}
-		};
-	}
+//	@Bean
+//	public CommandLineRunner run() {
+//		return new CommandLineRunner() {
+//			@Override
+//			public void run(String... args) throws Exception {
+//				System.out.println(usDao.getCountryByName("Azerbaijan"));
+//			}
+//		};
+//	}
 
 }
