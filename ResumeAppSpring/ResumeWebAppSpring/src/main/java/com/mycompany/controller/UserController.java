@@ -1,9 +1,11 @@
 package com.mycompany.controller;
 
 import com.mycompany.entity.User;
+import com.mycompany.form.UserForm;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -33,15 +34,27 @@ public class UserController {
 //        return "users";
 //    }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView index(@RequestParam(value = "name", required = false) String name,
                         @RequestParam(value = "surname", required = false) String surname,
                         @RequestParam(value = "nationality", required = false) Integer nid) {
         List<User> users = userService.filter(name, surname, nid);
-        ModelAndView mv = new ModelAndView("users");
+        ModelAndView mv = new ModelAndView("usersJ");
         mv.addObject("users", users);
         return mv;
     }
 
+    @RequestMapping(value = "/usersm", method = RequestMethod.GET)
+    public ModelAndView indexM(@ModelAttribute("userFilter") UserForm userForm) {
+        List<User> usersList = userService.filter(userForm.getName(), userForm.getSurname(), userForm.getNationalityId());
+        ModelAndView mv = new ModelAndView("usersM");
+        mv.addObject("users", usersList);
+        return mv;
+    }
+
+    @ModelAttribute("userFilter")
+    public UserForm getEmptyUserForm() {
+        return new UserForm(null, null, null);
+    }
 
 }
