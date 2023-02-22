@@ -52,9 +52,9 @@ public class UserController {
         return mv;
     }
 
-    @ModelAttribute("userFilter")
-    public UserForm getEmptyUserForm() {
-        return new UserForm(null, null, null);
-    }
+//    @ModelAttribute("userFilter")
+//    public UserForm getEmptyUserForm() {
+//        return new UserForm(null, null, null);
+//    }
 
 }
