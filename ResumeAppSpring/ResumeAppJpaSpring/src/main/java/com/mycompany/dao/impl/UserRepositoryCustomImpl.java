@@ -24,6 +24,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
         return query.getResultList();
     }
 
+    @Cacheable(value = "filterUser")
     @Override
     public List<User> filter(String name, String surname, Integer nationalityId) {
         String strQuery = "select u from User u where 1 = 1 ";
