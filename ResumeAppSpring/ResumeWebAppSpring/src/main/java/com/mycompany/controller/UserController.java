@@ -3,12 +3,11 @@ package com.mycompany.controller;
 import com.mycompany.entity.User;
 import com.mycompany.form.UserForm;
 import com.mycompany.service.inter.UserServiceInter;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -34,27 +33,40 @@ public class UserController {
 //        return "users";
 //    }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public ModelAndView index(@RequestParam(value = "name", required = false) String name,
-                        @RequestParam(value = "surname", required = false) String surname,
-                        @RequestParam(value = "nationality", required = false) Integer nid) {
-        List<User> users = userService.filter(name, surname, nid);
-        ModelAndView mv = new ModelAndView("usersJ");
-        mv.addObject("users", users);
-        return mv;
-    }
+//    @RequestMapping(value = "/users", method = RequestMethod.GET)
+//    public ModelAndView index(@RequestParam(value = "name", required = false) String name,
+//                        @RequestParam(value = "surname", required = false) String surname,
+//                        @RequestParam(value = "nationality", required = false) Integer nid) {
+//        List<User> users = userService.filter(name, surname, nid);
+//        ModelAndView mv = new ModelAndView("usersJ");
+//        mv.addObject("users", users);
+//        return mv;
+//    }
 
     @RequestMapping(value = "/usersm", method = RequestMethod.GET)
     public ModelAndView indexM(@ModelAttribute("userFilter") UserForm userForm) {
-        List<User> usersList = userService.filter(userForm.getName(), userForm.getSurname(), userForm.getNationalityId());
         ModelAndView mv = new ModelAndView("usersM");
+        List<User> usersList = userService.filter(userForm.getName(), userForm.getSurname(), userForm.getNationalityId());
+        mv.addObject("users", usersList);
+        return mv;
+    }
+
+    @GetMapping(value = "/filter")
+    public ModelAndView filter(@Valid @ModelAttribute("userFilter") UserForm userForm, BindingResult bindingResult) {
+        ModelAndView mv = new ModelAndView("usersM");
+        if (bindingResult.hasErrors()) {
+            List<User> usersList = userService.filter(null, null, null);
+            mv.addObject("users", usersList);
+            return mv;
+        }
+        List<User> usersList = userService.filter(userForm.getName(), userForm.getSurname(), userForm.getNationalityId());
         mv.addObject("users", usersList);
         return mv;
     }
 
 //    @ModelAttribute("userFilter")
 //    public UserForm getEmptyUserForm() {
-//        return new UserForm(null, null, null);
+//        return new UserForm("Vusal", "ax", null);
 //    }
 
 }

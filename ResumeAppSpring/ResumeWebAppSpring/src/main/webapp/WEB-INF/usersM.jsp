@@ -24,27 +24,18 @@
 <div class="container mycontainer">
     <div class="row">
         <div class="col-4">
-            <f:form action="usersm" method="GET" modelAttribute="userFilter">
+            <f:form action="filter" method="GET" modelAttribute="userFilter">
                 <div class="form-group">
-                    <label for="name">name:</label>
-                    <f:input path="name"
-                             placeholder="Enter name"
-                             class="form-control"/>
-<%--                    <form:errors path="name" cssClass="error"/>--%>
+                    <label for="name">Name:</label>
+                    <f:input path="name" placeholder="Enter name" class="form-control"/>
+                    <f:errors path="name" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <label for="surname">surname:</label>
-                    <f:input
-                            path="surname"
-                            placeholder="Enter surname"
-                            class="form-control" />
-<%--                    <form:errors path="surname" cssClass="error"/>--%>
+                    <label for="surname">Surname:</label>
+                    <f:input path="surname" placeholder="Enter surname" class="form-control" />
+                    <f:errors path="surname" cssClass="error"/>
                 </div>
-
-                <f:button type="submit" class="btn btn-primary" id="btnsearch">
-                    Search
-                </f:button>
-
+                <f:button type="submit" class="btn btn-primary" id="btnsearch">Search</f:button>
             </f:form>
         </div>
     </div>

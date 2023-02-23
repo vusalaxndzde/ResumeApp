@@ -1,9 +1,17 @@
 package com.mycompany.form;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class UserForm {
 
+    @NotEmpty
+    @Size(min = 3)
     private String name;
+
+    @NotEmpty
     private String surname;
+
     private Integer nationalityId;
 
     public UserForm() {
