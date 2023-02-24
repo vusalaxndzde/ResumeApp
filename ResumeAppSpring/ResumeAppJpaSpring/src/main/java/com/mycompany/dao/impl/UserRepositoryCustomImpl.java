@@ -1,5 +1,6 @@
 package com.mycompany.dao.impl;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.mycompany.entity.User;
 
 import jakarta.persistence.EntityManager;
@@ -8,10 +9,12 @@ import jakarta.persistence.Query;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository(value = "userDao1")
+@Transactional
 public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     @PersistenceContext
@@ -129,8 +132,11 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
         return em.find(User.class, id);
     }
 
+    private static BCrypt.Hasher crypt = BCrypt.withDefaults();
+
     @Override
     public int addUser(User u) {
+        u.setPassword(crypt.hashToString(4, u.getPassword().toCharArray()));
         em.persist(u);
         return 1;
     }

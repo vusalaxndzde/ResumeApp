@@ -1,7 +1,9 @@
 package com.mycompany;
 
 import com.mycompany.dao.impl.UserRepository;
+import com.mycompany.dao.impl.UserRepositoryCustom;
 import com.mycompany.dao.inter.CountryDaoInter;
+import com.mycompany.entity.User;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +18,10 @@ import org.springframework.context.annotation.Bean;
 @EnableCaching
 public class ResumeAppJpaSpringApplication {
 
+//	@Autowired
+//	@Qualifier("userDao1")
+//	private UserRepositoryCustom userRepo;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ResumeAppJpaSpringApplication.class, args);
 	}
@@ -25,7 +31,8 @@ public class ResumeAppJpaSpringApplication {
 //		return new CommandLineRunner() {
 //			@Override
 //			public void run(String... args) throws Exception {
-//				System.out.println(usDao.getCountryByName("Azerbaijan"));
+//
+//				userRepo.addUser(new User(null, "vusal@gmail.com", "12345"));
 //			}
 //		};
 //	}

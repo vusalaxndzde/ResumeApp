@@ -26,13 +26,13 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
+    @Basic
     @Column(name = "name")
     private String name;
-    @Basic(optional = false)
+    @Basic
     @Column(name = "surname")
     private String surname;
-    @Basic(optional = false)
+    @Basic
     @Column(name = "phone")
     private String phone;
     @Basic(optional = false)
@@ -67,6 +67,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    public User(Integer id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
     public User(Integer id, String name, String surname, String phone, String email, String password) {
         this.id = id;
         this.name = name;
