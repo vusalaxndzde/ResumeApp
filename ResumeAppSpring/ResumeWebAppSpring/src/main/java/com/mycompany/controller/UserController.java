@@ -33,15 +33,15 @@ public class UserController {
 //        return "users";
 //    }
 
-//    @RequestMapping(value = "/users", method = RequestMethod.GET)
-//    public ModelAndView index(@RequestParam(value = "name", required = false) String name,
-//                        @RequestParam(value = "surname", required = false) String surname,
-//                        @RequestParam(value = "nationality", required = false) Integer nid) {
-//        List<User> users = userService.filter(name, surname, nid);
-//        ModelAndView mv = new ModelAndView("usersJ");
-//        mv.addObject("users", users);
-//        return mv;
-//    }
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public ModelAndView index(@RequestParam(value = "name", required = false) String name,
+                        @RequestParam(value = "surname", required = false) String surname,
+                        @RequestParam(value = "nationality", required = false) Integer nid) {
+        List<User> users = userService.filter(name, surname, nid);
+        ModelAndView mv = new ModelAndView("usersJ");
+        mv.addObject("users", users);
+        return mv;
+    }
 
     @RequestMapping(value = "/usersm", method = RequestMethod.GET)
     public ModelAndView indexM(@ModelAttribute("userFilter") UserForm userForm) {
