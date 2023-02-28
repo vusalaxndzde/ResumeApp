@@ -82,7 +82,7 @@ public class WebSecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
                 .requestMatchers("/login*").permitAll().anyRequest().authenticated()
 //                .requestMatchers("/usersm*").permitAll().anyRequest().authenticated()
                 .and()
-                .formLogin().defaultSuccessUrl("/usersm", false).permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/usersm", false).permitAll()
 //                .loginPage("/login.html")
 //                .loginProcessingUrl("/perform_login")
 //                .defaultSuccessUrl("/homepage.html", true)

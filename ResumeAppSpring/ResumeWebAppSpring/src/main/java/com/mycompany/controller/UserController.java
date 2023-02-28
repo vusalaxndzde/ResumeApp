@@ -64,6 +64,11 @@ public class UserController {
         return mv;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 //    @ModelAttribute("userFilter")
 //    public UserForm getEmptyUserForm() {
 //        return new UserForm("Vusal", "ax", null);
