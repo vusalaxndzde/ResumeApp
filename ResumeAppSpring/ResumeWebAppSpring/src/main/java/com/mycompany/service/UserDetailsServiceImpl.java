@@ -27,8 +27,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             builder.disabled(false);
             builder.password(user.getPassword());
 
-            String[] authoritiesArr = new String[]{"USER", "ADMIN"};
-            builder.authorities(authoritiesArr);
+            String[] roles = new String[]{"USER", "ADMIN"};
+//            builder.authorities(authoritiesArr);
+            builder.roles(roles);
         } else {
             throw new UsernameNotFoundException("User not found");
         }

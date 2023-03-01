@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 //@EnableWebSecurity
 @Configuration
@@ -73,23 +75,34 @@ public class WebSecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
 //    }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+
+//        MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector).servletPath("/path");
+//        http
+//                .authorizeHttpRequests((authorize) -> authorize
+//                        .requestMatchers(mvcMatcherBuilder.pattern("/users")).hasRole("ADMIN")
+//                        .requestMatchers(mvcMatcherBuilder.pattern("/usersm")).hasRole("USER")
+//                        .anyRequest().authenticated()
+//                ).formLogin().loginPage("/login").defaultSuccessUrl("/usersm", false).permitAll()
+//                .and().csrf().disable();
         http.csrf()
                 .disable()
-                .authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")
+                .authorizeRequests().requestMatchers("/usersm*").hasRole("ADMIN")
                 .requestMatchers("/anonymous*")
                 .anonymous()
 //                .requestMatchers("/login*").permitAll().anyRequest().authenticated()
 //                .requestMatchers("/usersm*").permitAll().anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/usersm", false).permitAll()
+                .formLogin().loginPage("/login")
+                .defaultSuccessUrl("/usersm", false)
+                .permitAll()
 //                .loginPage("/login.html")
 //                .loginProcessingUrl("/perform_login")
 //                .defaultSuccessUrl("/homepage.html", true)
 //                .failureUrl("/login.html?error=true")
 //                .failureHandler(authenticationFailureHandler())
                 .and()
-                .logout().logoutSuccessUrl("/login").permitAll();
+                .logout().logoutSuccessUrl("/login?logout").permitAll();
 //                .logoutUrl("/perform_logout")
 //                .deleteCookies("JSESSIONID")
 //                .logoutSuccessHandler(logoutSuccessHandler());

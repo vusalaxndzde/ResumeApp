@@ -1,0 +1,11 @@
+.mylogin {
+    margin-bottom: 10px;
+}
+
+#error {
+    color: red;
+}
+
+#logout {
+    color: #03cc03;
+}
