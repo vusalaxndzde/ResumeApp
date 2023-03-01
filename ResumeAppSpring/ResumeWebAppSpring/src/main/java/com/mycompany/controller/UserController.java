@@ -6,6 +6,7 @@ import com.mycompany.service.inter.UserServiceInter;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,8 +65,14 @@ public class UserController {
         return mv;
     }
 
-    @GetMapping("/login")
-    public String login() {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model, String error, String logout) {
+        if (error != null)
+            model.addAttribute("errorMsg", "Your username and password are invalid.");
+
+        if (logout != null)
+            model.addAttribute("msg", "You have been logged out successfully.");
+
         return "login";
     }
 

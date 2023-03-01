@@ -13,10 +13,12 @@
                 <form action="login" method="post">
                     <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: dodgerblue">Log in</h3>
                     <div class="form-outline mb-4">
-                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+                        <input type="email" class="form-control" id="inputEmail" name="username" placeholder="Email">
                     </div>
                     <div class="form-outline mb-4">
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <label>${errorMsg}</label>
+                        <label>${msg}</label>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mb-4" name="btn_login">Login</button>
                 </form>

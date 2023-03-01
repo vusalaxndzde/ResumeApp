@@ -79,7 +79,7 @@ public class WebSecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
                 .authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/anonymous*")
                 .anonymous()
-                .requestMatchers("/login*").permitAll().anyRequest().authenticated()
+//                .requestMatchers("/login*").permitAll().anyRequest().authenticated()
 //                .requestMatchers("/usersm*").permitAll().anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/usersm", false).permitAll()
