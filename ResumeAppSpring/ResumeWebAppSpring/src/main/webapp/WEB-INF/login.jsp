@@ -20,6 +20,7 @@
                         <label id="error">${errorMsg}</label>
                         <label id="logout">${msg}</label>
                     </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <button type="submit" class="btn btn-primary btn-block mb-4" name="btn_login">Login</button>
                 </form>
             </div>
