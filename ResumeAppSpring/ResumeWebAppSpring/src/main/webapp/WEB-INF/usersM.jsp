@@ -79,6 +79,10 @@
             <%}%>
             </tbody>
         </table>
+        <form action="logout" method="get">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+<%--        <a href="${pageContext.request.contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">Logout</a>--%>
     </div>
 </div>
 

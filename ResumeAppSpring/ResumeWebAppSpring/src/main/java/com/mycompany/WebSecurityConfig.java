@@ -59,16 +59,16 @@ public class WebSecurityConfig {
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/usersm", false)
-                .permitAll()
+                .permitAll();
 //                .loginPage("/login.html")
 //                .loginProcessingUrl("/perform_login")
 //                .defaultSuccessUrl("/homepage.html", true)
 //                .failureUrl("/login.html?error=true")
 //                .failureHandler(authenticationFailureHandler())
-                .and()
-                .logout()
-                .logoutSuccessUrl("/login?logout")
-                .permitAll();
+//                .and()
+//                .logout()
+//                .logoutSuccessUrl("/login?logout")
+//                .permitAll();
 
         return http.build();
     }

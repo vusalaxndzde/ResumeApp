@@ -65,7 +65,7 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value = "/logout", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request){
         HttpSession session;
         SecurityContextHolder.clearContext();
