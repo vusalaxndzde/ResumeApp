@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,10 +35,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/usersm", method = RequestMethod.GET)
-    public ModelAndView indexM(@ModelAttribute("userFilter") UserForm userForm) {
+    public ModelAndView indexM(@ModelAttribute("userFilter") UserForm userForm, Authentication authentication) {
         ModelAndView mv = new ModelAndView("usersM");
         List<User> usersList = userService.filter(userForm.getName(), userForm.getSurname(), userForm.getNationalityId());
         mv.addObject("users", usersList);
+        System.out.println(authentication.getName());
         return mv;
     }
 
