@@ -67,10 +67,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout", method = {RequestMethod.POST, RequestMethod.GET})
-    public String logoutDo(HttpServletRequest request, HttpServletResponse response){
-        HttpSession session= request.getSession(false);
+    public String logout(HttpServletRequest request){
+        HttpSession session;
         SecurityContextHolder.clearContext();
-        session= request.getSession(false);
+        session = request.getSession(false);
         if(session != null) {
             session.invalidate();
         }
