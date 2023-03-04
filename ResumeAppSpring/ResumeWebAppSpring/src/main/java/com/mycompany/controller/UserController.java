@@ -3,8 +3,13 @@ package com.mycompany.controller;
 import com.mycompany.entity.User;
 import com.mycompany.form.UserForm;
 import com.mycompany.service.inter.UserServiceInter;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,21 +23,6 @@ public class UserController {
 
     @Autowired
     private UserServiceInter userService;
-
-
-//    @RequestMapping(method = RequestMethod.GET)
-//    public String index(HttpServletRequest request) {
-//        String name = request.getParameter("name");
-//        String surname = request.getParameter("surname");
-//        String nationalityIdStr = request.getParameter("nationality");
-//        Integer nationalityId = null;
-//        if (nationalityIdStr != null && !nationalityIdStr.trim().equals("")) {
-//            nationalityId = Integer.valueOf(nationalityIdStr);
-//        }
-//        List<User> users = userService.filter(name, surname, nationalityId);
-//        request.setAttribute("users", users);
-//        return "users";
-//    }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView index(@RequestParam(value = "name", required = false) String name,
@@ -73,6 +63,20 @@ public class UserController {
         if (logout != null)
             model.addAttribute("msg", "You have been logged out successfully.");
 
+        return "login";
+    }
+
+    @RequestMapping(value = "/logout", method = {RequestMethod.POST, RequestMethod.GET})
+    public String logoutDo(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session= request.getSession(false);
+        SecurityContextHolder.clearContext();
+        session= request.getSession(false);
+        if(session != null) {
+            session.invalidate();
+        }
+        for(Cookie cookie : request.getCookies()) {
+            cookie.setMaxAge(0);
+        }
         return "login";
     }
 
