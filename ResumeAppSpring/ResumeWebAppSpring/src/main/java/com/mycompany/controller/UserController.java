@@ -5,7 +5,6 @@ import com.mycompany.form.UserForm;
 import com.mycompany.service.inter.UserServiceInter;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +76,7 @@ public class UserController {
         for(Cookie cookie : request.getCookies()) {
             cookie.setMaxAge(0);
         }
-        return "login";
+        return "redirect:/login?logout";
     }
 
 //    @ModelAttribute("userFilter")
