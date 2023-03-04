@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 //@EnableWebSecurity
@@ -60,15 +61,17 @@ public class WebSecurityConfig {
                 .loginPage("/login")
                 .defaultSuccessUrl("/usersm", false)
                 .permitAll();
-//                .loginPage("/login.html")
-//                .loginProcessingUrl("/perform_login")
-//                .defaultSuccessUrl("/homepage.html", true)
-//                .failureUrl("/login.html?error=true")
-//                .failureHandler(authenticationFailureHandler())
 //                .and()
 //                .logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 //                .logoutSuccessUrl("/login?logout")
-//                .permitAll();
+//                .deleteCookies("JSESSIONID")
+//                .invalidateHttpSession(true);
+        
+//                .and()
+//                .logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/login?logout").permitAll();
 
         return http.build();
     }
