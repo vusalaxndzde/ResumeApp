@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    @GetMapping("hello")
-    public ResponseEntity<String> hello() {
+    @GetMapping("users")
+    public ResponseEntity<String> getUsers() {
         return ResponseEntity.ok().body("Salam");
     }
 
