@@ -132,7 +132,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
         return em.find(User.class, id);
     }
 
-    private static BCrypt.Hasher crypt = BCrypt.withDefaults();
+    private static final BCrypt.Hasher crypt = BCrypt.withDefaults();
 
     @Override
     public int addUser(User u) {
