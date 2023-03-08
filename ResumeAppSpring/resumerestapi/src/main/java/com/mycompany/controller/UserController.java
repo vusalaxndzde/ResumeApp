@@ -15,8 +15,6 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    @Autowired
-    @Qualifier("userDao1")
     private UserRepositoryCustom userRepo;
 
     @GetMapping("users")
@@ -27,6 +25,12 @@ public class UserController {
             userDTOS.add(new UserDTO(u));
         }
         return ResponseEntity.ok().body(userDTOS);
+    }
+
+    @Autowired
+    @Qualifier("userDao1")
+    public void setUserRepo(UserRepositoryCustom userRepo) {
+        this.userRepo = userRepo;
     }
 
 }
