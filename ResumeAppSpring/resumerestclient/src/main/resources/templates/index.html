@@ -6,13 +6,15 @@
     <script>
         function printUsers(arr) {
             var element = document.getElementById("container");
+            element.innerHTML = "";
             for (var i = 0; i < arr.length; i++) {
                 var obj = arr[i];
-                var str = obj.id + " " + obj.name + " " + obj.surname + "<br>";
+                var deleteBtn = '<button onClick="deleteUser('+obj.id+')">Delete</button>';
+                var str = obj.id + " " + obj.name + " " + obj.surname + deleteBtn + "<br>";
                 element.innerHTML += str;
             }
         }
-        function loadDoc() {
+        function getUsers() {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange=function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -24,9 +26,46 @@
             xhttp.open("GET", "http://localhost:8080/users", true);
             xhttp.send();
         }
+        function deleteUser(id) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange=function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    getUsers();
+                }
+            }
+            xhttp.open("DELETE", "http://localhost:8080/users/" + id, true);
+            xhttp.send();
+        }
+        function addUser() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange=function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    getUsers();
+                }
+            }
+            var name = document.getElementById("name").value;
+            var surname = document.getElementById("surname").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var user = {name: name, surname: surname, email: email, password: password}
+            xhttp.open("POST", "http://localhost:8080/users", true);
+            xhttp.setRequestHeader("Content-Type", "application/json")
+            xhttp.send(JSON.stringify(user));
+        }
     </script>
 </head>
-<body onload="loadDoc()">
+<body onload="getUsers()">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" id="name"><br>
+        <label for="surname">Surname</label>
+        <input type="text" id="surname"><br>
+        <label for="email">Email</label>
+        <input type="email" id="email"><br>
+        <label for="password">Password</label>
+        <input type="password" id="password"><br>
+        <button onclick="addUser()">Add user</button>
+    </div>
     <div id="container">
     </div>
 </body>

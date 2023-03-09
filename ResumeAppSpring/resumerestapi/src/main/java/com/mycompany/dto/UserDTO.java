@@ -11,6 +11,8 @@ public class UserDTO {
     private Integer id;
     private String name;
     private String surname;
+    private String email;
+    private String password;
     private List<UserSkillDTO> userSkillDTO;
 
     public UserDTO() {
@@ -20,6 +22,7 @@ public class UserDTO {
         this.id = user.getId();
         this.name = user.getName();
         this.surname = user.getSurname();
+        this.email = user.getEmail();
 
         List<UserSkillDTO> userSkillDTOList = new ArrayList<>();
         List<UserSkill> userSkills = user.getUserSkillList();
@@ -65,6 +68,22 @@ public class UserDTO {
 
     public void setUserSkillDTO(List<UserSkillDTO> userSkillDTO) {
         this.userSkillDTO = userSkillDTO;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

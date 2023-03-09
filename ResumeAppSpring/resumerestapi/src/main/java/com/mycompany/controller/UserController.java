@@ -48,6 +48,26 @@ public class UserController {
         return ResponseEntity.ok(ResponseDTO.of(userDTO));
     }
 
+    @DeleteMapping("users/{id}")
+    public ResponseEntity<ResponseDTO> deleteUser(@PathVariable("id") Integer id) {
+        User user = userRepo.getById(id);
+        userRepo.removeUser(id);
+        return ResponseEntity.ok(ResponseDTO.of(new UserDTO(user), "Successfully deleted"));
+    }
+
+    @PostMapping("users")
+    public ResponseEntity<ResponseDTO> addUser(@RequestBody UserDTO userDTO) {
+        User user = new User();
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+
+        userRepo.addUser(user);
+        userDTO.setId(user.getId());
+        return ResponseEntity.ok(ResponseDTO.of(userDTO, "Successfully added"));
+    }
+
     @Autowired
     @Qualifier("userDao1")
     public void setUserRepo(UserRepositoryCustom userRepo) {
