@@ -20,14 +20,14 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     @PersistenceContext
     private EntityManager em;
 
-//    @Cacheable(value = "users")
+    @Cacheable(value = "users")
     @Override
     public List<User> getAll() {
         Query query = em.createQuery("select u from User u", User.class);
         return query.getResultList();
     }
 
-//    @Cacheable(value = "filterUser")
+    @Cacheable(value = "filterUser")
     @Override
     public List<User> filter(String name, String surname, Integer nationalityId) {
         String strQuery = "select u from User u where 1 = 1 ";
@@ -113,6 +113,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
         return null;
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public boolean updateUser(User u) {
         em.merge(u);
@@ -134,6 +135,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     private static final BCrypt.Hasher crypt = BCrypt.withDefaults();
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public int addUser(User u) {
         u.setPassword(crypt.hashToString(4, u.getPassword().toCharArray()));
