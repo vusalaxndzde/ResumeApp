@@ -23,6 +23,7 @@ public class UserDTO {
         this.name = user.getName();
         this.surname = user.getSurname();
         this.email = user.getEmail();
+        this.password = user.getPassword();
 
         List<UserSkillDTO> userSkillDTOList = new ArrayList<>();
         List<UserSkill> userSkills = user.getUserSkillList();
