@@ -68,6 +68,21 @@ public class UserController {
         return ResponseEntity.ok(ResponseDTO.of(userDTO, "Successfully added"));
     }
 
+    @PutMapping("users/{id}")
+    public ResponseEntity<ResponseDTO> updateUser(@PathVariable("id") Integer id,
+                                                  @RequestBody UserDTO userDTO) {
+        User user = new User();
+        user.setId(id);
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+
+        userRepo.updateUser(user);
+        userDTO.setId(user.getId());
+        return ResponseEntity.ok(ResponseDTO.of(userDTO, "Successfully updated"));
+    }
+
     @Autowired
     @Qualifier("userDao1")
     public void setUserRepo(UserRepositoryCustom userRepo) {
