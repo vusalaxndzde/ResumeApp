@@ -52,9 +52,20 @@ public class LoggingAspect {
             returning = "users")
     public void afterReturningAdvice(JoinPoint joinPoint, List<User> users) {
         System.out.println("after returning advice started");
-        System.out.println("After Returning method:"+joinPoint.getSignature());
+        System.out.println("After Returning method: " + joinPoint.getSignature());
         System.out.println(users);
         System.out.println("after returning advice finished");
+        System.out.println("**********************");
+    }
+
+    @AfterThrowing(
+            value = "execution(* com.mycompany.controller.UserController.getUsers(..))",
+            throwing = "ex")
+    public void afterThrowingAdvice(JoinPoint joinPoint, Exception ex) {
+        System.out.println("after Throwing advice started");
+        System.out.println("After Throwing method: " + joinPoint.getSignature());
+        System.out.println("Exception: " + ex.getMessage());
+        System.out.println("after Throwing advice finished");
         System.out.println("**********************");
     }
 

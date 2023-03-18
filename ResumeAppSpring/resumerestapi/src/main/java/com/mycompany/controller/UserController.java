@@ -25,6 +25,9 @@ public class UserController {
         for (User u : users) {
             userDTOS.add(new UserDTO(u));
         }
+        if (users != null) {
+            throw new IllegalArgumentException("exception in user controller");
+        }
         return ResponseEntity.ok().body(ResponseDTO.of(userDTOS));
     }
 
