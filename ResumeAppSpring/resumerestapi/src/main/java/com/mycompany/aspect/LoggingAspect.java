@@ -17,6 +17,7 @@ public class LoggingAspect {
         System.out.println("before advice started");
         System.out.println(joinPoint.getSignature());
         System.out.println("before advice finished");
+        System.out.println("**********************");
     }
 
     @Before(value = "execution(* com.mycompany.dao.impl.UserRepositoryCustom.filter(..))")
@@ -25,6 +26,7 @@ public class LoggingAspect {
         System.out.println(joinPoint.getArgs()[0]);
         System.out.println(joinPoint.getSignature());
         System.out.println("before advice finished");
+        System.out.println("**********************");
     }
 
     @After(value = "execution(* com.mycompany.dao.impl.*.*(..)))")
@@ -32,14 +34,16 @@ public class LoggingAspect {
         System.out.println("after advice started");
         System.out.println(joinPoint.getSignature().getName());
         System.out.println("after advice finished");
-
+        System.out.println("**********************");
     }
 
     @Around(value = "execution(* com.mycompany.dao.impl.*.*(..)))")
     public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("around advice started");
+        System.out.println("around");
         Object obj = joinPoint.proceed();
         System.out.println("around advice finished");
+        System.out.println("**********************");
         return obj;
     }
 
@@ -51,6 +55,7 @@ public class LoggingAspect {
         System.out.println("After Returning method:"+joinPoint.getSignature());
         System.out.println(users);
         System.out.println("after returning advice finished");
+        System.out.println("**********************");
     }
 
 }
