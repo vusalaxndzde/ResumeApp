@@ -20,10 +20,10 @@ public class LoggingAspect {
         System.out.println("**********************");
     }
 
-    @Before(value = "execution(* com.mycompany.dao.impl.UserRepositoryCustom.filter(..))")
-    public void beforeAdviceUser(JoinPoint joinPoint) {
+    @Before(value = "execution(* com.mycompany.dao.impl.UserRepositoryCustom.filter(..)) && args(name, ..)")
+    public void beforeAdviceUser(JoinPoint joinPoint, String name) {
         System.out.println("before advice started2");
-        System.out.println(joinPoint.getArgs()[0]);
+        System.out.println("Name: " + name);
         System.out.println(joinPoint.getSignature());
         System.out.println("before advice finished");
         System.out.println("**********************");
