@@ -4,12 +4,12 @@ import com.mycompany.entity.User;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Aspect
-@Configuration
+@Component
 public class LoggingAspect {
 
     @Before(value = "execution(* com.mycompany.dao.impl.*.*(..))")
