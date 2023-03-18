@@ -40,7 +40,6 @@ public class LoggingAspect {
     @Around(value = "execution(* com.mycompany.dao.impl.*.*(..)))")
     public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("around advice started");
-        System.out.println("around");
         Object obj = joinPoint.proceed();
         System.out.println("around advice finished");
         System.out.println("**********************");
