@@ -85,6 +85,7 @@ public class UserController {
         return ResponseEntity.ok(ResponseDTO.of(userDTO, "Successfully updated"));
     }
 
+    // Mappings
     private UserDTO convertToUserDto(User user) {
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
         List<UserSkillDTO> userSkillDTOList = new ArrayList<>();
