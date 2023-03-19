@@ -2,8 +2,13 @@ package com.mycompany.controller;
 
 import com.mycompany.dao.impl.UserRepositoryCustom;
 import com.mycompany.dto.ResponseDTO;
+import com.mycompany.dto.SkillDTO;
 import com.mycompany.dto.UserDTO;
+import com.mycompany.dto.UserSkillDTO;
+import com.mycompany.entity.Skill;
 import com.mycompany.entity.User;
+import com.mycompany.entity.UserSkill;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +22,16 @@ import java.util.List;
 public class UserController {
 
     private UserRepositoryCustom userRepo;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping("users")
     public ResponseEntity<ResponseDTO> getUsers() {
         List<UserDTO> userDTOS = new ArrayList<>();
         List<User> users = userRepo.getAll();
         for (User u : users) {
-            userDTOS.add(new UserDTO(u));
+//            userDTOS.add(new UserDTO(u));
+            userDTOS.add(convertToUserDto(u));
         }
 //        if (users != null) {
 //            throw new IllegalArgumentException("exception in user controller");
@@ -84,6 +92,31 @@ public class UserController {
         userRepo.updateUser(user);
         userDTO.setId(user.getId());
         return ResponseEntity.ok(ResponseDTO.of(userDTO, "Successfully updated"));
+    }
+
+    private UserDTO convertToUserDto(User user) {
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        List<UserSkillDTO> userSkillDTOList = new ArrayList<>();
+        for (UserSkill userSkill : user.getUserSkillList()) {
+            userSkillDTOList.add(convertToUserSkillDto(userSkill));
+        }
+        userDTO.setUserSkillDTO(userSkillDTOList);
+        return userDTO;
+    }
+
+    private UserSkillDTO convertToUserSkillDto(UserSkill userSkill) {
+        UserSkillDTO userSkillDTO = modelMapper.map(userSkill, UserSkillDTO.class);
+        userSkillDTO.setSkillDTO(convertToSkillDto(userSkill.getSkill()));
+        return userSkillDTO;
+    }
+
+    private SkillDTO convertToSkillDto(Skill skill) {
+        return modelMapper.map(skill, SkillDTO.class);
+    }
+
+    private User convertToEntity(UserDTO userDTO) {
+        User user = modelMapper.map(userDTO, User.class);
+        return user;
     }
 
     @Autowired
