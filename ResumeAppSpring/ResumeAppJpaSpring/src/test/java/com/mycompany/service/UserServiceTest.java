@@ -1,6 +1,7 @@
 package com.mycompany.service;
 
 import com.mycompany.dao.impl.UserRepositoryCustom;
+import com.mycompany.entity.Country;
 import com.mycompany.entity.User;
 import com.mycompany.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Assertions;
@@ -33,18 +34,38 @@ public class UserServiceTest {
         System.out.println("Before called");
         MockitoAnnotations.openMocks(this);
 
-        List<User> users = new ArrayList<>();
         User user = new User(null, "test@gmail.com", "test");
+        user.setName("test");
+        user.setSurname("test");
+        user.setNationality(new Country(1));
 
+        List<User> users = new ArrayList<>();
         users.add(user);
 
         Mockito.when(userRepo.getAll()).thenReturn(users);
+        Mockito.when(userRepo.filter("test", "test", 1)).thenReturn(users);
     }
 
     @Test
     public void getAllTest() {
         List<User> users = userService.getAll();
         Assertions.assertEquals(1, users.size(), "users size must be 1");
+
+        Mockito.verify(userRepo, Mockito.atLeastOnce()).getAll();
+        Mockito.verify(userRepo, Mockito.atLeast(1)).getAll();
+    }
+
+    @Test
+    public void filterTest() {
+        List<User> users = userService.filter("test", "test", 1);
+
+        Assertions.assertTrue(users.size() > 0, "users size must be over 0");
+        Assertions.assertEquals(1, users.size(), "users size must be 1");
+        Assertions.assertEquals("test", users.get(0).getName(), "name wrong");
+        Assertions.assertEquals("test", users.get(0).getSurname(), "name wrong");
+        Assertions.assertEquals(1, users.get(0).getNationality().getId(), "nationality wrong");
+
+        Mockito.verify(userRepo, Mockito.atLeastOnce()).filter("test", "test", 1);
     }
 
 }
