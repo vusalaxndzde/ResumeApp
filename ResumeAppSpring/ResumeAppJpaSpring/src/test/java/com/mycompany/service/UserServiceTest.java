@@ -44,6 +44,7 @@ public class UserServiceTest {
 
         Mockito.when(userRepo.getAll()).thenReturn(users);
         Mockito.when(userRepo.filter("test", "test", 1)).thenReturn(users);
+        Mockito.when(userRepo.getUserByEmail(null)).thenReturn(null);
     }
 
     @Test
@@ -66,6 +67,14 @@ public class UserServiceTest {
         Assertions.assertEquals(1, users.get(0).getNationality().getId(), "nationality wrong");
 
         Mockito.verify(userRepo, Mockito.atLeastOnce()).filter("test", "test", 1);
+    }
+
+    @Test
+    public void getByEmailTest() {
+        User user = userService.getUserByEmail(null);
+
+        Assertions.assertNull(user, "user must be null");
+        Mockito.verify(userRepo, Mockito.atLeastOnce()).getUserByEmail(null);
     }
 
 }
