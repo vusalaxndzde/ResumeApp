@@ -4,10 +4,7 @@ import com.mycompany.dao.impl.UserRepositoryCustom;
 import com.mycompany.entity.Country;
 import com.mycompany.entity.User;
 import com.mycompany.service.impl.UserServiceImpl;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -47,6 +44,7 @@ public class UserServiceTest {
         Mockito.when(userRepo.getUserByEmail(null)).thenReturn(null);
     }
 
+    @DisplayName("Get All Method")
     @Test
     public void getAllTest() {
         List<User> users = userService.getAll();
@@ -56,6 +54,7 @@ public class UserServiceTest {
         Mockito.verify(userRepo, Mockito.atLeast(1)).getAll();
     }
 
+    @DisplayName("Filter Method")
     @Test
     public void filterTest() {
         List<User> users = userService.filter("test", "test", 1);
@@ -69,12 +68,23 @@ public class UserServiceTest {
         Mockito.verify(userRepo, Mockito.atLeastOnce()).filter("test", "test", 1);
     }
 
+    @DisplayName("Get By Email Method")
     @Test
     public void getByEmailTest() {
         User user = userService.getUserByEmail(null);
 
         Assertions.assertNull(user, "user must be null");
         Mockito.verify(userRepo, Mockito.atLeastOnce()).getUserByEmail(null);
+    }
+
+    @Disabled("not implemented yet")
+    @Test
+    public void test() {
+    }
+
+    @AfterAll
+    static void done() {
+        System.out.println("@AfterAll - executed after all test methods.");
     }
 
 }
