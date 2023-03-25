@@ -4,14 +4,10 @@ import com.mycompany.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
@@ -28,10 +24,18 @@ public class UserRepositoryCustomITest {
 
     @DisplayName("Get All")
     @Test
-    public void getAll() {
+    public void getAllTest() {
         List<User> users = userRepo.getAll();
         System.out.println(users);
         Assertions.assertEquals(4, users.size(), "users size must be 4");
+    }
+
+    @DisplayName("Filter")
+    @Test
+    public void filterTest() {
+        List<User> users = userRepo.filter("test3", "test3", null);
+        System.out.println(users);
+        Assertions.assertTrue(users.size() > 0);
     }
 
 }
