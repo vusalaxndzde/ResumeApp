@@ -2,9 +2,7 @@ package com.mycompany.controller;
 
 import com.mycompany.ResumerestapiApplication;
 import com.mycompany.dto.ResponseDTO;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -24,7 +22,7 @@ public class UserControllerTest {
     @Test
     public void getUsersTest() {
         ResponseEntity<ResponseDTO> response = restTemplate.getForEntity("/users", ResponseDTO.class);
-        Assertions.assertSame(response.getStatusCode(), HttpStatus.OK);
+        Assertions.assertSame(HttpStatus.OK, response.getStatusCode());
         System.out.println(response.getBody());
     }
 
@@ -32,7 +30,7 @@ public class UserControllerTest {
     @Test
     public void filterTest() {
         ResponseEntity<ResponseDTO> response = restTemplate.getForEntity("/users/filter?name=vusal&surname=axundzade", ResponseDTO.class);
-        Assertions.assertSame(response.getStatusCode(), HttpStatus.OK);
+        Assertions.assertSame(HttpStatus.OK, response.getStatusCode());
         System.out.println(response.getBody());
     }
 
@@ -40,7 +38,7 @@ public class UserControllerTest {
     @Test
     public void getUserTest() {
         ResponseEntity<ResponseDTO> response = restTemplate.getForEntity("/users/18", ResponseDTO.class);
-        Assertions.assertSame(response.getStatusCode(), HttpStatus.OK);
+        Assertions.assertSame(HttpStatus.OK, response.getStatusCode());
         System.out.println(response.getBody());
     }
 
