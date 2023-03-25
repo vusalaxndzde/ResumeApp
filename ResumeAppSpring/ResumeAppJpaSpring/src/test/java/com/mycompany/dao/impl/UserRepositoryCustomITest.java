@@ -10,14 +10,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 //@ExtendWith(SpringExtension.class)
-//@DataJpaTest
+//@DataJpaTest --> replaced with @SpringBootTest
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@TestPropertySource(locations = "classpath:application.properties") --> replaced with @AutoConfigureTestDatabase
 public class UserRepositoryCustomITest {
 
     @Autowired
