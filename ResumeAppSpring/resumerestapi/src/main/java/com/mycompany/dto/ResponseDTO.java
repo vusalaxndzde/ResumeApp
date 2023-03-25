@@ -63,4 +63,14 @@ public class ResponseDTO {
         this.object = object;
     }
 
+    @Override
+    public String toString() {
+        return "ResponseDTO{" +
+                "successMsg='" + successMsg + '\'' +
+                ", errorCode=" + errorCode +
+                ", errorMsg='" + errorMsg + '\'' +
+                ", object=" + object +
+                '}';
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.mycompany.dao.impl;
 
+import com.mycompany.ResumeAppJpaSpringApplication;
 import com.mycompany.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,8 +14,8 @@ import java.util.List;
 
 //@ExtendWith(SpringExtension.class)
 //@DataJpaTest --> replaced with @SpringBootTest
-@SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@SpringBootTest(classes = ResumeAppJpaSpringApplication.class)
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) --> replaced with (classes = ResumeAppJpaSpringApplication.class)
 //@TestPropertySource(locations = "classpath:application.properties") --> replaced with @AutoConfigureTestDatabase
 public class UserRepositoryCustomITest {
 
