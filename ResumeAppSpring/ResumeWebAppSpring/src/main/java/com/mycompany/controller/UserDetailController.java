@@ -20,17 +20,23 @@ import java.util.List;
 @Controller
 public class UserDetailController {
 
-    @Autowired
-    private UserRepository userRepo;
+    private final UserRepository userRepo;
+    private final CountryDaoInter countryDao;
+    private final EmploymentHistoryDaoInter empDao;
+    private final UserSkillDaoInter userSkillDao;
 
     @Autowired
-    private CountryDaoInter countryDao;
-
-    @Autowired
-    private EmploymentHistoryDaoInter empDao;
-
-    @Autowired
-    private UserSkillDaoInter userSkillDao;
+    public UserDetailController(
+            UserRepository userRepo,
+            CountryDaoInter countryDao,
+            EmploymentHistoryDaoInter empDao,
+            UserSkillDaoInter userSkillDao)
+    {
+        this.userRepo = userRepo;
+        this.countryDao = countryDao;
+        this.empDao = empDao;
+        this.userSkillDao = userSkillDao;
+    }
 
     @RequestMapping(value = "/userdetail", method = RequestMethod.GET)
     public String userDetail(Model model, @RequestParam(value = "id") int id) {
@@ -38,8 +44,11 @@ public class UserDetailController {
         List<Country> countries = countryDao.getAllCountry();
         List<EmploymentHistory> userEmpHistories = empDao.getEmploymentHistoryByUserId(user.getId());
         List<UserSkill> userSkills = userSkillDao.getAllUserSkillByUserId(user.getId());
-        
+
         model.addAttribute("user", user);
+        model.addAttribute("countries", countries);
+        model.addAttribute("userEmpHistories", userEmpHistories);
+        model.addAttribute("userSkills", userSkills);
         return "userdetail";
     }
 
