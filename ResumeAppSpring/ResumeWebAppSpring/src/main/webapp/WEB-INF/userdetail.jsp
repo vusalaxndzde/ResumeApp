@@ -1,13 +1,8 @@
 <%@ page import="com.mycompany.entity.User" %>
 <%@ page import="com.mycompany.entity.Country" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.mycompany.dao.inter.CountryDaoInter" %>
 <%@ page import="com.mycompany.entity.EmploymentHistory" %>
-<%@ page import="com.mycompany.dao.inter.EmploymentHistoryDaoInter" %>
-<%@ page import="com.mycompany.dao.inter.UserSkillDaoInter" %>
 <%@ page import="com.mycompany.entity.UserSkill" %>
-<%@ page import="com.mycompany.dao.impl.CountryDaoImpl" %>
-<%@ page import="com.mycompany.dao.impl.EmploymentHistoryDaoImpl" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -25,12 +20,9 @@
 <body style="background-color: #e0e1e1">
     <%
         User u = (User) request.getAttribute("user");
-        CountryDaoInter countryDao = new CountryDaoImpl();
-        List<Country> countries = countryDao.getAllCountry();
-        EmploymentHistoryDaoInter empHistoryDao = new EmploymentHistoryDaoImpl();
-        List<EmploymentHistory> userEmpHistories = empHistoryDao.getEmploymentHistoryByUserId(u.getId());
-        UserSkillDaoInter userSkillDao = Context.instanceUserSkillDao();
-        List<UserSkill> userSkills = userSkillDao.getAllUserSkillByUserId(u.getId());
+        List<Country> countries = (List<Country>) request.getAttribute("countries");
+        List<EmploymentHistory> userEmpHistories = (List<EmploymentHistory>) request.getAttribute("userEmpHistories");
+        List<UserSkill> userSkills = (List<UserSkill>) request.getAttribute("userSkills");
     %>
     <div class="container my-container resume-wrapper-inner mx-auto text-start bg-white shadow-lg" style="background-color: #efefef; border-radius: 15px">
         <form action="userdetail" method="post">
@@ -63,7 +55,7 @@
             <div class="form-row my-margin-bottom">
                 <div class="form-group col-2">
                     <label for="inputBirthdate">Birthdate</label>
-                    <input type="date" class="form-control" id="inputBirthdate" name="birthdate" value="<%=u.getBrithdate()%>">
+                    <input type="date" class="form-control" id="inputBirthdate" name="birthdate" value="<%=u.getBirthdate()%>">
                 </div>
             </div>
             <!-- Address country -->
