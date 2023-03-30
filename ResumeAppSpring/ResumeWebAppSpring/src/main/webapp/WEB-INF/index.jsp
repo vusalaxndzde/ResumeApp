@@ -13,7 +13,7 @@
 </head>
 <body>
     <%
-        User u = (User) request.getSession().getAttribute("loggedInUser");
+        User u = (User) request.getAttribute("loggedInUser");
     %>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index">Resume</a>

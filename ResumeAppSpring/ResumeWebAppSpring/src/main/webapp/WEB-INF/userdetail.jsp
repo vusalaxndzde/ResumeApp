@@ -2,7 +2,6 @@
 <%@ page import="com.mycompany.entity.Country" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.mycompany.dao.inter.CountryDaoInter" %>
-<%@ page import="com.mycompany.main.Context" %>
 <%@ page import="com.mycompany.entity.EmploymentHistory" %>
 <%@ page import="com.mycompany.dao.inter.EmploymentHistoryDaoInter" %>
 <%@ page import="com.mycompany.dao.inter.UserSkillDaoInter" %>
