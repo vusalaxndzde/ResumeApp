@@ -41,7 +41,7 @@
                     </div>
                 </li>
             </ul>
-            <form action="logout" method="post" class="form-inline my-2 my-lg-0">
+            <form action="logout" method="get" class="form-inline my-2 my-lg-0">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit" value="logout">Logout</button>
             </form>
             <ul class="navbar-nav">
@@ -53,7 +53,7 @@
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="settings">Settings</a>
                         <div class="dropdown-divider"></div>
-                        <form action="logout" method="post" class="form-inline my-2 my-lg-0">
+                        <form action="logout" method="get" class="form-inline my-2 my-lg-0">
                             <button class="dropdown-item dropdown-signout" type="submit" name="submit" value="logout">Sign out</button>
                         </form>
                     </div>
