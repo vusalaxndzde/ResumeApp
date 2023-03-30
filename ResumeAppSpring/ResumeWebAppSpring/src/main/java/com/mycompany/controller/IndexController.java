@@ -2,6 +2,7 @@ package com.mycompany.controller;
 
 import com.mycompany.dao.impl.UserRepositoryCustom;
 import com.mycompany.entity.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -18,10 +19,10 @@ public class IndexController {
     private UserRepositoryCustom userRepo;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model, Authentication authentication) {
+    public String index(Authentication authentication, HttpSession session) {
         String email = authentication.getName();
         User loggedInUser = userRepo.getUserByEmail(email);
-        model.addAttribute("loggedInUser", loggedInUser);
+        session.setAttribute("loggedInUser", loggedInUser);
         return "index";
     }
 
