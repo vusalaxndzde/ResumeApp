@@ -6,6 +6,8 @@
 <%@ page import="com.mycompany.dao.inter.EmploymentHistoryDaoInter" %>
 <%@ page import="com.mycompany.dao.inter.UserSkillDaoInter" %>
 <%@ page import="com.mycompany.entity.UserSkill" %>
+<%@ page import="com.mycompany.dao.impl.CountryDaoImpl" %>
+<%@ page import="com.mycompany.dao.impl.EmploymentHistoryDaoImpl" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -22,10 +24,10 @@
 </head>
 <body style="background-color: #e0e1e1">
     <%
-        User u = (User) request.getAttribute("u");
-        CountryDaoInter countryDao = Context.instanceCountryDao();
+        User u = (User) request.getAttribute("user");
+        CountryDaoInter countryDao = new CountryDaoImpl();
         List<Country> countries = countryDao.getAllCountry();
-        EmploymentHistoryDaoInter empHistoryDao = Context.instanceEmploymentHistoryDao();
+        EmploymentHistoryDaoInter empHistoryDao = new EmploymentHistoryDaoImpl();
         List<EmploymentHistory> userEmpHistories = empHistoryDao.getEmploymentHistoryByUserId(u.getId());
         UserSkillDaoInter userSkillDao = Context.instanceUserSkillDao();
         List<UserSkill> userSkills = userSkillDao.getAllUserSkillByUserId(u.getId());

@@ -69,8 +69,7 @@
                 <td style="width: 10px">
                     <form action="userdetail" method="get">
                         <input type="hidden" name="id" value="<%=user.getId()%>">
-                        <input type="hidden" name="action" value="update">
-                        <button class="btn btn-secondary" type="submit" value="update">
+                        <button class="btn btn-secondary" type="submit" name="action" value="update">
                             <i class="fa-sharp fa-solid fa-pen"></i>
                         </button>
                     </form>
